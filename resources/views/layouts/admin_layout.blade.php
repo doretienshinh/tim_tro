@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
-    data-assets-path="{{ asset('admin_assets/') }}" data-template="vertical-menu-template-free">
+    data-assets-path="{{ asset('assets/') }}" data-template="vertical-menu-template-free">
 
 <head>
-    @include('Core::headers.admin_header')
+    @include('headers.admin_header')
 </head>
 
 <body>
@@ -12,14 +12,14 @@
         <div class="layout-container">
             <!-- Menu -->
 
-            @include('Core::sidebars.admin_sidebar')
+            @include('sidebars.admin_sidebar')
             <!-- / Menu -->
 
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
 
-                @include('Core::navbars.admin_navbar')
+                @include('navbars.admin_navbar')
 
                 <!-- / Navbar -->
 
@@ -47,7 +47,7 @@
         <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/" target="_blank"
             class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
     </div> --}}
-    @include('Core::footers.admin_footer')
+    @include('footers.admin_footer')
 </body>
 
 </html>

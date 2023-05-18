@@ -3,17 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Http\Services\User\UserService;
 
-class HostelController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $UserService;
+
+    public function __construct(UserService $UserService) {
+        $this->UserService = $UserService;
+    }
+
     public function index()
     {
-        
+        $users = $this->UserService->getAll();
+
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -40,10 +51,10 @@ class HostelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Hostel  $Hostel
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Hostel $Hostel)
+    public function show($id)
     {
         //
     }
@@ -51,10 +62,10 @@ class HostelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Hostel  $Hostel
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hostel $Hostel)
+    public function edit($id)
     {
         //
     }
@@ -63,10 +74,10 @@ class HostelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Hostel  $Hostel
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hostel $Hostel)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -74,10 +85,10 @@ class HostelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Hostel  $Hostel
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hostel $Hostel)
+    public function destroy($id)
     {
         //
     }

@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $user) {
             $newUser = User::create($user);
 
-            if ($user['email'] == 'admin@caerux.cms') {
+            if ($user['email'] == 'admin@timtro.cms') {
                 $newUser->assignRole('admin');
             } 
             else {

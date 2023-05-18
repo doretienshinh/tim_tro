@@ -122,6 +122,30 @@
                                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                               </div>
+                              <div class="mb-3">
+                                <label class="form-label d-block">Choose a role</label>
+                                <div class="form-check form-check-inline mt-3">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="role"
+                                    id="inlineRadio1"
+                                    value="user"
+                                    checked
+                                  />
+                                  <label class="form-check-label" for="inlineRadio1">Student</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="role"
+                                    id="inlineRadio2"
+                                    value="host"
+                                  />
+                                  <label class="form-check-label" for="inlineRadio2">Host</label>
+                                </div>
+                              </div>
                             {{-- <div class="mb-3">
                               <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />

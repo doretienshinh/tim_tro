@@ -4215,11 +4215,17 @@ textarea.form-control-lg {
 }
 
 .alert {
-  position: relative;
+  /* position: relative; */
   padding: 0.9375rem 0.9375rem;
   margin-bottom: 1rem;
   border: 0 solid transparent;
   border-radius: 0.375rem;
+  width: 50%;
+  position: absolute;
+  z-index: 100;
+  /* margin-right: 0px; */
+  right: 20px;
+  margin-top: 20px;
 }
 
 .alert-heading {

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Services\User\UserService;
+use Illuminate\Support\Carbon;
+use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
@@ -34,7 +36,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -43,9 +45,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        $users = $this->UserService->store($request->all());
+
+        return redirect()->route('admin.user.index')->with('success', 'Tạo tài khoản người dùng mới thành công');
     }
 
     /**
@@ -56,7 +60,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->UserService->find($id);
+        
+        return view('user.detail', compact('user'));
     }
 
     /**
@@ -67,7 +73,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->UserService->find($id);
+
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -77,9 +85,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateUserRequest $request, $id)
     {
-        //
+        $user = $this->UserService->update($id, $request->all());
+
+        return redirect()->route('admin.user.detail', $id)->with('success', 'Thay đổi thông tin thành công');
     }
 
     /**

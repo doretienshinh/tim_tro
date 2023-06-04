@@ -10,8 +10,8 @@
 
 <body>
     <!-- Content -->
-    @include('layouts.alert')
     <div class="container-xxl">
+        @include('layouts.alert')
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner">
                 <!-- Register -->

@@ -34,7 +34,12 @@ Route::middleware(['auth'])->group(function(){
         #User
         Route::prefix('user')->group(function (){
             Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
-            // Route::post('add', [MenuController::class, 'store'])->name('admin.menus.store');
+            Route::get('/detail/{id}', [UserController::class, 'show'])->name('admin.user.detail');
+            Route::get('/create', [UserController::class, 'create'])->name('admin.user.create');
+            Route::post('/create', [UserController::class, 'store'])->name('admin.user.store');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
+            Route::post('/edit/{id}', [UserController::class, 'update'])->name('admin.user.update');
+
             // Route::get('list', [MenuController::class, 'index'])->name('admin.menus.list');
             // Route::get('edit/{menu}', [MenuController::class, 'show'])->name('admin.menus.show');
             // Route::post('edit/{menu}', [MenuController::class, 'update'])->name('admin.menus.update');

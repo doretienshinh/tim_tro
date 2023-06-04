@@ -1,6 +1,7 @@
 @extends('layouts.admin_layout')
 
 @section('content')
+<div class="container-xxl flex-grow-1 container-p-y">
     <div class="content-wrapper">
 
         <div class="row">
@@ -484,4 +485,5 @@
             <!--/ Transactions -->
         </div>
     </div>
+</div>
 @endsection

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HostelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,16 @@ Route::middleware(['auth'])->group(function(){
             // Route::get('edit/{menu}', [MenuController::class, 'show'])->name('admin.menus.show');
             // Route::post('edit/{menu}', [MenuController::class, 'update'])->name('admin.menus.update');
             // Route::DELETE('destroy', [MenuController::class, 'destroy'])->name('admin.menus.destroy');
+        });
+
+        #Hostel
+        Route::prefix('hostel')->group(function (){
+            Route::get('/', [HostelController::class, 'index'])->name('admin.hostel.index');
+            Route::get('/detail/{id}', [HostelController::class, 'show'])->name('admin.hostel.detail');
+            Route::get('/create', [HostelController::class, 'create'])->name('admin.hostel.create');
+            Route::post('/create', [HostelController::class, 'store'])->name('admin.hostel.store');
+            Route::get('/edit/{id}', [HostelController::class, 'edit'])->name('admin.hostel.edit');
+            Route::post('/edit/{id}', [HostelController::class, 'update'])->name('admin.hostel.update');
         });
     });
 

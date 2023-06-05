@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Services\Hostel\HostelService;
 
 class HostelController extends Controller
 {
@@ -11,9 +12,17 @@ class HostelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $HostelService;
+
+    public function __construct(HostelService $HostelService) {
+        $this->HostelService = $HostelService;
+    }
+
     public function index()
     {
-        
+        $hostels = $this->HostelService->getAll();
+
+        return view('hostel.index', compact('hostels'));
     }
 
     /**

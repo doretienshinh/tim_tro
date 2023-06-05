@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback_hostel extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'hostel_id',
+        'from_user_id',
+        'content',
+        'rate',
+    ];
 }

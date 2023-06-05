@@ -103,14 +103,13 @@
 
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Layouts</div>
+                <i class='bx bx-building-house tf-icons menu-icon'></i>
+                <div data-i18n="Layouts">Posts</div>
             </a>
-
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="layouts-without-menu.html" class="menu-link">
-                        <div data-i18n="Without menu">Without menu</div>
+                    <a href="{{ route('admin.hostel.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Posts</div>
                     </a>
                 </li>
                 <li class="menu-item">

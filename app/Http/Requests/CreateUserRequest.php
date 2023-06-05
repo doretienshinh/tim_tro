@@ -31,6 +31,7 @@ class CreateUserRequest extends FormRequest
             'address' => ['max:191'],
             'gender' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required'],
         ];
 
         return $validates;

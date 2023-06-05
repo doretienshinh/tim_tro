@@ -94,6 +94,10 @@
                                                 value="user" />
                                             <label class="form-check-label" for="role3">Sinh viên</label>
                                         </div>
+                                        @if ($errors->has('role'))
+                                            <span id="role-error" class="error text-danger"
+                                                for="input-name">{{ $errors->first('role') }}</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="mb-3 col-md-6">

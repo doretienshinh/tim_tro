@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Attribute extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'hostel_id',
+        'name',
+        'value',
+        'type_id',
+    ];
 }

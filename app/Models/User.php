@@ -52,4 +52,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function hostels()
+    {
+        return $this->hasMany(Hostel::class);
+    }
+
+    public function hostel_users()
+    {
+        return $this->hasMany(Hostel_user::class);
+    }
 }

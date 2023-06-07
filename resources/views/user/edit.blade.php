@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                             <div class="mt-2">
-                                <button type="submit" class="btn btn-primary me-2">Tạo</button>
+                                <button type="submit" class="btn btn-primary me-2">Cập nhật</button>
                                 <button type="reset" onclick="window.location='{{ URL::route('admin.user.index') }}'"
                                     class="btn btn-outline-secondary">Trở về</button>
                             </div>

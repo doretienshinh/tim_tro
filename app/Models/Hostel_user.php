@@ -15,4 +15,14 @@ class Hostel_user extends Model
         'in_at',
         'out_at',
     ];
+
+    public function hostel()
+    {
+        return $this->belongsTo(Hostel::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

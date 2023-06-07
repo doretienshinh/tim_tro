@@ -85,7 +85,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateUserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $user = $this->UserService->update($id, $request->all());
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use App\Http\Services\Notification\NotificationService;
+use Illuminate\Support\Carbon;
 
 class NotificationController extends Controller
 {
@@ -12,9 +14,17 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $NotificationService;
+
+    public function __construct(NotificationService $NotificationService) {
+        $this->NotificationService = $NotificationService;
+    }
+
     public function index()
     {
-        //
+        $notifications = $this->NotificationService->getAll();
+
+        return view('notification.index', compact('notifications'));
     }
 
     /**

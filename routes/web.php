@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HostelController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,16 @@ Route::middleware(['auth'])->group(function(){
             Route::post('/create', [HostelController::class, 'store'])->name('admin.hostel.store');
             Route::get('/edit/{id}', [HostelController::class, 'edit'])->name('admin.hostel.edit');
             Route::post('/edit/{id}', [HostelController::class, 'update'])->name('admin.hostel.update');
+        });
+
+        #Notification
+        Route::prefix('notification')->group(function (){
+            Route::get('/', [NotificationController::class, 'index'])->name('admin.notification.index');
+            Route::get('/detail/{id}', [NotificationController::class, 'show'])->name('admin.notification.detail');
+            Route::get('/create', [NotificationController::class, 'create'])->name('admin.notification.create');
+            Route::post('/create', [NotificationController::class, 'store'])->name('admin.notification.store');
+            // Route::get('/edit/{id}', [HostelController::class, 'edit'])->name('admin.notification.edit');
+            // Route::post('/edit/{id}', [HostelController::class, 'update'])->name('admin.notification.update');
         });
     });
 

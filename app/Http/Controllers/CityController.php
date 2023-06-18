@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use Illuminate\Http\Request;
+use App\Http\Services\City\CityService;
 
 class CityController extends Controller
 {
@@ -12,9 +13,18 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $CityService;
+
+    public function __construct(CityService $CityService) {
+        $this->CityService = $CityService;
+    }
+
     public function index()
     {
-        //
+        $cities = $this->CityService->getAll();
+
+        return view('city.index', compact('cities'));
     }
 
     /**

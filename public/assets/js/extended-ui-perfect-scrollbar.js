@@ -5,22 +5,22 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   (function () {
-    const verticalExample = document.getElementById('vertical-example'),
-      horizontalExample = document.getElementById('horizontal-example'),
-      horizVertExample = document.getElementById('both-scrollbars-example');
+    const verticalScroll = document.getElementById('vertical-scroll'),
+      horizontalScroll = document.getElementById('horizontal-scroll'),
+      horizVertScroll = document.getElementById('both-scrollbars-scroll');
 
     // Vertical Example
     // --------------------------------------------------------------------
-    if (verticalExample) {
-      new PerfectScrollbar(verticalExample, {
+    if (verticalScroll) {
+      new PerfectScrollbar(verticalScroll, {
         wheelPropagation: false
       });
     }
 
     // Horizontal Example
     // --------------------------------------------------------------------
-    if (horizontalExample) {
-      new PerfectScrollbar(horizontalExample, {
+    if (horizontalScroll) {
+      new PerfectScrollbar(horizontalScroll, {
         wheelPropagation: false,
         suppressScrollY: true
       });
@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Both vertical and Horizontal Example
     // --------------------------------------------------------------------
-    if (horizVertExample) {
-      new PerfectScrollbar(horizVertExample, {
+    if (horizVertScroll) {
+      new PerfectScrollbar(horizVertScroll, {
         wheelPropagation: false
       });
     }

@@ -57,7 +57,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'home') === 0) ? 'active' : '' }}">
             <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
@@ -66,14 +66,14 @@
 
         <!-- Layouts -->
 
-        <li class="menu-item">
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'admin.user.index') === 0) ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Users</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item {{ (strpos(Route::currentRouteName(), 'admin.user.index') === 0) ? 'active' : '' }}">
                     <a href="{{ route('admin.user.index') }}" class="menu-link">
                         <div data-i18n="Without menu">Users</div>
                     </a>
@@ -101,7 +101,7 @@
             </ul>
         </li>
 
-        <li class="menu-item">
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'admin.hostel.index') === 0) ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='bx bx-building-house tf-icons menu-icon'></i>
                 <div data-i18n="Layouts">Posts</div>
@@ -135,7 +135,7 @@
             </ul>
         </li>
 
-        <li class="menu-item">
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'admin.notification.index') === 0) ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='bx bx-bell tf-icons menu-icon'></i>
                 <div data-i18n="Layouts">Notifications</div>
@@ -164,6 +164,30 @@
                 <li class="menu-item">
                     <a href="layouts-blank.html" class="menu-link">
                         <div data-i18n="Blank">Blank</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'admin.ward.index') === 0) ? 'active' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class='bx bx-current-location tf-icons menu-icon'></i>
+                <div data-i18n="Layouts">Local</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('admin.ward.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Wards</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('admin.district.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Districts</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('admin.city.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Cities</div>
                     </a>
                 </li>
             </ul>

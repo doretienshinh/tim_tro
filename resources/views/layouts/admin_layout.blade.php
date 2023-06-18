@@ -22,7 +22,11 @@
                 @include('navbars.admin_navbar')
 
                 <!-- / Navbar -->
+                <!-- Review Notification -->
 
+                @include('layouts.review_notification')
+
+                <!-- / Review Notification -->
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->

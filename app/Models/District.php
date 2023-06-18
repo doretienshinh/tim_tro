@@ -13,4 +13,14 @@ class District extends Model
         'city_id',
         'name',
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function wards()
+    {
+        return $this->haveMany(Ward::class);
+    }
 }

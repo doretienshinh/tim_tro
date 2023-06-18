@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use Illuminate\Http\Request;
+use App\Http\Services\District\DistrictService;
+use App\Http\Services\City\CityService;
 
 class DistrictController extends Controller
 {
@@ -12,9 +14,20 @@ class DistrictController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     
+    protected $DistrictService, $CityService;
+
+    public function __construct(DistrictService $DistrictService, CityService $CityService) {
+        $this->DistrictService = $DistrictService;
+        $this->CityService = $CityService;
+    }
+
     public function index()
     {
-        //
+        $districts = $this->DistrictService->getAll();
+
+        return view('district.index', compact('districts'));
     }
 
     /**
@@ -24,7 +37,9 @@ class DistrictController extends Controller
      */
     public function create()
     {
-        //
+        $cities = $this->CityService->getAllNotHavePagination();
+
+        return view('district.create', compact('cities'));
     }
 
     /**
@@ -81,5 +96,12 @@ class DistrictController extends Controller
     public function destroy(District $district)
     {
         //
+    }
+
+    public function findDistrictByCity($id)
+    {
+        $districts = $this->DistrictService->findByCity($id);
+
+        return response()->json([ 'districts' => $districts ]);
     }
 }

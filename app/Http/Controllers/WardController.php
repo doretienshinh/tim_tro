@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Ward;
 use Illuminate\Http\Request;
+use App\Http\Services\Ward\WardService;
 
 class WardController extends Controller
 {
+    protected $WardService;
+
+    public function __construct(WardService $WardService) {
+        $this->WardService = $WardService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -81,5 +87,12 @@ class WardController extends Controller
     public function destroy(Ward $ward)
     {
         //
+    }
+
+    public function findWardByDistrict($id)
+    {
+        $wards = $this->WardService->findByDistrict($id);
+
+        return response()->json([ 'wards' => $wards ]);
     }
 }

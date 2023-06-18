@@ -18,11 +18,17 @@
         <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-            {{-- Notifications --}}
-            <button type="button" class="btn btn-outline-primary">
-                <i class='bx bxs-bell' ></i>
+            {{-- Message --}}
+            <button type="button" class="btn btn-outline-primary me-1">
+                <i class='bx bxs-chat'></i>
                 <span class="badge bg-white text-primary">4</span>
-              </button>
+            </button>
+            {{-- Notifications --}}
+            <button type="button" class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScroll" aria-controls="offcanvasScroll">
+                <i class='bx bxs-bell'></i>
+                <span class="badge bg-white text-primary">4</span>
+            </button>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">

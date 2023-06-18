@@ -53,26 +53,21 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="selectpickerLiveSearch" class="form-label">Choose city</label>
-                                    <select id="city_select" class="selectpicker w-100" data-style="btn-default"
-                                        data-live-search="true" data-show-subtext="true" name="city_select">
-                                        <option selected="selected" disabled>Choose city</option>
-                                        @foreach ($cities as $index => $city)
-                                            <option data-tokens="{{ $city->name }}" value="{{ $city->id }}">
-                                                {{ $city->name }}</option>
-                                        @endforeach
+                                    <label for="city_select" class="form-label">Choose city</label>
+                                    <select id="city_select" class="w-100" data-style="btn-default" data-live-search="true"
+                                        data-show-subtext="true" name="city_select">
                                     </select>
                                 </div>
-                                <div class="mb-3 district_select {{ old('city_select') == null ? 'd-none' : '' }}">
-                                    <label for="selectpickerLiveSearch" class="form-label">Choose district</label>
+                                <div class="mb-3 district_select d-none">
+                                    <label for="district_select" class="form-label">Choose district</label>
                                     <select id="district_select" class="w-100" data-style="btn-default"
                                         data-live-search="true" data-show-subtext="true" name="district_select">
                                     </select>
                                 </div>
-                                <div class="mb-3 ward_select {{ old('district_select') == null ? 'd-none' : '' }}">
-                                    <label for="selectpickerLiveSearch" class="form-label">Choose ward</label>
-                                    <select id="ward_select" class="w-100" data-style="btn-default"
-                                        data-live-search="true" data-show-subtext="true" name="ward">
+                                <div class="mb-3 ward_select d-none">
+                                    <label for="ward" class="form-label">Choose ward</label>
+                                    <select id="ward_select" class="w-100" data-style="btn-default" data-live-search="true"
+                                        data-show-subtext="true" name="ward">
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-6">
@@ -116,140 +111,63 @@
     </div>
 @endsection
 <script type="text/javascript" src="{{ asset('assets/js/hostel/create.js') }}"></script>
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function(e) {
-        $(".selectpicker").selectpicker();
-    });
-    document.addEventListener('DOMContentLoaded', function(e) {
-        var city_id = $('#city_select').val();
-
-        $('#city_select').change(function() {
-            $('#district_select').empty();
-            $("#district_select").selectpicker('refresh');
-            city_id = $('#city_select').val()
-            if ($(this).val() != null) {
-                $('.district_select').removeClass('d-none');
-            } else {
-                $('.district_select').addClass('d-none');
-            }
-
-            $.ajax({
-                url: '/admin/district/findDistrictByCity/' + city_id,
-                method: 'get',
-                success: function(response) {
-
-                    var districts = response.districts;
-
-                    $('#district_select').empty();
-                    $("#district_select").selectpicker('refresh');
-
-                    $('#district_select').append('<option selected="selected" disabled>Choose district</option>');
-                    $.each(districts, function(index, item) {
-                        $('#district_select').append('<option data-tokens=" ' + item
-                            .name + ' " value="' + item.id + '">' + item.name +
-                            '</option>');
-                    });
-
-                    $("#district_select").selectpicker('refresh');
-                },
-                error: function(xhr, status, error) {
-                    // Xử lý lỗi nếu có
-                    console.error(error);
-                }
-            });
-        });
-    });
-    document.addEventListener('DOMContentLoaded', function(e) {
-        var district_id = $('#district_select').val();
-
-        $('#district_select').change(function() {
-            $('#ward_select').empty();
-                    $("#ward_select").selectpicker('refresh');
-            district_id = $('#district_select').val()
-            if ($(this).val() != null) {
-                $('.ward_select').removeClass('d-none');
-            } else {
-                $('.ward_select').addClass('d-none');
-            }
-
-            $.ajax({
-                url: '/admin/ward/findWardByDistrict/' + district_id,
-                method: 'get',
-                success: function(response) {
-
-                    var wards = response.wards;
-
-                    $('#ward_select').empty();
-                    $("#ward_select").selectpicker('refresh');
-
-                    $('#ward_select').append('<option selected="selected" disabled>Choose ward</option>');
-
-                    $.each(wards, function(index, item) {
-                        $('#ward_select').append('<option data-tokens=" ' + item
-                            .name + ' " value="' + item.id + '">' + item.name +
-                            '</option>');
-                    });
-
-                    $("#ward_select").selectpicker('refresh');
-                },
-                error: function(xhr, status, error) {
-                    // Xử lý lỗi nếu có
-                    console.error(error);
-                }
-            });
-        });
-    });
-</script> --}}
 <script>
     document.addEventListener('DOMContentLoaded', function(e) {
         $(".selectpicker").selectpicker();
     });
     document.addEventListener('DOMContentLoaded', function(e) {
-        var city_id = $('#city_select').val();
+        $.ajax({
+            url: 'https://provinces.open-api.vn/api/p/',
+            method: 'get',
+            success: function(response) {
+                var provinces = response;
+                $('#city_select').append(
+                    '<option selected="selected" disabled>Choose city</option>');
+                $.each(provinces, function(index, item) {
+                    $('#city_select').append('<option data-tokens=" ' + item
+                        .name + ' " value="' + item.code + '">' + item.name +
+                        '</option>');
+                });
+                $("#city_select").selectpicker();
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
 
         $('#city_select').change(function() {
-            $('#district_select').empty();
-            $("#district_select").selectpicker('refresh');
-            city_id = $('#city_select').val()
+            var city_id = $('#city_select').val()
             if ($(this).val() != null) {
                 $('.district_select').removeClass('d-none');
+                $('#ward_select').val(null);
+                $('.ward_select').addClass('d-none');
             } else {
                 $('.district_select').addClass('d-none');
             }
 
             $.ajax({
-                url: '/admin/district/findDistrictByCity/' + city_id,
+                url: 'https://provinces.open-api.vn/api/p/'+city_id+'?depth=2',
                 method: 'get',
                 success: function(response) {
-
                     var districts = response.districts;
-
-                    $('#district_select').empty();
-                    $("#district_select").selectpicker('refresh');
-
-                    $('#district_select').append('<option selected="selected" disabled>Choose district</option>');
+                    $("#district_select").selectpicker('destroy');
+                    $('#district_select').empty().append('<option selected="selected" disabled>Choose district</option>');
                     $.each(districts, function(index, item) {
                         $('#district_select').append('<option data-tokens=" ' + item
-                            .name + ' " value="' + item.id + '">' + item.name +
-                            '</option>');
-                    });
-
-                    $("#district_select").selectpicker('refresh');
+                        .name + ' " value="' + item.code + '">' + item.name +
+                        '</option>');
+                    })
+                    $("#district_select").selectpicker();
                 },
                 error: function(xhr, status, error) {
-                    // Xử lý lỗi nếu có
                     console.error(error);
                 }
             });
         });
-    });
-    document.addEventListener('DOMContentLoaded', function(e) {
-        var district_id = $('#district_select').val();
-
         $('#district_select').change(function() {
             $('#ward_select').empty();
-                    $("#ward_select").selectpicker('refresh');
-            district_id = $('#district_select').val()
+            $("#ward_select").selectpicker('render');
+            var district_id = $('#district_select').val();
             if ($(this).val() != null) {
                 $('.ward_select').removeClass('d-none');
             } else {
@@ -257,27 +175,20 @@
             }
 
             $.ajax({
-                url: '/admin/ward/findWardByDistrict/' + district_id,
+                url: 'https://provinces.open-api.vn/api/d/'+district_id+'?depth=2',
                 method: 'get',
                 success: function(response) {
-
                     var wards = response.wards;
-
-                    $('#ward_select').empty();
-                    $("#ward_select").selectpicker('refresh');
-
+                    $("#ward_select").selectpicker('destroy');
                     $('#ward_select').append('<option selected="selected" disabled>Choose ward</option>');
-
                     $.each(wards, function(index, item) {
                         $('#ward_select').append('<option data-tokens=" ' + item
-                            .name + ' " value="' + item.id + '">' + item.name +
-                            '</option>');
+                        .name + ' " value="' + item.code + '">' + item.name +
+                        '</option>');
                     });
-
-                    $("#ward_select").selectpicker('refresh');
+                    $("#ward_select").selectpicker();
                 },
                 error: function(xhr, status, error) {
-                    // Xử lý lỗi nếu có
                     console.error(error);
                 }
             });

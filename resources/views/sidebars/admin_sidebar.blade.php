@@ -169,30 +169,6 @@
             </ul>
         </li>
 
-        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'admin.ward.index') === 0) ? 'active' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='bx bx-current-location tf-icons menu-icon'></i>
-                <div data-i18n="Layouts">Local</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('admin.ward.index') }}" class="menu-link">
-                        <div data-i18n="Without menu">Wards</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.district.index') }}" class="menu-link">
-                        <div data-i18n="Without menu">Districts</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.city.index') }}" class="menu-link">
-                        <div data-i18n="Without menu">Cities</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>

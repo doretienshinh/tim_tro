@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\Hostel\HostelService;
 use App\Http\Services\Tag\TagService;
-use App\Http\Services\City\CityService;
-use App\Http\Services\District\DistrictService;
-use App\Http\Services\Ward\WardService;
 
 class HostelController extends Controller
 {
@@ -18,12 +15,9 @@ class HostelController extends Controller
      */
     protected $HostelService;
 
-    public function __construct(HostelService $HostelService, TagService $TagService, CityService $CityService, DistrictService $DistrictService, WardService $WardService) {
+    public function __construct(HostelService $HostelService, TagService $TagService) {
         $this->HostelService = $HostelService;
         $this->TagService = $TagService;
-        $this->CityService = $CityService;
-        $this->DistrictService = $DistrictService;
-        $this->WardService = $WardService;
     }
 
     public function index()
@@ -41,11 +35,8 @@ class HostelController extends Controller
     public function create()
     {
         $tags = $this->TagService->getAllNotHavePagination();
-        $cities = $this->CityService->getAllNotHavePagination();
-        $districts = $this->DistrictService->getAllNotHavePagination();
-        $wards = $this->WardService->getAllNotHavePagination();
 
-        return view('hostel.create', compact('tags', 'cities', 'districts', 'wards'));
+        return view('hostel.create', compact('tags'));
     }
 
     /**

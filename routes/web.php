@@ -6,9 +6,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HostelController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\WardController;
-use App\Http\Controllers\DistrictController;
-use App\Http\Controllers\CityController;
 
 
 /*
@@ -72,37 +69,6 @@ Route::middleware(['auth'])->group(function(){
             // Route::post('/edit/{id}', [HostelController::class, 'update'])->name('admin.notification.update');
         });
 
-        #Ward
-        Route::prefix('ward')->group(function (){
-            Route::get('/', [WardController::class, 'index'])->name('admin.ward.index');
-            Route::get('/detail/{id}', [WardController::class, 'show'])->name('admin.ward.detail');
-            Route::get('/create', [WardController::class, 'create'])->name('admin.ward.create');
-            Route::post('/create', [WardController::class, 'store'])->name('admin.ward.store');
-            // Route::get('/edit/{id}', [WardController::class, 'edit'])->name('admin.ward.edit');
-            // Route::post('/edit/{id}', [WardController::class, 'update'])->name('admin.ward.update');
-            Route::get('/findWardByDistrict/{id}', [WardController::class, 'findWardByDistrict'])->name('admin.district.findWardByDistrict');
-        });
-
-        #District
-        Route::prefix('district')->group(function (){
-            Route::get('/', [DistrictController::class, 'index'])->name('admin.district.index');
-            Route::get('/detail/{id}', [DistrictController::class, 'show'])->name('admin.district.detail');
-            Route::get('/create', [DistrictController::class, 'create'])->name('admin.district.create');
-            Route::post('/create', [DistrictController::class, 'store'])->name('admin.district.store');
-            Route::get('/edit/{id}', [DistrictController::class, 'edit'])->name('admin.district.edit');
-            Route::post('/edit/{id}', [DistrictController::class, 'update'])->name('admin.district.update');
-            Route::get('/findDistrictByCity/{id}', [DistrictController::class, 'findDistrictByCity'])->name('admin.district.findDistrictByCity');
-        });
-
-        #City
-        Route::prefix('city')->group(function (){
-            Route::get('/', [CityController::class, 'index'])->name('admin.city.index');
-            Route::get('/detail/{id}', [CityController::class, 'show'])->name('admin.city.detail');
-            Route::get('/create', [CityController::class, 'create'])->name('admin.city.create');
-            Route::post('/create', [CityController::class, 'store'])->name('admin.city.store');
-            Route::get('/edit/{id}', [CityController::class, 'edit'])->name('admin.city.edit');
-            Route::post('/edit/{id}', [CityController::class, 'update'])->name('admin.city.update');
-        });
     });
 
 });

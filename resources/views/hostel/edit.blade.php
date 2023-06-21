@@ -21,12 +21,12 @@
 </style>
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Hostel Create</span></h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Hostel Edit</span></h4>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="card mb-4">
-                    <form id="formAccountSettings" method="POST" action=" {{ route('admin.hostel.store') }}"
+                    <form id="formAccountSettings" method="POST" action=" {{ route('admin.hostel.update', $hostel) }}"
                         enctype='multipart/form-data'>
                         @csrf
                         <h5 class="card-header">Hostel Details</h5>
@@ -35,7 +35,7 @@
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Title</label>
                                     <input class="form-control" type="text" id="title" name="title"
-                                        placeholder="Input title" autofocus />
+                                        placeholder="Input title" autofocus value="{{ $hostel->title }}" />
                                     @if ($errors->has('title'))
                                         <span id="title-error" class="error text-danger"
                                             for="input-title">{{ $errors->first('title') }}</span>
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">description</label>
-                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                    <textarea class="form-control" id="description" name="description" rows="3">{{ $hostel->description }}</textarea>
                                     @if ($errors->has('description'))
                                         <span id="description-error" class="error text-danger"
                                             for="input-description">{{ $errors->first('description') }}</span>
@@ -57,7 +57,9 @@
                                             for="input-thumbnail">{{ $errors->first('thumbnail') }}</span>
                                     @endif
                                     <div class="" id="thumbnail_show">
-                                        {{-- <label for="formFile" class="form-label">Thẻ sinh viên</label> --}}
+                                        <div class="w-100 d-flex justify-content-center mt-3">
+                                            <img src="{{ asset('storage/' . $hostel->thumbnail) }}" width="250px">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -67,7 +69,9 @@
                                         {{-- <option selected="selected" disabled>Choose tag</option> --}}
                                         @foreach ($tags as $index => $tag)
                                             <option data-tokens="{{ $tag->name }}" value="{{ $tag->id }}"
-                                                data-subtext="{{ $tag->description }}">{{ $tag->name }}</option>
+                                                data-subtext="{{ $tag->description }}"
+                                                {{ $hostel->tag->id == $tag->id ? 'selected' : '' }}>{{ $tag->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('tag_id'))
@@ -76,6 +80,10 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
+                                    <label for="preview_location" class="form-label">Ward</label>
+                                    <input class="form-control" id="preview_location" type="text" readonly/>
+                                </div>
+                                <div class="mb-3 d-none">
                                     <label for="city_select" class="form-label">Choose city</label>
                                     <select id="city_select" class="w-100" data-style="btn-default" data-live-search="true"
                                         data-show-subtext="true" name="city_select">
@@ -100,7 +108,8 @@
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Address Detail</label>
                                     <input class="form-control" type="text" id="address_detail" name="address_detail"
-                                        placeholder="Input Address Detail" autofocus />
+                                        placeholder="Input Address Detail" autofocus
+                                        value="{{ $hostel->address_detail }}" />
                                     @if ($errors->has('address_detail'))
                                         <span id="title-error" class="error text-danger"
                                             for="input-address_detail">{{ $errors->first('address_detail') }}</span>
@@ -114,12 +123,24 @@
                                         <span id="images-error" class="error text-danger"
                                             for="input-image">{{ $errors->first('image') }}</span>
                                     @endif
-                                    <div id="preview"></div>
+                                    <div id="preview">
+                                        @php
+                                            $images = explode(';', $hostel->image);
+                                            $images = array_filter($images, function ($value) {
+                                                return !empty($value);
+                                            });
+                                        @endphp
+                                        @foreach ($images as $index => $image)
+                                            <div class="preview-container">
+                                                <img class="preview-image" src="{{ asset('storage/' . $image) }}">
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-2">
-                                <button type="submit" class="btn btn-primary me-2">Tạo</button>
-                                <button type="reset" onclick="window.location='{{ URL::route('admin.user.index') }}'"
+                                <button type="submit" class="btn btn-primary me-2">Sửa</button>
+                                <button type="reset" onclick="window.location='{{ URL::route('admin.hostel.index') }}'"
                                     class="btn btn-outline-secondary">Trở về</button>
                             </div>
                         </div>
@@ -136,6 +157,24 @@
         $(".selectpicker").selectpicker();
     });
     document.addEventListener('DOMContentLoaded', function(e) {
+
+        $.ajax({
+            url: 'https://provinces.open-api.vn/api/w/{{ $hostel->ward_id }}',
+            method: 'get',
+            success: function(response) {
+                var provinces = response;
+                $('#preview_location').val(response.name);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+
+        $('#preview_location').click(function() {
+            $('#preview_location').parent().hide();
+            $('#city_select').parent().parent().removeClass('d-none');
+        });
+
         $.ajax({
             url: 'https://provinces.open-api.vn/api/p/',
             method: 'get',

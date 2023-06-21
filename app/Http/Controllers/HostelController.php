@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\Hostel\HostelService;
 use App\Http\Services\Tag\TagService;
+use App\Models\Hostel;
+use App\Http\Requests\CreateHostelRequest;
 
 class HostelController extends Controller
 {
@@ -45,9 +47,11 @@ class HostelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateHostelRequest $request)
     {
-        dd($request->all());
+        $hostels = $this->HostelService->store($request->all());
+
+        return redirect()->route('admin.hostel.index');
     }
 
     /**
@@ -58,7 +62,9 @@ class HostelController extends Controller
      */
     public function show(Hostel $Hostel)
     {
-        //
+        return view('hostel.detail', [
+            'hostel' => $Hostel,
+        ]);
     }
 
     /**
@@ -69,7 +75,12 @@ class HostelController extends Controller
      */
     public function edit(Hostel $Hostel)
     {
-        //
+        $tags = $this->TagService->getAllNotHavePagination();
+
+        return view('hostel.edit', [
+            'hostel' => $Hostel,
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -81,7 +92,9 @@ class HostelController extends Controller
      */
     public function update(Request $request, Hostel $Hostel)
     {
-        //
+        $this->HostelService->update($request->all(), $Hostel);
+
+        return redirect(route('admin.hostel.index'));
     }
 
     /**
@@ -92,6 +105,16 @@ class HostelController extends Controller
      */
     public function destroy(Hostel $Hostel)
     {
-        //
+        $result = $this->HostelService->destroy($Hostel);
+
+        if($result){
+            return response()->json([
+                'error' => false,
+                'message'=> 'Xóa trọ thành công'
+            ]);
+        }
+        else return response()->json([
+            'error' => true,
+        ]);
     }
 }

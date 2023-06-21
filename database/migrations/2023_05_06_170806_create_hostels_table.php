@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('hostels', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('image');
             $table->string('thumbnail');
+            $table->string('address_detail');
             $table->unsignedBigInteger('tag_id');
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');

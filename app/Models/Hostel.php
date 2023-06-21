@@ -17,6 +17,7 @@ class Hostel extends Model
         'tag_id',
         'user_id',
         'ward_id',
+        'address_detail'
     ];
 
     public function hostel_users()

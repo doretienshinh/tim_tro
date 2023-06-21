@@ -52,11 +52,12 @@ Route::middleware(['auth'])->group(function(){
         #Hostel
         Route::prefix('hostel')->group(function (){
             Route::get('/', [HostelController::class, 'index'])->name('admin.hostel.index');
-            Route::get('/detail/{id}', [HostelController::class, 'show'])->name('admin.hostel.detail');
+            Route::get('/detail/{hostel}', [HostelController::class, 'show'])->name('admin.hostel.detail');
             Route::get('/create', [HostelController::class, 'create'])->name('admin.hostel.create');
             Route::post('/create', [HostelController::class, 'store'])->name('admin.hostel.store');
-            Route::get('/edit/{id}', [HostelController::class, 'edit'])->name('admin.hostel.edit');
-            Route::post('/edit/{id}', [HostelController::class, 'update'])->name('admin.hostel.update');
+            Route::get('/edit/{hostel}', [HostelController::class, 'edit'])->name('admin.hostel.edit');
+            Route::post('/edit/{hostel}', [HostelController::class, 'update'])->name('admin.hostel.update');
+            Route::delete('/destroy/{hostel}', [HostelController::class, 'destroy'])->name('admin.hostel.destroy');
         });
 
         #Notification

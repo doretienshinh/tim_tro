@@ -217,14 +217,19 @@ button.list-group-item-primary.active {
   border-color: #5f61e6;
   transform: translateY(-1px);
 }
-.btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary.focus {
+/* .btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary.focus {
   color: #fff;
   background-color: #5f61e6;
   border-color: #5f61e6;
   transform: translateY(0);
   box-shadow: none;
-}
-.btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+} */
+/* .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #595cd9;
+  border-color: #595cd9;
+} */
+.btn-check:checked + .btn-primary, .show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: #595cd9;
   border-color: #595cd9;

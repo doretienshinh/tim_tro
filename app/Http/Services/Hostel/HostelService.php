@@ -70,7 +70,7 @@ class HostelService
             }
             $data['image'] = $images;
         } 
-        else $data['thumbnail'] = $hostel->image;
+        else $data['image'] = $hostel->image;
         
         $data['user_id'] = Auth::user()->id;
 

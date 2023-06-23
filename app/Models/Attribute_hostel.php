@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attribute_type extends Model
+class Attribute_hostel extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'hostel_id',
+        'attribute_id',
         'value',
     ];
 }

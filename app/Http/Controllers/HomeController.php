@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Services\Hostel\HostelService;
 
 class HomeController extends Controller
 {
@@ -11,9 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    protected $HostelService;
+
+    public function __construct(HostelService $HostelService) {
+        $this->HostelService = $HostelService;
     }
 
     /**
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.home');
+        if( !Auth::check() || Auth::user()->getRoleNames()[0] == 'user') {
+            $hostels = $this->HostelService->getAll();
+
+            return view('home.user',[ 'hostels' => $hostels]);
+        }
+        else return view('home.admin');
     }
 }

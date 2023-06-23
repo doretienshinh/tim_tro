@@ -57,26 +57,25 @@ class UserService
         $user = User::where('id', $id)->first();
 
         if (isset($data['avatar'])) {
-            if(Storage::exists($user->avatar)) Storage::delete($user->avatar);
+            if($user->avatar) Storage::delete($user->avatar);
             $urlName = Carbon::now()->format('Y-m-d-H-i-s') . $data['avatar']->getClientOriginalName();;
             $pathUrl = Storage::disk('public')->put('avatar/' . $urlName, file_get_contents($data['avatar']->getRealPath()));
             $data['avatar'] = 'avatar/' . $urlName;
         } 
         if (isset($data['student_card'])) {
-            if(Storage::exists($user->student_card)) Storage::delete($user->student_card);
+            if($user->student_card) Storage::delete($user->student_card);
             $urlName = Carbon::now()->format('Y-m-d-H-i-s') . $data['student_card']->getClientOriginalName();;
             $pathUrl = Storage::disk('public')->put('student_card/' . $urlName, file_get_contents($data['student_card']->getRealPath()));
             $data['student_card'] = 'student_card/' . $urlName;
         } 
         if (isset($data['citizen_identification'])) {
-            if(Storage::exists($user->citizen_identification)) Storage::delete($user->citizen_identification);
+            if($user->citizen_identification) Storage::delete($user->citizen_identification);
             $urlName = Carbon::now()->format('Y-m-d-H-i-s') . $data['citizen_identification']->getClientOriginalName();;
             $pathUrl = Storage::disk('public')->put('citizen_identification/' . $urlName, file_get_contents($data['citizen_identification']->getRealPath()));
             $data['citizen_identification'] = 'citizen_identification/' . $urlName;
         }
 
         $user->syncRoles($data['role']);
-
         $user = $user->update([
             'name' => $data['name'],
             'email' =>  $user->email,

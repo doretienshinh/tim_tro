@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function (e) {
     $('#thumbnail-upload').change(function () {
+      $('#thumbnail_show').empty();
       let reader = new FileReader();
       reader.onload = (e) => {
         $('#thumbnail_show').html('<div class="w-100 d-flex justify-content-center mt-3">' +

@@ -100,7 +100,6 @@
                 </li> --}}
             </ul>
         </li>
-
         <li class="menu-item {{ (strpos(Route::currentRouteName(), 'admin.hostel.index') === 0) ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='bx bx-building-house tf-icons menu-icon'></i>
@@ -110,26 +109,6 @@
                 <li class="menu-item">
                     <a href="{{ route('admin.hostel.index') }}" class="menu-link">
                         <div data-i18n="Without menu">Posts</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Without navbar</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-container.html" class="menu-link">
-                        <div data-i18n="Container">Container</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-fluid.html" class="menu-link">
-                        <div data-i18n="Fluid">Fluid</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-blank.html" class="menu-link">
-                        <div data-i18n="Blank">Blank</div>
                     </a>
                 </li>
             </ul>

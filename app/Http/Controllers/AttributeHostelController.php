@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attribute_type;
+use App\Models\Attribute_hostel;
 use Illuminate\Http\Request;
 
-class AttributeTypeController extends Controller
+class AttributeHostelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class AttributeTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Attribute_type  $attribute_type
+     * @param  \App\Models\Attribute_hostel  $Attribute_hostel
      * @return \Illuminate\Http\Response
      */
-    public function show(Attribute_type $attribute_type)
+    public function show(Attribute_hostel $Attribute_hostel)
     {
         //
     }
@@ -52,10 +52,10 @@ class AttributeTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Attribute_type  $attribute_type
+     * @param  \App\Models\Attribute_hostel  $Attribute_hostel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attribute_type $attribute_type)
+    public function edit(Attribute_hostel $Attribute_hostel)
     {
         //
     }
@@ -64,10 +64,10 @@ class AttributeTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Attribute_type  $attribute_type
+     * @param  \App\Models\Attribute_hostel  $Attribute_hostel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attribute_type $attribute_type)
+    public function update(Request $request, Attribute_hostel $Attribute_hostel)
     {
         //
     }
@@ -75,10 +75,10 @@ class AttributeTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Attribute_type  $attribute_type
+     * @param  \App\Models\Attribute_hostel  $Attribute_hostel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attribute_type $attribute_type)
+    public function destroy(Attribute_hostel $Attribute_hostel)
     {
         //
     }

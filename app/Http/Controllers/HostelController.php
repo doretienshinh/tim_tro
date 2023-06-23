@@ -16,6 +16,7 @@ class HostelController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $HostelService;
+    protected $TagService;
 
     public function __construct(HostelService $HostelService, TagService $TagService) {
         $this->HostelService = $HostelService;

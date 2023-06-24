@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HostelController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\AttributeHostelController;
 
 
 /*
@@ -68,7 +70,6 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/edit/{id}', [HostelController::class, 'edit'])->name('admin.notification.edit');
             Route::post('/edit/{id}', [HostelController::class, 'update'])->name('admin.notification.update');
         });
-
     });
     //route for user
     Route::prefix('')->group(function (){

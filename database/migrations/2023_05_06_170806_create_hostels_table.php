@@ -25,6 +25,28 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('ward_id');
+            $table->integer('price');
+            $table->string('payment_note');
+            $table->integer('deposit_price');
+            $table->integer('electricity_price');
+            $table->integer('water_price');
+            $table->string('water_note');
+            $table->integer('internet_price');
+            $table->string('internet_note');
+            $table->string('acreage');
+            $table->boolean('air_conditional');
+            $table->boolean('heater');
+            $table->boolean('washing_machine');
+            $table->boolean('stay_with_host');
+
+            $table->boolean('closed_room');
+            $table->boolean('parking_area');
+            $table->integer('floor');
+            $table->boolean('elevator');
+            $table->boolean('kitchen');
+            $table->boolean('balcony');
+
+            $table->integer('amount_of_people');
             $table->timestamps();
         });
     }

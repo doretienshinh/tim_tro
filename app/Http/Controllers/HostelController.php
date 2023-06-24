@@ -18,7 +18,7 @@ class HostelController extends Controller
     protected $HostelService;
     protected $TagService;
 
-    public function __construct(HostelService $HostelService, TagService $TagService) {
+    public function __construct(HostelService $HostelService, TagService $TagService, ) {
         $this->HostelService = $HostelService;
         $this->TagService = $TagService;
     }
@@ -50,6 +50,8 @@ class HostelController extends Controller
      */
     public function store(CreateHostelRequest $request)
     {
+        // dd($request->all());
+
         $hostels = $this->HostelService->store($request->all());
 
         return redirect()->route('admin.hostel.index');

@@ -17,7 +17,27 @@ class Hostel extends Model
         'tag_id',
         'user_id',
         'ward_id',
-        'address_detail'
+        'address_detail',
+        'price',
+        'payment_note',
+        'deposit_price',
+        'electricity_price',
+        'water_price',
+        'water_note',
+        'internet_price',
+        'internet_note',
+        'acreage',
+        'air_conditional',
+        'heater',
+        'washing_machine',
+        'stay_with_host',
+        'closed_room',
+        'parking_area',
+        'floor',
+        'elevator',
+        'kitchen',
+        'balcony',
+        'amount_of_people',
     ];
 
     public function hostel_users()

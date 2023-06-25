@@ -5,13 +5,13 @@
 
 <head>
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
-    @include('headers.admin_header')
+    @include('admin.headers.admin_header')
 </head>
 
 <body>
     <!-- Content -->
     <div class="container-xxl">
-        @include('layouts.alert')
+        @include('admin.layouts.alert')
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner">
                 <!-- Register -->
@@ -126,7 +126,7 @@
         <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/" target="_blank"
             class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
     </div> --}}
-    @include('footers.admin_footer')
+    @include('admin.footers.admin_footer')
 </body>
 
 </html>

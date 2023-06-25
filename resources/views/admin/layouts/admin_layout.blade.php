@@ -3,7 +3,7 @@
     data-assets-path="{{ asset('assets/') }}" data-template="vertical-menu-template-free">
 
 <head>
-    @include('headers.admin_header')
+    @include('admin.headers.admin_header')
 </head>
 
 <body>
@@ -12,25 +12,25 @@
         <div class="layout-container">
             <!-- Menu -->
 
-            @include('sidebars.admin_sidebar')
+            @include('admin.sidebars.admin_sidebar')
             <!-- / Menu -->
 
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
 
-                @include('navbars.admin_navbar')
+                @include('admin.navbars.admin_navbar')
 
                 <!-- / Navbar -->
                 <!-- Review Notification -->
 
-                @include('layouts.review_notification')
+                @include('admin.layouts.review_notification')
 
                 <!-- / Review Notification -->
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
-                    @include('layouts.alert')
+                    @include('admin.layouts.alert')
 
                     <div class="container-xxl flex-grow-1 container-p-y">
                         @yield('content')
@@ -52,7 +52,7 @@
         <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/" target="_blank"
             class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
     </div> --}}
-    @include('footers.admin_footer')
+    @include('admin.footers.admin_footer')
 </body>
 
 </html>

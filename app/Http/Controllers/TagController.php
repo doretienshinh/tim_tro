@@ -23,7 +23,7 @@ class TagController extends Controller
     {
         $tags = $this->TagService->getAllNotHavePagination();
 
-        return view('tag.index', compact('tags'));
+        return view('admin.tag.index', compact('tags'));
     }
 
     /**
@@ -33,7 +33,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('tag.create');
+        return view('admin.tag.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        return view('tag.edit', compact('tag'));
+        return view('admin.tag.edit', compact('tag'));
     }
 
     /**

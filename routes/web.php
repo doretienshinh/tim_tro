@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HostelController;
+use App\Http\Controllers\TimeController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\AttributeHostelController;
@@ -61,14 +63,34 @@ Route::middleware(['auth'])->group(function(){
             Route::delete('/destroy/{hostel}', [HostelController::class, 'destroy'])->name('admin.hostel.destroy');
         });
 
+        #Tag
+        Route::prefix('tag')->group(function (){
+            Route::get('/', [TagController::class, 'index'])->name('admin.tag.index');
+            Route::get('/create', [TagController::class, 'create'])->name('admin.tag.create');
+            Route::post('/create', [TagController::class, 'store'])->name('admin.tag.store');
+            Route::get('/edit/{tag}', [TagController::class, 'edit'])->name('admin.tag.edit');
+            Route::post('/edit/{tag}', [TagController::class, 'update'])->name('admin.tag.update');
+            Route::get('/delete/{tag}', [TagController::class, 'destroy'])->name('admin.tag.delete');
+        });
+
         #Notification
         Route::prefix('notification')->group(function (){
             Route::get('/', [NotificationController::class, 'index'])->name('admin.notification.index');
-            Route::get('/detail/{id}', [NotificationController::class, 'show'])->name('admin.notification.detail');
-            Route::get('/create', [NotificationController::class, 'create'])->name('admin.notification.create');
-            Route::post('/create', [NotificationController::class, 'store'])->name('admin.notification.store');
-            Route::get('/edit/{id}', [HostelController::class, 'edit'])->name('admin.notification.edit');
-            Route::post('/edit/{id}', [HostelController::class, 'update'])->name('admin.notification.update');
+            // Route::get('/detail/{id}', [NotificationController::class, 'show'])->name('admin.notification.detail');
+            // Route::get('/create', [NotificationController::class, 'create'])->name('admin.notification.create');
+            // Route::post('/create', [NotificationController::class, 'store'])->name('admin.notification.store');
+            // Route::get('/edit/{id}', [HostelController::class, 'edit'])->name('admin.notification.edit');
+            // Route::post('/edit/{id}', [HostelController::class, 'update'])->name('admin.notification.update');
+        });
+
+        #Time
+        Route::prefix('time')->group(function (){
+            Route::get('/', [TimeController::class, 'index'])->name('admin.time.index');
+            Route::get('/create', [TimeController::class, 'create'])->name('admin.time.create');
+            Route::post('/create', [TimeController::class, 'store'])->name('admin.time.store');
+            Route::get('/edit/{time}', [TimeController::class, 'edit'])->name('admin.time.edit');
+            Route::post('/edit/{time}', [TimeController::class, 'update'])->name('admin.time.update');
+            Route::get('/delete/{time}', [TimeController::class, 'destroy'])->name('admin.time.delete');
         });
     });
     //route for user

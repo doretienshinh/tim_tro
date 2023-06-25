@@ -62,4 +62,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Hostel_user::class);
     }
+
+    public function times()
+    {
+        return $this->hasMany(Time::class);
+    }
 }

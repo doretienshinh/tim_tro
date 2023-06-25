@@ -116,6 +116,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modalCenter">
+                                    Đặt lịch xem trọ
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -275,16 +279,42 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="navs-justified-messages" role="tabpanel">
-                    <p>
-                        Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
-                        cupcake gummi bears cake chocolate.
-                    </p>
-                    <p class="mb-0">
-                        Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
-                        roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
-                        jelly-o tart brownie jelly.
-                    </p>
+                    a
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">Chọn lịch xem trọ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        @foreach ($hostel->user->times as $time)
+                            <a class="dropdown-item" href="{{ route('admin.hostel.detail', $hostel) }}">
+                                <i class="bx bx-search-alt me-1"></i>
+                                <span>Thời gian: {{ $time->start_at }} -> {{ $time->end_at }} </span><br>
+                                @if ($time->day)
+                                    <span>Ngày: {{ $time->day }}</span>
+                                @endif
+                                @if ($time->weekly_at)
+                                    <span>Hằng tuần: {{ $time->weekly_at }}</span>
+                                @endif
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+                {{-- <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary"
+                    data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> --}}
             </div>
         </div>
     </div>

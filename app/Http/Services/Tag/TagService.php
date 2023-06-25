@@ -27,11 +27,41 @@ class TagService
 
     public function store($data)
     {
-        
+        try {
+            Tag::create($data);
+            Session::flash('success','Thêm thẻ thành công');
+        } catch (\Exception $err){
+            Session::flash('error','Thêm thẻ thất bại');
+            \Log::info($err->getMessage());
+            return false;
+        }
+        return true;
     }
 
-    public function update($id, $data)
+    public function update($data, $tag)
     {
-       
+        try {
+            $tag->fill($data);
+            $tag->save();
+            Session::flash('success','Sửa thẻ thành công');
+        } catch (\Exception $err){
+            Session::flash('error','Sửa thẻ thất bại');
+            \Log::info($err->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public function destroy($tag)
+    {
+        try {
+            $tag->delete();
+            Session::flash('success','Xóa thẻ thành công');
+        } catch (\Exception $err){
+            Session::flash('error','Xóa thẻ thất bại');
+            \Log::info($err->getMessage());
+            return false;
+        }
+        return true;
     }
 }

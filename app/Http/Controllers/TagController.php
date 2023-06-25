@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Services\Tag\TagService;
 
 class TagController extends Controller
 {
+    protected $TagService;
+
+    public function __construct(TagService $TagService, ) {
+        $this->TagService = $TagService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = $this->TagService->getAllNotHavePagination();
+
+        return view('tag.index', compact('tags'));
     }
 
     /**
@@ -24,7 +33,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('tag.create');
     }
 
     /**
@@ -35,7 +44,9 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $times = $this->TagService->store($request->all());
+
+        return redirect()->route('admin.tag.index');
     }
 
     /**
@@ -57,7 +68,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('tag.edit', compact('tag'));
     }
 
     /**
@@ -69,7 +80,9 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $this->TagService->update($request->all(), $tag);
+
+        return redirect(route('admin.tag.index'));
     }
 
     /**
@@ -80,6 +93,8 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $this->TagService->destroy($tag);
+
+        return redirect(route('admin.tag.index'));
     }
 }

@@ -148,6 +148,34 @@
             </ul>
         </li>
 
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'admin.tag.index') === 0) ? 'active' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class='bx bx-purchase-tag-alt tf-icons menu-icon'></i>
+                <div data-i18n="Layouts">Tags</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('admin.tag.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Tags</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'admin.time.index') === 0) ? 'active' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class='bx bx-time-five tf-icons menu-icon'></i>
+                <div data-i18n="Layouts">Times</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('admin.time.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Times</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>

@@ -27,7 +27,7 @@ class HostelController extends Controller
     {
         $hostels = $this->HostelService->getAll();
 
-        return view('hostel.index', compact('hostels'));
+        return view('admin.hostel.index', compact('hostels'));
     }
 
     /**
@@ -39,7 +39,7 @@ class HostelController extends Controller
     {
         $tags = $this->TagService->getAllNotHavePagination();
 
-        return view('hostel.create', compact('tags'));
+        return view('admin.hostel.create', compact('tags'));
     }
 
     /**
@@ -65,7 +65,7 @@ class HostelController extends Controller
      */
     public function show(Hostel $Hostel)
     {
-        return view('hostel.detail', [
+        return view('admin.hostel.detail', [
             'hostel' => $Hostel,
         ]);
     }
@@ -80,7 +80,7 @@ class HostelController extends Controller
     {
         $tags = $this->TagService->getAllNotHavePagination();
 
-        return view('hostel.edit', [
+        return view('admin.hostel.edit', [
             'hostel' => $Hostel,
             'tags' => $tags,
         ]);

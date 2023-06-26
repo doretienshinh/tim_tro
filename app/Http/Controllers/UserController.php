@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         $users = $this->UserService->getAll();
 
-        return view('user.index', compact('users'));
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('admin.user.create');
     }
 
     /**
@@ -62,7 +62,7 @@ class UserController extends Controller
     {
         $user = $this->UserService->find($id);
         
-        return view('user.detail', compact('user'));
+        return view('admin.user.detail', compact('user'));
     }
 
     /**
@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         $user = $this->UserService->find($id);
 
-        return view('user.edit', compact('user'));
+        return view('admin.user.edit', compact('user'));
     }
 
     /**

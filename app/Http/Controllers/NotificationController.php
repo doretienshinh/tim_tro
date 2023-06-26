@@ -24,7 +24,7 @@ class NotificationController extends Controller
     {
         $notifications = $this->NotificationService->getAll();
 
-        return view('notification.index', compact('notifications'));
+        return view('admin.notification.index', compact('notifications'));
     }
 
     /**

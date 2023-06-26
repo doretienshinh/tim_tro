@@ -29,8 +29,13 @@ class HomeController extends Controller
         if( !Auth::check() || Auth::user()->getRoleNames()[0] == 'user') {
             $hostels = $this->HostelService->getAll();
 
-            return view('home.user',[ 'hostels' => $hostels]);
+            return view('user.home.user',[ 'hostels' => $hostels]);
         }
-        else return view('home.admin');
+        else if( !Auth::check() || Auth::user()->getRoleNames()[0] == 'host') {
+            $hostels = $this->HostelService->getAll();
+
+            return view('host.home.user',[ 'hostels' => $hostels]);
+        }
+        else return view('admin.home.admin');
     }
 }

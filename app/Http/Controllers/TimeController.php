@@ -24,7 +24,7 @@ class TimeController extends Controller
     {
         $times = $this->TimeService->getAllMyTime();
 
-        return view('time.index', compact('times'));
+        return view('admin.time.index', compact('times'));
     }
 
     /**
@@ -34,7 +34,7 @@ class TimeController extends Controller
      */
     public function create()
     {
-        return view('time.create');
+        return view('admin.time.create');
     }
 
     /**
@@ -69,7 +69,7 @@ class TimeController extends Controller
      */
     public function edit(time $time)
     {
-        return view('time.edit', compact('time'));
+        return view('admin.time.edit', compact('time'));
     }
 
     /**

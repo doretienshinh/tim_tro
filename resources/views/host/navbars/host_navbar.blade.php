@@ -16,6 +16,7 @@
             </div>
         </div>
         <!-- /Search -->
+
         @if (Auth::user())
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             {{-- Message --}}
@@ -58,7 +59,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ route('admin.user.detail', Auth::user()->id) }}">
+                        <a class="dropdown-item" href="{{ route('user.user.detail') }}">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
                         </a>
@@ -97,13 +98,6 @@
             </li>
             <!--/ User -->
         </ul>
-        @else
-        <div class="navbar-nav flex-row align-items-center ms-auto">
-            <a href="{{ route('login') }}" class="btn btn-primary me-1">
-                Đăng nhập
-            </a>
-        </div>
         @endif
-        
     </div>
 </nav>

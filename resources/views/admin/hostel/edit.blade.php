@@ -118,7 +118,7 @@
                                 <div class="mb-3">
                                     <label for="upload-images" class="form-label custom-file-label">Images</label>
                                     <input class="form-control" type="file" id="upload-images" name="image[]"
-                                        accept="image/*" multiple />
+                                        accept="image/*, video/*" multiple />
                                     @if ($errors->has('image'))
                                         <span id="images-error" class="error text-danger"
                                             for="input-image">{{ $errors->first('image') }}</span>

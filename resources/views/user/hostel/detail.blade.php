@@ -29,68 +29,77 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
-
-                    <div class="p-4 min-vh-100">
-                        <div class="card-body row">
-                            <div class="col-md-6">
-                                <div id="carouselExample" class="carousel slide min-vh-50" data-bs-ride="carousel">
-                                    <ol class="carousel-indicators" style="top:0 !important;bottom:auto;">
-                                        @php
-                                            $images = explode(';', $hostel->image);
-                                            $images = array_filter($images, function ($value) {
-                                                return !empty($value);
-                                            });
-                                        @endphp
-                                        @foreach ($images as $index => $image)
-                                            <li data-bs-target="#carouselExample" data-bs-slide-to="{{ $index - 1 }}"
-                                                class="{{ $index == 1 ? 'active' : '' }}"></li>
-                                        @endforeach
-                                    </ol>
-                                    <div class="carousel-inner min-vh-50">
-                                        @foreach ($images as $index => $image)
-                                            <div class="carousel-item {{ $index == 1 ? 'active' : '' }}">
-                                                <img class="d-block w-100 h-100 img-fluid object-fit-contain"
-                                                    src="{{ asset('storage/' . $image) }}"
-                                                    alt="{{ asset('storage/' . $image) }}" />
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <a class="carousel-control-prev" href="#carouselExample" role="button"
-                                        data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#carouselExample" role="button"
-                                        data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </a>
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div id="carouselExample" class="carousel slide min-vh-50" data-bs-ride="carousel">
+                                <ol class="carousel-indicators" style="top:0 !important;bottom:auto;">
+                                    @php
+                                        $images = explode(';', $hostel->image);
+                                        $images = array_filter($images, function ($value) {
+                                            return !empty($value);
+                                        });
+                                    @endphp
+                                    @foreach ($images as $index => $image)
+                                        <li data-bs-target="#carouselExample" data-bs-slide-to="{{ $index - 1 }}"
+                                            class="{{ $index == 1 ? 'active' : '' }}"></li>
+                                    @endforeach
+                                </ol>
+                                <div class="carousel-inner min-vh-50">
+                                    @foreach ($images as $index => $image)
+                                        <div class="carousel-item {{ $index == 1 ? 'active' : '' }}">
+                                            <img class="d-block w-100 h-100 img-fluid object-fit-contain"
+                                                src="{{ asset('storage/' . $image) }}"
+                                                alt="{{ asset('storage/' . $image) }}"/>
+                                        </div>
+                                    @endforeach
                                 </div>
+                                <a class="carousel-control-prev" href="#carouselExample" role="button"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExample" role="button"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </a>
                             </div>
-                            <div class="col-md-6">
-                                <h4 class="fw-bold py-3 mb-4">
-                                    {{ $hostel->title }}
-                                    <button type="button" class="ms-2 btn btn-primary" data-bs-toggle="tooltip"
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="card-title">{{ $hostel->title }}</h5>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip"
                                         data-bs-offset="0,4" data-bs-placement="right" data-bs-html="true"
                                         title="<i class='bx bx-trending-up bx-xs' ></i> <span>{{ $hostel->tag->description }}</span>">
                                         {{ $hostel->tag->name }}
                                     </button>
-                                </h4>
-                                <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>{{ $hostel->description }}</textarea>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="preview_city" class="form-label">province</label>
-                                    <input class="form-control" id="preview_city" type="text" readonly />
+                                <hr>
+                                <p class="card-text">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button type="button" class="accordion-button collapsed p-0"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accordion_desciption_{{ $hostel->id }}" aria-expanded="false"
+                                            aria-controls="accordion_desciption_{{ $hostel->id }}">
+                                            Mô tả
+                                        </button>
+                                    </h2>
+                                    <div id="accordion_desciption_{{ $hostel->id }}" class="accordion-collapse collapse"
+                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body pt-4">
+                                            {{ $hostel->description }}
+                                        </div>
+                                    </div>
                                 </div>
+                                </p>
+                                <hr>
+                                <h6 class="card-title">Thông tin địa chỉ</h6>
+                                <p class="card-text">
                                 <div class="mb-3">
-                                    <label for="preview_district" class="form-label">District</label>
-                                    <input class="form-control" id="preview_district" type="text" readonly />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="preview_ward" class="form-label">Ward</label>
-                                    <input class="form-control" id="preview_ward" type="text" readonly />
+                                    <label for="address" class="form-label">Địa chỉ</label>
+                                    <input class="form-control" id="address" type="text" readonly />
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlReadOnlyInput1" class="form-label">Địa chỉ chi
@@ -98,32 +107,257 @@
                                     <input class="form-control" type="text" readonly
                                         value="{{ $hostel->address_detail }}" />
                                 </div>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                        <img src="{{ $hostel->user->avatar ? asset('storage/' . $hostel->user->avatar) : asset('assets/img/avatars/default.png') }}"
-                                            alt="user-avatar" class="d-block rounded" height="100" width="100" />
-                                        <div class="button-wrapper">
-                                            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                                <span class="d-none d-sm-block">{{ $hostel->user->name }}</span>
-                                                <i class="bx bx-upload d-block d-sm-none"></i>
-                                            </label>
-                                            {{-- <div type="button" class="btn btn-outline-secondary mb-4">
-                              <i class="bx bx-reset d-block d-sm-none"></i>
-                              <span class="d-none d-sm-block">Reset</span>
-                            </div> --}}
-
-                                            {{-- <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p> --}}
-                                        </div>
+                                </p>
+                                <hr>
+                                <h6 class="card-title">Thông tin chi tiết trọ</h6>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="price" class="form-label">Giá trọ</label>
+                                        <input class="form-control" type="text" id="price" name="price"
+                                            placeholder="Nhập giá tiền thuê trọ" autofocus value="{{ $hostel->price }}"/>
+                                        @if ($errors->has('price'))
+                                            <span id="price-error" class="error text-danger"
+                                                for="input-price">{{ $errors->first('price') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="payment_note" class="form-label">Thông tin thanh toán</label>
+                                        <input class="form-control" type="text" id="payment_note" name="payment_note"
+                                            placeholder="Ví dụ: 3 tháng / lần, 1 tháng / lần" autofocus value="{{ $hostel->payment_note }}"/>
+                                        @if ($errors->has('payment_note'))
+                                            <span id="payment_note-error" class="error text-danger"
+                                                for="input-payment_note">{{ $errors->first('payment_note') }}</span>
+                                        @endif
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalCenter">
-                                    Đặt lịch xem trọ
-                                </button>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="deposit_price" class="form-label">Giá tiền cọc</label>
+                                        <input class="form-control" type="text" id="deposit_price"
+                                            name="deposit_price" placeholder="Nhập giá tiền cọc" autofocus value="{{ $hostel->deposit_price }}"/>
+                                        @if ($errors->has('deposit_price'))
+                                            <span id="deposit_price-error" class="error text-danger"
+                                                for="input-deposit_price">{{ $errors->first('deposit_price') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="electricity_price" class="form-label">Tiền điện</label>
+                                        <input class="form-control" type="text" id="electricity_price"
+                                            name="electricity_price" placeholder="Nhập giá tiền điện / 1 kWh" autofocus value="{{ $hostel->electricity_price }}"/>
+                                        @if ($errors->has('electricity_price'))
+                                            <span id="electricity_price-error" class="error text-danger"
+                                                for="input-electricity_price">{{ $errors->first('electricity_price') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="water_price" class="form-label">Tiền nước</label>
+                                        <input class="form-control" type="text" id="water_price" name="water_price"
+                                            placeholder="Nhập tiền nước" autofocus value="{{ $hostel->water_price}}"/>
+                                        @if ($errors->has('water_price'))
+                                            <span id="water_price-error" class="error text-danger"
+                                                for="input-water_price">{{ $errors->first('water_price') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="water_note" class="form-label">Cách tính</label>
+                                        <input class="form-control" type="text" id="water_note" name="water_note"
+                                            placeholder="Nhập cách tính ví dụ: người/tháng, giá nước/số khối" autofocus value="{{ $hostel->water_note }}"/>
+                                        @if ($errors->has('title'))
+                                            <span id="title-error" class="error text-danger"
+                                                for="input-title">{{ $errors->first('title') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="internet_price" class="form-label">Giá internet</label>
+                                        <input class="form-control" type="text" id="internet_price"
+                                            name="internet_price" placeholder="Nhập giá / tháng" autofocus value="{{ $hostel->internet_price }}"/>
+                                        @if ($errors->has('internet_price'))
+                                            <span id="internet_price-error" class="error text-danger"
+                                                for="input-internet_price">{{ $errors->first('internet_price') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="internet_note" class="form-label">Chú thích internet</label>
+                                        <input class="form-control" type="text" id="internet_note"
+                                            name="internet_note" placeholder="Người/tháng, phòng/tháng" autofocus value="{{ $hostel->internet_note }}"/>
+                                        @if ($errors->has('internet_note'))
+                                            <span id="internet_note-error" class="error text-danger"
+                                                for="input-internet_note">{{ $errors->first('internet_note') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="acreage" class="form-label">Diện tích</label>
+                                        <input class="form-control" type="text" id="acreage" name="acreage"
+                                            placeholder="Nhập diện tích tính theo mét vuông" autofocus value="{{ $hostel->acreage }}"/>
+                                        @if ($errors->has('acreage'))
+                                            <span id="acreage-error" class="error text-danger"
+                                                for="input-acreage">{{ $errors->first('acreage') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="stay_with_host" class="form-label">Ở chung chủ</label>
+                                        <select id="stay_with_host" class="selectpicker w-100" data-style="btn-default"
+                                            name="stay_with_host">
+                                            <option value=1 {{ $hostel->stay_with_host == 1 ? 'selected' : '' }}>Chung chủ</option>
+                                            <option value=0 {{ $hostel->stay_with_host == 0 ? 'selected' : '' }}>Không chung chủ</option>
+                                        </select>
+                                        @if ($errors->has('stay_with_host'))
+                                            <span id="stay_with_host-error" class="error text-danger"
+                                                for="input-stay_with_host">{{ $errors->first('stay_with_host') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="air_conditional" class="form-label">Điều hòa</label>
+                                        <select id="air_conditional" class="selectpicker w-100" data-style="btn-default"
+                                            name="air_conditional">
+                                            <option value=1 {{ $hostel->air_conditional == 1 ? 'selected' : '' }}>Có điều hòa</option>
+                                            <option value=0 {{ $hostel->air_conditional == 0 ? 'selected' : '' }}>Không có điều hòa</option>
+                                        </select>
+                                        @if ($errors->has('air_conditional'))
+                                            <span id="air_conditional-error" class="error text-danger"
+                                                for="input-air_conditional">{{ $errors->first('air_conditional') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="heater" class="form-label">Nóng lạnh</label>
+                                        <select id="heater" class="selectpicker w-100" data-style="btn-default"
+                                            name="heater">
+                                            <option value=1  {{ $hostel->heater == 1 ? 'selected' : '' }}>Có bình nóng lạnh</option>
+                                            <option value=0  {{ $hostel->heater == 0 ? 'selected' : '' }}>Không có bình nóng lạnh</option>
+                                        </select>
+                                        @if ($errors->has('heater'))
+                                            <span id="heater-error" class="error text-danger"
+                                                for="input-heater">{{ $errors->first('heater') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="washing_machine" class="form-label">Máy giặt</label>
+                                        <select id="washing_machine" class="selectpicker w-100" data-style="btn-default"
+                                            name="washing_machine">
+                                            <option value=1  {{ $hostel->washing_machine == 1 ? 'selected' : '' }}>Có máy giặt</option>
+                                            <option value=0  {{ $hostel->washing_machine == 0 ? 'selected' : '' }}>Không có máy giặt</option>
+                                        </select>
+                                        @if ($errors->has('washing_machine'))
+                                            <span id="washing_machine-error" class="error text-danger"
+                                                for="input-washing_machine">{{ $errors->first('washing_machine') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="amount_of_people" class="form-label">Số người ở</label>
+                                        <input class="form-control" type="number" id="amount_of_people"
+                                            name="amount_of_people" placeholder="Nhập số người ở" autofocus value="{{ $hostel->amount_of_people }}"/>
+                                        @if ($errors->has('amount_of_people'))
+                                            <span id="amount_of_people-error" class="error text-danger"
+                                                for="input-amount_of_people">{{ $errors->first('amount_of_people') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="closed_room" class="form-label">Khép kín</label>
+                                        <select id="closed_room" class="selectpicker w-100" data-style="btn-default"
+                                            name="closed_room">
+                                            <option value=1  {{ $hostel->closed_room == 1 ? 'selected' : '' }}>Khép kín</option>
+                                            <option value=0  {{ $hostel->closed_room == 0 ? 'selected' : '' }}>Không khép kín</option>
+                                        </select>
+                                        @if ($errors->has('closed_room'))
+                                            <span id="closed_room-error" class="error text-danger"
+                                                for="input-closed_room">{{ $errors->first('closed_room') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="parking_area" class="form-label">Chỗ đổ xe</label>
+                                        <select id="parking_area" class="selectpicker w-100" data-style="btn-default"
+                                            name="parking_area">
+                                            <option value=1  {{ $hostel->parking_area == 1 ? 'selected' : '' }}>Có chỗ đổ xe</option>
+                                            <option value=0  {{ $hostel->parking_area == 0 ? 'selected' : '' }}>Không có chỗ đổ xe</option>
+                                        </select>
+                                        @if ($errors->has('parking_area'))
+                                            <span id="parking_area-error" class="error text-danger"
+                                                for="input-parking_area">{{ $errors->first('parking_area') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="floor" class="form-label">Nằm ở tầng mấy</label>
+                                        <input class="form-control" type="number" id="floor"
+                                            name="floor" placeholder="Nằm ở tầng mấy" value="{{ $hostel->floor }}"/>
+                                        @if ($errors->has('floor'))
+                                            <span id="floor-error" class="error text-danger"
+                                                for="input-floor">{{ $errors->first('floor') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="elevator" class="form-label">Có thang máy không</label>
+                                        <select id="elevator" class="selectpicker w-100" data-style="btn-default"
+                                            name="elevator">
+                                            <option value=1  {{ $hostel->elevator == 1 ? 'selected' : '' }}>Có thang máy</option>
+                                            <option value=0  {{ $hostel->elevator == 0 ? 'selected' : '' }}>Không có thang máy</option>
+                                        </select>
+                                        @if ($errors->has('elevator'))
+                                            <span id="elevator-error" class="error text-danger"
+                                                for="input-elevator">{{ $errors->first('elevator') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <label for="kitchen" class="form-label">Chỗ nấu ăn</label>
+                                        <select id="kitchen" class="selectpicker w-100" data-style="btn-default"
+                                            name="kitchen">
+                                            <option value=1  {{ $hostel->kitchen == 1 ? 'selected' : '' }}>Có chỗ nấu ăn</option>
+                                            <option value=0  {{ $hostel->kitchen == 0 ? 'selected' : '' }}>Không có chỗ nấu ăn</option>
+                                        </select>
+                                        @if ($errors->has('kitchen'))
+                                            <span id="kitchen-error" class="error text-danger"
+                                                for="input-kitchen">{{ $errors->first('kitchen') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="balcony" class="form-label">Ban công</label>
+                                        <select id="balcony" class="selectpicker w-100" data-style="btn-default"
+                                            name="balcony">
+                                            <option value=1  {{ $hostel->balcony == 1 ? 'selected' : '' }}>Có ban công</option>
+                                            <option value=0  {{ $hostel->balcony == 0 ? 'selected' : '' }}>Không có ban công</option>
+                                        </select>
+                                        @if ($errors->has('balcony'))
+                                            <span id="balcony-error" class="error text-danger"
+                                                for="input-balcony">{{ $errors->first('balcony') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                {{-- <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button type="button" class="accordion-button collapsed p-0"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accordion_attribute_{{ $hostel->id }}" aria-expanded="false"
+                                            aria-controls="accordion_attribute_{{ $hostel->id }}">
+                                            Thông tin nhà trọ
+                                        </button>
+                                    </h2>
+                                    <div id="accordion_attribute_{{ $hostel->id }}" class="accordion-collapse collapse"
+                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body pt-4">
+                                            {{ $hostel->description }}
+                                        </div>
+                                    </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
                     <div>
@@ -322,60 +556,34 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(e) {
         var ward_id = {{ $hostel->ward_id }};
+        var address_show = $('#address');
         var district_id;
         var province_id;
-
-        // function getDataLocation(ajaxurl) {
-        //     return $.ajax({
-        //         url: ajaxurl,
-        //         type: 'GET',
-        //     });
-        // };
-        // async function getLocation(ajaxurl) {
-        //     try {
-        //         const res = await getData(ajaxurl);
-        //         return res;
-        //     } catch (err) {
-        //         return error;
-        //     }
-        // }
-        // var ward = await getLocation('https://provinces.open-api.vn/api/w/' + ward_id).then(
-        //     $('#preview_ward').val(ward.name);
-        //     district_id = warden.district_id;
-        // );
-        // var district = await getLocation('https://provinces.open-api.vn/api/d/' + ward_id).then(
-        //     $('#preview_district').val(ward.name);
-        //     province_id = district.district_id;
-        // );
-        // var city = await getLocation('https://provinces.open-api.vn/api/p/' + ward_id).then(
-        //     $('#preview_city').val(city.name);
-        // );
-
+        var address;
         $.ajax({
             url: 'https://provinces.open-api.vn/api/w/' + ward_id,
             method: 'get',
             success: function(response) {
-                console.log(response);
 
                 district_id = response.district_code;
-                $('#preview_ward').val(response.name);
+                address = response.name;
 
                 $.ajax({
                     url: 'https://provinces.open-api.vn/api/d/' + district_id,
                     method: 'get',
                     success: function(response) {
-                        console.log(response);
                         province_id = response.province_code;
-                        $('#preview_district').val(response.name);
+                        address = address + ' - ' + response.name;
 
                         $.ajax({
                             url: 'https://provinces.open-api.vn/api/p/' +
                                 province_id,
                             method: 'get',
                             success: function(response) {
-                                console.log(response);
 
-                                $('#preview_city').val(response.name);
+                                address = address + ' - ' +
+                                    response.name;
+                                address_show.val(address);
                             },
                             error: function(xhr, status, error) {
                                 console.error(error);
@@ -391,7 +599,5 @@
                 console.error(error);
             }
         });
-
-
     });
 </script>

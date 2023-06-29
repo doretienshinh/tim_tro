@@ -12,6 +12,8 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Host\HostHostelController;
 use App\Http\Controllers\Host\HostTimeController;
 use App\Http\Controllers\Host\HostUserController;
+use App\Http\Controllers\Host\HostBookingController;
+
 use App\Http\Controllers\User\UserHostelController;
 use App\Http\Controllers\User\UserUserController;
 use App\Http\Controllers\User\UserBookingController;
@@ -149,6 +151,14 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/edit/{time}', [HostTimeController::class, 'edit'])->name('host.time.edit');
             Route::post('/edit/{time}', [HostTimeController::class, 'update'])->name('host.time.update');
             Route::get('/delete/{time}', [HostTimeController::class, 'destroy'])->name('host.time.delete');
+        });
+
+        #Booking
+        Route::prefix('booking')->group(function (){
+            Route::get('/', [HostBookingController::class, 'index'])->name('host.booking.index');
+            Route::get('/edit/{booking}', [HostBookingController::class, 'edit'])->name('host.booking.edit');
+            Route::post('/edit/{booking}', [HostBookingController::class, 'update'])->name('host.booking.update');
+            // Route::get('/delete/{time}', [HostTimeController::class, 'destroy'])->name('host.time.delete');
         });
     });
 });

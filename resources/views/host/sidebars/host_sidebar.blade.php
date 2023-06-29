@@ -104,6 +104,25 @@
             </ul>
         </li>
 
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'host.booking.index') === 0) ? 'active' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class='bx bx-time-five tf-icons menu-icon'></i>
+                <div data-i18n="Layouts">Lịch xem trọ</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('host.booking.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Danh sách hẹn</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('host.time.create') }}" class="menu-link">
+                        <div data-i18n="Without menu">Tạo thời gian mới</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Thông tin tài khoản</span>
         </li>

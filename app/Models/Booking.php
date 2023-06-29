@@ -15,4 +15,19 @@ class Booking extends Model
         'time_id',
         'status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function time()
+    {
+        return $this->belongsTo(Time::class);
+    }
+
+    public function hostel()
+    {
+        return $this->belongsTo(Hostel::class);
+    }
 }

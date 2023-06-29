@@ -14,6 +14,7 @@ use App\Http\Controllers\Host\HostTimeController;
 use App\Http\Controllers\Host\HostUserController;
 use App\Http\Controllers\User\UserHostelController;
 use App\Http\Controllers\User\UserUserController;
+use App\Http\Controllers\User\UserBookingController;
 
 
 /*
@@ -111,6 +112,11 @@ Route::middleware(['auth'])->group(function(){
         #Hostel
         Route::prefix('hostel')->group(function (){
             Route::get('/detail/{hostel}', [UserHostelController::class, 'show'])->name('user.hostel.detail');
+        });
+
+        #Booking
+        Route::prefix('booking')->group(function (){
+            Route::post('/store/{time_id}/{hostel_id}', [UserBookingController::class, 'booking'])->name('user.booking.store');
         });
     });
     //route for host

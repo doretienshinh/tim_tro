@@ -49,7 +49,7 @@
                                         <div class="carousel-item {{ $index == 1 ? 'active' : '' }}">
                                             <img class="d-block w-100 h-100 img-fluid object-fit-contain"
                                                 src="{{ asset('storage/' . $image) }}"
-                                                alt="{{ asset('storage/' . $image) }}"/>
+                                                alt="{{ asset('storage/' . $image) }}" />
                                         </div>
                                     @endforeach
                                 </div>
@@ -114,230 +114,180 @@
                                     <div class="col-6">
                                         <label for="price" class="form-label">Giá trọ</label>
                                         <input class="form-control" type="text" id="price" name="price"
-                                            placeholder="Nhập giá tiền thuê trọ" autofocus value="{{ $hostel->price }}"/>
-                                        @if ($errors->has('price'))
-                                            <span id="price-error" class="error text-danger"
-                                                for="input-price">{{ $errors->first('price') }}</span>
-                                        @endif
+                                            placeholder="Nhập giá tiền thuê trọ" autofocus
+                                            value="{{ number_format($hostel->price) }}  Đồng" readonly />
                                     </div>
                                     <div class="col-6">
                                         <label for="payment_note" class="form-label">Thông tin thanh toán</label>
                                         <input class="form-control" type="text" id="payment_note" name="payment_note"
-                                            placeholder="Ví dụ: 3 tháng / lần, 1 tháng / lần" autofocus value="{{ $hostel->payment_note }}"/>
-                                        @if ($errors->has('payment_note'))
-                                            <span id="payment_note-error" class="error text-danger"
-                                                for="input-payment_note">{{ $errors->first('payment_note') }}</span>
-                                        @endif
+                                            placeholder="Ví dụ: 3 tháng / lần, 1 tháng / lần" autofocus
+                                            value="{{ $hostel->payment_note }}" readonly />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    @if (isset($hostel->deposit_price))
+                                        <div class="col-6">
+                                            <label for="deposit_price" class="form-label">Giá tiền cọc</label>
+                                            <input class="form-control" type="text" id="deposit_price"
+                                                name="deposit_price" placeholder="Nhập giá tiền cọc" autofocus
+                                                value="{{ number_format($hostel->deposit_price) }} Đồng" readonly />
+                                        </div>
+                                    @endif
                                     <div class="col-6">
-                                        <label for="deposit_price" class="form-label">Giá tiền cọc</label>
-                                        <input class="form-control" type="text" id="deposit_price"
-                                            name="deposit_price" placeholder="Nhập giá tiền cọc" autofocus value="{{ $hostel->deposit_price }}"/>
-                                        @if ($errors->has('deposit_price'))
-                                            <span id="deposit_price-error" class="error text-danger"
-                                                for="input-deposit_price">{{ $errors->first('deposit_price') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">
-                                        <label for="electricity_price" class="form-label">Tiền điện</label>
+                                        <label for="electricity_price" class="form-label">Giá điện</label>
                                         <input class="form-control" type="text" id="electricity_price"
-                                            name="electricity_price" placeholder="Nhập giá tiền điện / 1 kWh" autofocus value="{{ $hostel->electricity_price }}"/>
-                                        @if ($errors->has('electricity_price'))
-                                            <span id="electricity_price-error" class="error text-danger"
-                                                for="input-electricity_price">{{ $errors->first('electricity_price') }}</span>
-                                        @endif
+                                            name="electricity_price" placeholder="Nhập giá tiền điện / 1 kWh" autofocus
+                                            value="{{ number_format($hostel->electricity_price) }} Đồng" readonly />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <label for="water_price" class="form-label">Tiền nước</label>
                                         <input class="form-control" type="text" id="water_price" name="water_price"
-                                            placeholder="Nhập tiền nước" autofocus value="{{ $hostel->water_price}}"/>
-                                        @if ($errors->has('water_price'))
-                                            <span id="water_price-error" class="error text-danger"
-                                                for="input-water_price">{{ $errors->first('water_price') }}</span>
-                                        @endif
+                                            placeholder="Nhập tiền nước"
+                                            value="{{ number_format($hostel->water_price) }} Đồng" readonly />
                                     </div>
                                     <div class="col-6">
                                         <label for="water_note" class="form-label">Cách tính</label>
                                         <input class="form-control" type="text" id="water_note" name="water_note"
-                                            placeholder="Nhập cách tính ví dụ: người/tháng, giá nước/số khối" autofocus value="{{ $hostel->water_note }}"/>
-                                        @if ($errors->has('title'))
-                                            <span id="title-error" class="error text-danger"
-                                                for="input-title">{{ $errors->first('title') }}</span>
-                                        @endif
+                                            placeholder="Nhập cách tính ví dụ: người/tháng, giá nước/số khối" readonly
+                                            value="{{ $hostel->water_note }}" />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <label for="internet_price" class="form-label">Giá internet</label>
                                         <input class="form-control" type="text" id="internet_price"
-                                            name="internet_price" placeholder="Nhập giá / tháng" autofocus value="{{ $hostel->internet_price }}"/>
-                                        @if ($errors->has('internet_price'))
-                                            <span id="internet_price-error" class="error text-danger"
-                                                for="input-internet_price">{{ $errors->first('internet_price') }}</span>
-                                        @endif
+                                            name="internet_price" placeholder="Nhập giá / tháng" autofocus
+                                            value="{{ number_format($hostel->internet_price) }}" readonly />
                                     </div>
                                     <div class="col-6">
                                         <label for="internet_note" class="form-label">Chú thích internet</label>
                                         <input class="form-control" type="text" id="internet_note"
-                                            name="internet_note" placeholder="Người/tháng, phòng/tháng" autofocus value="{{ $hostel->internet_note }}"/>
-                                        @if ($errors->has('internet_note'))
-                                            <span id="internet_note-error" class="error text-danger"
-                                                for="input-internet_note">{{ $errors->first('internet_note') }}</span>
-                                        @endif
+                                            name="internet_note" placeholder="Người/tháng, phòng/tháng" autofocus
+                                            value="{{ $hostel->internet_note }}" readonly />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <label for="acreage" class="form-label">Diện tích</label>
                                         <input class="form-control" type="text" id="acreage" name="acreage"
-                                            placeholder="Nhập diện tích tính theo mét vuông" autofocus value="{{ $hostel->acreage }}"/>
-                                        @if ($errors->has('acreage'))
-                                            <span id="acreage-error" class="error text-danger"
-                                                for="input-acreage">{{ $errors->first('acreage') }}</span>
-                                        @endif
+                                            placeholder="Nhập diện tích tính theo mét vuông" autofocus
+                                            value="{{ $hostel->acreage }} Mét vuông" readonly />
                                     </div>
-                                    <div class="col-6">
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-3">
                                         <label for="stay_with_host" class="form-label">Ở chung chủ</label>
                                         <select id="stay_with_host" class="selectpicker w-100" data-style="btn-default"
-                                            name="stay_with_host">
-                                            <option value=1 {{ $hostel->stay_with_host == 1 ? 'selected' : '' }}>Chung chủ</option>
-                                            <option value=0 {{ $hostel->stay_with_host == 0 ? 'selected' : '' }}>Không chung chủ</option>
+                                            name="stay_with_host" disabled>
+                                            <option value=1 {{ $hostel->stay_with_host == 1 ? 'selected' : '' }}>Chung chủ
+                                            </option>
+                                            <option value=0 {{ $hostel->stay_with_host == 0 ? 'selected' : '' }}>Không
+                                                chung chủ</option>
                                         </select>
-                                        @if ($errors->has('stay_with_host'))
-                                            <span id="stay_with_host-error" class="error text-danger"
-                                                for="input-stay_with_host">{{ $errors->first('stay_with_host') }}</span>
-                                        @endif
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <label for="air_conditional" class="form-label">Điều hòa</label>
                                         <select id="air_conditional" class="selectpicker w-100" data-style="btn-default"
-                                            name="air_conditional">
-                                            <option value=1 {{ $hostel->air_conditional == 1 ? 'selected' : '' }}>Có điều hòa</option>
-                                            <option value=0 {{ $hostel->air_conditional == 0 ? 'selected' : '' }}>Không có điều hòa</option>
+                                            name="air_conditional" disabled>
+                                            <option value=1 {{ $hostel->air_conditional == 1 ? 'selected' : '' }}>Có điều
+                                                hòa</option>
+                                            <option value=0 {{ $hostel->air_conditional == 0 ? 'selected' : '' }}>Không có
+                                                điều hòa</option>
                                         </select>
-                                        @if ($errors->has('air_conditional'))
-                                            <span id="air_conditional-error" class="error text-danger"
-                                                for="input-air_conditional">{{ $errors->first('air_conditional') }}</span>
-                                        @endif
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <label for="heater" class="form-label">Nóng lạnh</label>
                                         <select id="heater" class="selectpicker w-100" data-style="btn-default"
-                                            name="heater">
-                                            <option value=1  {{ $hostel->heater == 1 ? 'selected' : '' }}>Có bình nóng lạnh</option>
-                                            <option value=0  {{ $hostel->heater == 0 ? 'selected' : '' }}>Không có bình nóng lạnh</option>
+                                            name="heater" disabled>
+                                            <option value=1 {{ $hostel->heater == 1 ? 'selected' : '' }}>Có bình nóng lạnh
+                                            </option>
+                                            <option value=0 {{ $hostel->heater == 0 ? 'selected' : '' }}>Không có bình nóng
+                                                lạnh</option>
                                         </select>
-                                        @if ($errors->has('heater'))
-                                            <span id="heater-error" class="error text-danger"
-                                                for="input-heater">{{ $errors->first('heater') }}</span>
-                                        @endif
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <label for="washing_machine" class="form-label">Máy giặt</label>
                                         <select id="washing_machine" class="selectpicker w-100" data-style="btn-default"
-                                            name="washing_machine">
-                                            <option value=1  {{ $hostel->washing_machine == 1 ? 'selected' : '' }}>Có máy giặt</option>
-                                            <option value=0  {{ $hostel->washing_machine == 0 ? 'selected' : '' }}>Không có máy giặt</option>
+                                            name="washing_machine" disabled>
+                                            <option value=1 {{ $hostel->washing_machine == 1 ? 'selected' : '' }}>Có máy
+                                                giặt</option>
+                                            <option value=0 {{ $hostel->washing_machine == 0 ? 'selected' : '' }}>Không có
+                                                máy giặt</option>
                                         </select>
-                                        @if ($errors->has('washing_machine'))
-                                            <span id="washing_machine-error" class="error text-danger"
-                                                for="input-washing_machine">{{ $errors->first('washing_machine') }}</span>
-                                        @endif
                                     </div>
-                                    <div class="col-6">
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-3">
                                         <label for="amount_of_people" class="form-label">Số người ở</label>
                                         <input class="form-control" type="number" id="amount_of_people"
-                                            name="amount_of_people" placeholder="Nhập số người ở" autofocus value="{{ $hostel->amount_of_people }}"/>
-                                        @if ($errors->has('amount_of_people'))
-                                            <span id="amount_of_people-error" class="error text-danger"
-                                                for="input-amount_of_people">{{ $errors->first('amount_of_people') }}</span>
-                                        @endif
+                                            name="amount_of_people" placeholder="Nhập số người ở" autofocus
+                                            value="{{ $hostel->amount_of_people }}" readonly />
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <label for="closed_room" class="form-label">Khép kín</label>
                                         <select id="closed_room" class="selectpicker w-100" data-style="btn-default"
-                                            name="closed_room">
-                                            <option value=1  {{ $hostel->closed_room == 1 ? 'selected' : '' }}>Khép kín</option>
-                                            <option value=0  {{ $hostel->closed_room == 0 ? 'selected' : '' }}>Không khép kín</option>
+                                            name="closed_room" disabled>
+                                            <option value=1 {{ $hostel->closed_room == 1 ? 'selected' : '' }}>Khép kín
+                                            </option>
+                                            <option value=0 {{ $hostel->closed_room == 0 ? 'selected' : '' }}>Không khép
+                                                kín</option>
                                         </select>
-                                        @if ($errors->has('closed_room'))
-                                            <span id="closed_room-error" class="error text-danger"
-                                                for="input-closed_room">{{ $errors->first('closed_room') }}</span>
-                                        @endif
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <label for="parking_area" class="form-label">Chỗ đổ xe</label>
                                         <select id="parking_area" class="selectpicker w-100" data-style="btn-default"
-                                            name="parking_area">
-                                            <option value=1  {{ $hostel->parking_area == 1 ? 'selected' : '' }}>Có chỗ đổ xe</option>
-                                            <option value=0  {{ $hostel->parking_area == 0 ? 'selected' : '' }}>Không có chỗ đổ xe</option>
+                                            name="parking_area" disabled>
+                                            <option value=1 {{ $hostel->parking_area == 1 ? 'selected' : '' }}>Có chỗ đổ xe
+                                            </option>
+                                            <option value=0 {{ $hostel->parking_area == 0 ? 'selected' : '' }}>Không có chỗ
+                                                đổ xe</option>
                                         </select>
-                                        @if ($errors->has('parking_area'))
-                                            <span id="parking_area-error" class="error text-danger"
-                                                for="input-parking_area">{{ $errors->first('parking_area') }}</span>
-                                        @endif
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-6">
-                                        <label for="floor" class="form-label">Nằm ở tầng mấy</label>
-                                        <input class="form-control" type="number" id="floor"
-                                            name="floor" placeholder="Nằm ở tầng mấy" value="{{ $hostel->floor }}"/>
-                                        @if ($errors->has('floor'))
-                                            <span id="floor-error" class="error text-danger"
-                                                for="input-floor">{{ $errors->first('floor') }}</span>
-                                        @endif
+                                    <div class="col-3">
+                                        <label for="floor" class="form-label">Vị trí phòng trọ trong nhà</label>
+                                        <input class="form-control" type="number" id="floor" name="floor"
+                                            placeholder="Nằm ở tầng mấy" value="{{ $hostel->floor }}" readonly />
                                     </div>
-                                    <div class="col-6">
-                                        <label for="elevator" class="form-label">Có thang máy không</label>
+                                    <div class="col-3">
+                                        <label for="elevator" class="form-label">Thang máy</label>
                                         <select id="elevator" class="selectpicker w-100" data-style="btn-default"
-                                            name="elevator">
-                                            <option value=1  {{ $hostel->elevator == 1 ? 'selected' : '' }}>Có thang máy</option>
-                                            <option value=0  {{ $hostel->elevator == 0 ? 'selected' : '' }}>Không có thang máy</option>
+                                            name="elevator" disabled>
+                                            <option value=1 {{ $hostel->elevator == 1 ? 'selected' : '' }}>Có thang máy
+                                            </option>
+                                            <option value=0 {{ $hostel->elevator == 0 ? 'selected' : '' }}>Không có thang
+                                                máy</option>
                                         </select>
-                                        @if ($errors->has('elevator'))
-                                            <span id="elevator-error" class="error text-danger"
-                                                for="input-elevator">{{ $errors->first('elevator') }}</span>
-                                        @endif
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <label for="kitchen" class="form-label">Chỗ nấu ăn</label>
                                         <select id="kitchen" class="selectpicker w-100" data-style="btn-default"
-                                            name="kitchen">
-                                            <option value=1  {{ $hostel->kitchen == 1 ? 'selected' : '' }}>Có chỗ nấu ăn</option>
-                                            <option value=0  {{ $hostel->kitchen == 0 ? 'selected' : '' }}>Không có chỗ nấu ăn</option>
+                                            name="kitchen" disabled>
+                                            <option value=1 {{ $hostel->kitchen == 1 ? 'selected' : '' }}>Có chỗ nấu ăn
+                                            </option>
+                                            <option value=0 {{ $hostel->kitchen == 0 ? 'selected' : '' }}>Không có chỗ nấu
+                                                ăn</option>
                                         </select>
-                                        @if ($errors->has('kitchen'))
-                                            <span id="kitchen-error" class="error text-danger"
-                                                for="input-kitchen">{{ $errors->first('kitchen') }}</span>
-                                        @endif
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <label for="balcony" class="form-label">Ban công</label>
                                         <select id="balcony" class="selectpicker w-100" data-style="btn-default"
-                                            name="balcony">
-                                            <option value=1  {{ $hostel->balcony == 1 ? 'selected' : '' }}>Có ban công</option>
-                                            <option value=0  {{ $hostel->balcony == 0 ? 'selected' : '' }}>Không có ban công</option>
+                                            name="balcony" disabled>
+                                            <option value=1 {{ $hostel->balcony == 1 ? 'selected' : '' }}>Có ban công
+                                            </option>
+                                            <option value=0 {{ $hostel->balcony == 0 ? 'selected' : '' }}>Không có ban công
+                                            </option>
                                         </select>
-                                        @if ($errors->has('balcony'))
-                                            <span id="balcony-error" class="error text-danger"
-                                                for="input-balcony">{{ $errors->first('balcony') }}</span>
-                                        @endif
                                     </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalCenter">
+                                        Đặt lịch xem trọ
+                                    </button>
                                 </div>
                                 {{-- <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingThree">
@@ -529,7 +479,11 @@
                 <div class="modal-body">
                     <div class="row">
                         @foreach ($hostel->user->times as $time)
-                            <a class="dropdown-item" href="{{ route('host.hostel.detail', $hostel) }}">
+                            <form id="form-{{ $time->id }}"
+                                action="{{ route('user.booking.store', ['time_id'=> $time->id,'hostel_id'=>$hostel->id]) }}" method="POST"
+                                class="d-none">@csrf</form>
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="document.getElementById('form-{{ $time->id }}').submit()">
                                 <i class="bx bx-search-alt me-1"></i>
                                 <span>Thời gian: {{ $time->start_at }} -> {{ $time->end_at }} </span><br>
                                 @if ($time->day)

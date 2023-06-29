@@ -12,8 +12,7 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'hostel_id',
-        'meeting_id',
+        'time_id',
         'status',
-        'note',
     ];
 }

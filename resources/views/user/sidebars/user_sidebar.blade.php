@@ -63,6 +63,12 @@
                 <div data-i18n="Analytics">Trang chủ</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{ route('user.chat.index') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-chat"></i>
+              <div data-i18n="Chat">Chat</div>
+            </a>
+        </li>
 
         <!-- Layouts -->
 

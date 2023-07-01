@@ -17,7 +17,7 @@ use App\Http\Controllers\Host\HostBookingController;
 use App\Http\Controllers\User\UserHostelController;
 use App\Http\Controllers\User\UserUserController;
 use App\Http\Controllers\User\UserBookingController;
-
+use App\Http\Controllers\User\UserChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,6 +119,11 @@ Route::middleware(['auth'])->group(function(){
         #Booking
         Route::prefix('booking')->group(function (){
             Route::post('/store/{time_id}/{hostel_id}', [UserBookingController::class, 'booking'])->name('user.booking.store');
+        });
+
+        #Chat
+        Route::prefix('chat')->group(function (){
+            Route::get('/', [UserChatController::class, 'index'])->name('user.chat.index');
         });
     });
     //route for host

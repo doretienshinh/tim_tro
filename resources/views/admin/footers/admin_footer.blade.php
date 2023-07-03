@@ -24,3 +24,41 @@
  <script src="{{ asset('assets/vendor/libs/elevatezoom/elevatezoom.js') }}"></script>
  {{-- <!-- Place this tag in your head or just before your close body tag. -->
  <script async defer src="https://buttons.github.io/buttons.js"></script> --}}
+ <script src="https://js.pusher.com/7.2.0/pusher.min.js"></script>
+ <script>
+     // Gloabl Chatify variables from PHP to JS
+     window.chatify = {
+         name: "{{ config('chatify.name') }}",
+         sounds: {!! json_encode(config('chatify.sounds')) !!},
+         allowedImages: {!! json_encode(config('chatify.attachments.allowed_images')) !!},
+         allowedFiles: {!! json_encode(config('chatify.attachments.allowed_files')) !!},
+         maxUploadSize: {{ Chatify::getMaxUploadSize() }},
+         pusher: {!! json_encode(config('chatify.pusher')) !!},
+         pusherAuthEndpoint: '{{ route('pusher.auth') }}'
+     };
+     console.log(window.chatify);
+     window.chatify.allAllowedExtensions = chatify.allowedImages.concat(chatify.allowedFiles);
+ </script>
+ <script>
+     var auth_id = {{ Auth::user() ? Auth::user()->id : ''}};
+     const pusher = new Pusher(chatify.pusher.key, {
+         encrypted: chatify.pusher.options.encrypted,
+         cluster: chatify.pusher.options.cluster,
+         authEndpoint: chatify.pusherAuthEndpoint,
+         auth: {
+             headers: {
+                 "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+             },
+         },
+     });
+
+     const channelName = "private-chatify";
+     var channel = pusher.subscribe(`${channelName}.${auth_id}`);
+
+     channel.bind("messaging", function(data) {
+         $('.noti-chat').removeClass('btn-outline-primary');
+         $('.noti-chat').addClass('btn-danger');
+     });
+
+ </script>
+ 

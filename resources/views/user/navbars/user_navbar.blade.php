@@ -25,9 +25,8 @@
         @if (Auth::user())
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             {{-- Message --}}
-            <button type="button" class="btn btn-outline-primary me-1">
+            <button type="button" class="btn btn-outline-primary me-1 noti-chat" onclick="window.location='{{ route('chat') }}'">
                 <i class='bx bxs-chat'></i>
-                <span class="badge bg-white text-primary">4</span>
             </button>
             {{-- Notifications --}}
             <button type="button" class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas"

@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HostelController;
 use App\Http\Controllers\TimeController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Host\HostHostelController;
 use App\Http\Controllers\Host\HostTimeController;
@@ -37,7 +37,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
 Route::get('/', [HomeController::class,'index']);
-// Route::get('/login', 'LoginController@showLoginForm')->middleware('login')->name('login');
+Route::get('/search', [SearchController::class,'index'])->name('search.index');
+Route::get('/filter', [SearchController::class,'filter'])->name('filter.index');
 
 //admin
 Route::middleware(['auth'])->group(function(){

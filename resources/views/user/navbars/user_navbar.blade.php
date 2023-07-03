@@ -8,12 +8,17 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <!-- Search -->
-        <div class="navbar-nav align-items-center">
+        {{-- <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
                 <i class="bx bx-search fs-4 lh-0"></i>
                 <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
                     aria-label="Search..." />
             </div>
+        </div> --}}
+        <div class="nav-item d-flex align-items-center">
+            <a href="#" onclick="performSearch(event)"><i class="bx bx-search fs-4 lh-0"></i></a>
+            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
+                   aria-label="Search..." id="searchInput" onkeydown="handleKeyPress(event)" />
         </div>
         <!-- /Search -->
 
@@ -107,3 +112,15 @@
         @endif
     </div>
 </nav>
+<script>
+    function performSearch(event) {
+        event.preventDefault();
+        var keyword = document.getElementById('searchInput').value;
+        window.location.href = "{{ route('search.index') }}" + "?keyword=" + encodeURIComponent(keyword);
+    }
+    function handleKeyPress(event) {
+        if (event.keyCode === 13) {
+            performSearch(event);
+        }
+    }
+</script>

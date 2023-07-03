@@ -92,4 +92,33 @@ class HostelService
         }
         else return false;
     }
+
+    public function search($keyword) {
+        return Hostel::where('title', 'like', '%' . $keyword . '%')
+                       ->orWhere('description', 'like', '%' . $keyword . '%')
+                       ->get();
+    }
+
+    public function filter($data) {
+
+        $where = [
+            ['title', 'like', '%' . $data['keyword'] . '%'],
+            ['description', 'like', '%' . $data['keyword'] . '%'],
+        ];
+        if ($data['tag'] != "") {
+            array_push($where, ['tag_id', '=', $data['tag']]);
+        }
+        if ($data['priceRange'] == 'higher') {
+            array_push($where, ['price', '>=',7000]);
+        } else if ($data['priceRange'] == 0) 
+        {
+            return Hostel::where($where)->get();
+        }
+        else
+        {
+            return Hostel::where($where)
+                ->whereBetween('price', [intval($data['priceRange']) - 1000 , $data['priceRange']])->get();
+        }
+        return Hostel::where($where)->get();
+    }
 }

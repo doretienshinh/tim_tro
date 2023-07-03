@@ -325,10 +325,10 @@
                                         <span class="d-none d-sm-block">{{ $hostel->user->name }}</span>
                                         <i class="bx bx-upload d-block d-sm-none"></i>
                                     </label>
-                                    {{-- <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                    <a href="{{ route('chat') . '/' . $hostel->user->id }}" class="btn btn-outline-secondary mb-4">
                                         <i class="bx bx-reset d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Đặt lại</span>
-                                    </button> --}}
+                                        <span class="d-none d-sm-block">Chat</span>
+                                    </a>
 
                                     {{-- <p class="text-muted mb-0">Cho phép định dạng JPG, GIF hoặc PNG. Dung lượng tối đa 800KB</p> --}}
                                 </div>

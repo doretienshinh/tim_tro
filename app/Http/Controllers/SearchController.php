@@ -35,7 +35,7 @@ class SearchController extends Controller
         return view('user.search.index', compact('hostels', 'tags'));
     }
 
-    public function filter(Request $request)
+    public function filter_template(Request $request)
     {
         $tags = $this->tagService->getAll();
         $keywordObject = json_decode($request->keyword, true);
@@ -45,10 +45,23 @@ class SearchController extends Controller
             'keyword' => $request->session()->get('keyword')
         ];
 
-        $hostels = $this->hostelService->filter($keywordArray);
+        $hostels = $this->hostelService->filter_template($keywordArray);
 
         return view('user.search.index', compact('hostels', 'tags'));
     }
 
+    public function filter(Request $request)
+    {
+        $tags = $this->tagService->getAll();
 
+        // $request->all()->put('keyword', $request->session()->get('keyword'));
+
+        $request->merge(["keyword" => $request->session()->get('keyword')]);
+
+        $request_data = $request->all();
+
+        $hostels = $this->hostelService->filter($request->all());
+
+        return view('user.search.index', compact('hostels', 'tags', 'request_data'));
+    }
 }

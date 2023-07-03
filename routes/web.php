@@ -38,7 +38,8 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
 Route::get('/', [HomeController::class,'index']);
 Route::get('/search', [SearchController::class,'index'])->name('search.index');
-Route::get('/filter', [SearchController::class,'filter'])->name('filter.index');
+Route::get('/filter_template', [SearchController::class,'filter_template'])->name('filter_template.index');
+Route::post('/filter', [SearchController::class,'filter'])->name('filter.index');
 
 //admin
 Route::middleware(['auth'])->group(function(){

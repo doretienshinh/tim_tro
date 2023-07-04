@@ -8,7 +8,7 @@
                 <div class="card mb-3 col-md hostel-item" data-ward_id={{ $hostel->ward_id }}>
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img class="card-img card-img-left h-100" style="object-fit: cover;"
+                            <img class="card-img card-img-left" style="object-fit: cover; height: 100%;"
                                 src="{{ asset('storage/' . $hostel->thumbnail) }}" alt="Card image" />
                         </div>
                         <div class="col-md-8">
@@ -71,7 +71,17 @@
                                     </div>
                                 </div> --}}
                             </div>
-                            <div class="card-footer d-flex flex-row-reverse">
+                            <div class="card-footer d-flex justify-content-between">
+                                @if (Auth::user())
+                                    @if (isset($hostel->favorites) && in_array(Auth::user()->id, $hostel->favorites->pluck('user_id')->toArray()))
+                                        <a href="{{ route('user.favorite.destroy', $hostel) }}" class="btn btn-danger">
+                                            Bỏ Theo dõi</a>
+                                    @else
+                                        <a href="{{ route('user.favorite.store', $hostel) }}"
+                                            class="btn btn-outline-danger">
+                                            Theo dõi</a>
+                                    @endif
+                                @endif
                                 <a href="{{ route('user.hostel.detail', $hostel) }}" class="btn btn-outline-primary">Xem
                                     chi
                                     tiết</a>

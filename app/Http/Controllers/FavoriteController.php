@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use Illuminate\Http\Request;
+use App\Http\Services\Favorite\FavoriteService;
 
 class FavoriteController extends Controller
 {
+    protected $FavoriteService;
+
+    public function __construct(FavoriteService $FavoriteService,) {
+        $this->FavoriteService = $FavoriteService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

@@ -9,6 +9,8 @@ use App\Http\Controllers\TimeController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\FavoriteController;
+
 use App\Http\Controllers\Host\HostHostelController;
 use App\Http\Controllers\Host\HostTimeController;
 use App\Http\Controllers\Host\HostUserController;
@@ -18,6 +20,8 @@ use App\Http\Controllers\User\UserHostelController;
 use App\Http\Controllers\User\UserUserController;
 use App\Http\Controllers\User\UserBookingController;
 use App\Http\Controllers\User\UserChatController;
+use App\Http\Controllers\User\UserFavoriteController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +130,13 @@ Route::middleware(['auth'])->group(function(){
         #Chat
         Route::prefix('chat')->group(function (){
             Route::get('/', [UserChatController::class, 'index'])->name('user.chat.index');
+        });
+
+        #Favorite
+        Route::prefix('favorite')->group(function (){
+            Route::get('/', [UserFavoriteController::class, 'index'])->name('user.favorite.index');
+            Route::get('/create/{hostel}', [UserFavoriteController::class, 'store'])->name('user.favorite.store');
+            Route::get('/delete/{hostel}', [UserFavoriteController::class, 'destroy'])->name('user.favorite.destroy');
         });
     });
     //route for host

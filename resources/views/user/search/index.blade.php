@@ -32,7 +32,7 @@
                 <div class="col-5">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="10" aria-describedby="min_price"
-                            id="min_price" name="min_price" value="{{ intval($request_data['min_price']) }}"/>
+                            id="min_price" name="min_price" value="{{ isset($request_data['min_price']) ?  intval($request_data['min_price']) : '' }}"/>
                         <span class="input-group-text" id="min_price_note">Đồng</span>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="col-5">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="10" aria-describedby="max_price"
-                            id="max_price" name="max_price" value="{{ intval($request_data['max_price']) }}"/>
+                            id="max_price" name="max_price" value="{{ isset($request_data['max_price']) ?  intval($request_data['max_price']) : '' }}"/>
                         <span class="input-group-text" id="max_price_note">Đồng</span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="col-5">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="10" aria-describedby="min_acreage"
-                            id="min_acreage" name="min_acreage" value="{{ intval($request_data['min_acreage']) }}"/>
+                            id="min_acreage" name="min_acreage" value="{{ isset($request_data['min_acreage']) ? intval($request_data['min_acreage']) : '' }}"/>
                         <span class="input-group-text" id="min_acreage_note">Mét vuông</span>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="col-5">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="10" aria-describedby="max_acreage"
-                            id="max_acreage" name="max_acreage" value="{{ intval($request_data['max_acreage']) }}"/>
+                            id="max_acreage" name="max_acreage" value="{{ isset($request_data['max_acreage']) ? intval($request_data['max_acreage']) : ''}}"/>
                         <span class="input-group-text" id="max_acreage_note">Mét vuông</span>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                 <div class="col-6">
                     <label for="amount_of_people" class="form-label">Số người ở</label>
                     <input class="form-control" type="number" id="amount_of_people" name="amount_of_people"
-                        placeholder="Nhập số người ở" value="{{ intval($request_data['amount_of_people']) }}"/>
+                        placeholder="Nhập số người ở" value="{{ isset($request_data['amount_of_people']) ? intval($request_data['amount_of_people']) : ''}}"/>
                 </div>
                 <div class="col-6">
                     <label for="tag" class="form-label">Chọn tag</label>
@@ -86,7 +86,7 @@
                         <option value=""> Chọn tag </option>
                         @foreach ($tags as $index => $tag)
                             <option data-tokens="{{ $tag->name }}" value="{{ $tag->id }}"
-                                data-subtext="{{ $tag->description }}" {{$request_data['tag_id'] == $tag->id ? ' selected' : ''}}>{{ $tag->name }}</option>
+                                data-subtext="{{ $tag->description }}" {{  isset($request_data['tag_id']) && $request_data['tag_id'] == $tag->id ? ' selected' : ''}}>{{ $tag->name }}</option>
                         @endforeach
                     </select>
                 </div>

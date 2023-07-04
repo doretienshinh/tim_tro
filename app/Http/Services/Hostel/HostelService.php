@@ -149,7 +149,7 @@ class HostelService
             array_push($where, ['amount_of_people', '=', $data['amount_of_people']]);
         }
         if (isset($data['stay_with_host'] ) && $data['stay_with_host'] == 'on') {
-            array_push($where, ['stay_with_host', '==', 1]);
+            array_push($where, ['stay_with_host', '=', 1]);
         }
 
         if (isset($data['deposit'] ) && $data['deposit'] == 'on') {
@@ -157,31 +157,31 @@ class HostelService
         }
 
         if (isset($data['air_conditional'] ) && $data['air_conditional'] == 'on') {
-            array_push($where, ['air_conditional', '==', 1]);
+            array_push($where, ['air_conditional', '=', 1]);
         }
 
         if (isset($data['heater'] ) && $data['heater'] == 'on') {
-            array_push($where, ['heater', '==', 1]);
+            array_push($where, ['heater', '=', 1]);
         }
 
         if (isset($data['washing_machine'] ) && $data['washing_machine'] == 'on') {
-            array_push($where, ['washing_machine', '==', 1]);
+            array_push($where, ['washing_machine', '=', 1]);
         }
 
         if (isset($data['closed_room'] ) && $data['closed_room'] == 'on') {
-            array_push($where, ['closed_room', '==', 1]);
+            array_push($where, ['closed_room', '=', 1]);
         }
         if (isset($data['parking_area'] ) && $data['parking_area'] == 'on') {
-            array_push($where, ['parking_area', '==', 1]);
+            array_push($where, ['parking_area', '=', 1]);
         }
         if (isset($data['elevator'] ) && $data['elevator'] == 'on') {
-            array_push($where, ['elevator', '==', 1]);
+            array_push($where, ['elevator', '=', 1]);
         }
         if (isset($data['kitchen'] ) && $data['kitchen'] == 'on') {
-            array_push($where, ['kitchen', '==', 1]);
+            array_push($where, ['kitchen', '=', 1]);
         }
         if (isset($data['balcony'] ) && $data['balcony'] == 'on') {
-            array_push($where, ['balcony', '==', 1]);
+            array_push($where, ['balcony', '=', 1]);
         }
 
         return Hostel::where($where)->get();

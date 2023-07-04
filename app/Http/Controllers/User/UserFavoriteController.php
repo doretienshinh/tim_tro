@@ -18,9 +18,9 @@ class UserFavoriteController extends Controller
 
     public function index()
     {
-        $hostels = $this->FavoriteService->getAllMyFavorite();
+        $favorites = $this->FavoriteService->getAllMyFavorite();
 
-        return view('user.favorite.index', compact('hostels'));
+        return view('user.favorite.index', compact('favorites'));
     }
 
     public function store(Hostel $hostel)

@@ -63,8 +63,20 @@
                 <div data-i18n="Analytics">Trang chủ</div>
             </a>
         </li>
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'search.index') === 0) ||  (strpos(Route::currentRouteName(), 'filter.index') === 0)? 'active' : '' }}">
+            <a href="{{ route('search.index') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-search"></i>
+              <div data-i18n="Search">Tìm kiếm</div>
+            </a>
+        </li>
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'user.favorite.index') === 0) ? 'active' : '' }}">
+            <a href="{{ route('user.favorite.index') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-bookmark-heart"></i>
+              <div data-i18n="Chat">Danh sách theo dõi</div>
+            </a>
+        </li>
         <li class="menu-item">
-            <a href="{{ route('user.chat.index') }}" class="menu-link">
+            <a href="{{ route('chat') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-chat"></i>
               <div data-i18n="Chat">Chat</div>
             </a>

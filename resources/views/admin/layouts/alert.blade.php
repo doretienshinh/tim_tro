@@ -11,7 +11,7 @@
         <div class="toast-header">
             <i class="bx bx-bell me-2"></i>
             <div class="me-auto fw-semibold">Error</div>
-            <small>11 mins ago</small>
+            {{-- <small>11 mins ago</small> --}}
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
@@ -30,8 +30,7 @@
         <div class="toast-header">
             <i class="bx bx-bell me-2"></i>
             <div class="me-auto fw-semibold">Error</div>
-            <small>11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            {{-- <small>11 mins ago</small> --}}            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
             {{ Session::get('error') }}
@@ -48,8 +47,7 @@
         <div class="toast-header">
             <i class="bx bx-bell me-2"></i>
             <div class="me-auto fw-semibold">Success</div>
-            <small>11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            {{-- <small>11 mins ago</small> --}}            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
             {{ Session::get('success') }}

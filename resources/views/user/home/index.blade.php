@@ -41,6 +41,12 @@
                                 </div>
                                 </p>
                                 <hr>
+                                <p class="card-text">
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Giá trọ</label>
+                                    <input class="form-control" id="price" type="text" value="{{ number_format($hostel->price) }} Đồng" readonly />
+                                </div>
+                                <hr>
                                 <h6 class="card-title">Thông tin địa chỉ</h6>
                                 <p class="card-text">
                                 <div class="mb-3">

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('hostel_id')->references('id')->on('hostels')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamp('meet_at');
             $table->timestamps();
         });
     }

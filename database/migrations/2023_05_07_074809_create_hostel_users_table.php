@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('hostel_users', function (Blueprint $table) {
             $table->id();
-            $table->datetime('in_at');
-            $table->datetime('out_at');
+            $table->datetime('in_at')->nullable();
+            $table->datetime('out_at')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('hostel_id');
             $table->foreign('hostel_id')->references('id')->on('hostels')->onDelete('cascade');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

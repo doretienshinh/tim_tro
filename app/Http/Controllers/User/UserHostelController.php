@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Hostel\UserHostelService;
 use App\Models\Hostel;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CreateHostelRequest;
 
 class UserHostelController extends Controller
@@ -24,7 +25,6 @@ class UserHostelController extends Controller
     public function index()
     {
         $hostels = $this->HostelService->getAll();
-
         return view('user.hostel.index', compact('hostels'));
     }
 
@@ -41,4 +41,25 @@ class UserHostelController extends Controller
         ]);
     }
 
+    public function register(Hostel $Hostel)
+    {
+        $this->HostelService->register($Hostel);
+
+        return redirect()->back();
+    }
+
+    public function registerDetail()
+    {
+        $hostel = $this->HostelService->getCurrentRegister() ? $this->HostelService->getCurrentRegister()->hostel : $this->HostelService->getCurrentRegister();
+        if (!$hostel)
+        {
+            Session::flash('warning','Bạn không có trọ nào trong mục này');
+
+            return redirect()->back();
+        } 
+
+        return view('user.hostel.detail', [
+            'hostel' => $hostel,
+        ]);
+    }
 }

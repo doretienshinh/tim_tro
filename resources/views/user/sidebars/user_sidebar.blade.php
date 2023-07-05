@@ -77,6 +77,18 @@
         </li>
         <li class="menu-item">
             <a href="{{ route('chat') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-calendar"></i>
+              <div data-i18n="Chat">Lịch xem trọ</div>
+            </a>
+        </li>
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'user.register-hostel.detail') === 0) ? 'active' : '' }}">
+            <a href="{{ route('user.register-hostel.detail') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-clinic"></i>
+              <div data-i18n="Chat">Trọ thuê</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('chat') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-chat"></i>
               <div data-i18n="Chat">Chat</div>
             </a>

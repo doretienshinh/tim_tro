@@ -27,19 +27,28 @@
                                     <h2 class="accordion-header" id="headingThree">
                                         <button type="button" class="accordion-button collapsed p-0"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#accordion_desciption_{{ $favorite->hostel->id }}" aria-expanded="false"
+                                            data-bs-target="#accordion_desciption_{{ $favorite->hostel->id }}"
+                                            aria-expanded="false"
                                             aria-controls="accordion_desciption_{{ $favorite->hostel->id }}">
                                             Mô tả
                                         </button>
                                     </h2>
-                                    <div id="accordion_desciption_{{ $favorite->hostel->id }}" class="accordion-collapse collapse"
-                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div id="accordion_desciption_{{ $favorite->hostel->id }}"
+                                        class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                        data-bs-parent="#accordionExample">
                                         <div class="accordion-body pt-4">
                                             {{ $favorite->hostel->description }}
                                         </div>
                                     </div>
                                 </div>
                                 </p>
+                                <hr>
+                                <p class="card-text">
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Giá trọ</label>
+                                    <input class="form-control" id="price" type="text"
+                                        value="{{ number_format($favorite->hostel->price) }} Đồng" readonly />
+                                </div>
                                 <hr>
                                 <h6 class="card-title">Thông tin địa chỉ</h6>
                                 <p class="card-text">
@@ -73,8 +82,10 @@
                             </div>
                             <div class="card-footer d-flex justify-content-between">
                                 @if (Auth::user())
-                                    @if (isset($favorite->hostel->favorites) && in_array(Auth::user()->id, $favorite->hostel->favorites->pluck('user_id')->toArray()))
-                                        <a href="{{ route('user.favorite.destroy', $favorite->hostel) }}" class="btn btn-danger">
+                                    @if (isset($favorite->hostel->favorites) &&
+                                            in_array(Auth::user()->id, $favorite->hostel->favorites->pluck('user_id')->toArray()))
+                                        <a href="{{ route('user.favorite.destroy', $favorite->hostel) }}"
+                                            class="btn btn-danger">
                                             Bỏ Theo dõi</a>
                                     @else
                                         <a href="{{ route('user.favorite.store', $favorite->hostel) }}"
@@ -82,7 +93,8 @@
                                             Theo dõi</a>
                                     @endif
                                 @endif
-                                <a href="{{ route('user.hostel.detail', $favorite->hostel) }}" class="btn btn-outline-primary">Xem
+                                <a href="{{ route('user.hostel.detail', $favorite->hostel) }}"
+                                    class="btn btn-outline-primary">Xem
                                     chi
                                     tiết</a>
                             </div>

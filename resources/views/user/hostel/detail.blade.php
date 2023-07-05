@@ -283,11 +283,23 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modalCenter">
-                                        Đặt lịch xem trọ
-                                    </button>
+                                <div class="d-flex justify-content-between">
+                                    @if (!in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()))
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#modalCenter">
+                                            Đặt lịch xem trọ
+                                        </button>
+                                    @endif
+                                    @if (in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()))
+                                        <button type="button" class="btn btn-danger" disabled>
+                                            Đã đăng ký thuê trọ
+                                        </button>
+                                    @else
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#rent_registration">
+                                            Đăng ký thuê trọ
+                                        </button>
+                                    @endif
                                 </div>
                                 {{-- <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingThree">
@@ -325,7 +337,8 @@
                                         <span class="d-none d-sm-block">{{ $hostel->user->name }}</span>
                                         <i class="bx bx-upload d-block d-sm-none"></i>
                                     </label>
-                                    <a href="{{ route('chat') . '/' . $hostel->user->id }}" class="btn btn-outline-secondary mb-4">
+                                    <a href="{{ route('chat') . '/' . $hostel->user->id }}"
+                                        class="btn btn-outline-secondary mb-4">
                                         <i class="bx bx-reset d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Chat</span>
                                     </a>
@@ -480,8 +493,8 @@
                     <div class="row">
                         @foreach ($hostel->user->times as $time)
                             <form id="form-{{ $time->id }}"
-                                action="{{ route('user.booking.store', ['time_id'=> $time->id,'hostel_id'=>$hostel->id]) }}" method="POST"
-                                class="d-none">@csrf</form>
+                                action="{{ route('user.booking.store', ['time_id' => $time->id, 'hostel_id' => $hostel->id]) }}"
+                                method="POST" class="d-none">@csrf</form>
                             <a href="javascript:void(0)" class="dropdown-item"
                                 onclick="document.getElementById('form-{{ $time->id }}').submit()">
                                 <i class="bx bx-search-alt me-1"></i>
@@ -503,6 +516,26 @@
                 </button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div> --}}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="rent_registration" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">Bạn chắc chắn chứ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>Sau khi ấn đăng ký sẽ gửi thông báo tới cho chủ trọ, và đợi chủ trọ xét duyệt</div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <a href="{{ route('user.register-hostel.store', $hostel) }}" class="btn btn-success text-white">Thuê
+                        trọ</a>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Hủy
+                    </button>
+                </div>
             </div>
         </div>
     </div>

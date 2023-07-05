@@ -138,6 +138,13 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/create/{hostel}', [UserFavoriteController::class, 'store'])->name('user.favorite.store');
             Route::get('/delete/{hostel}', [UserFavoriteController::class, 'destroy'])->name('user.favorite.destroy');
         });
+
+        #Register_hostel
+        Route::prefix('register-hostel')->group(function (){
+            // Route::get('/', [UserHostelController::class, 'index'])->name('user.register-hostel.index');
+            Route::get('/register/{hostel}', [UserHostelController::class, 'register'])->name('user.register-hostel.store');
+            Route::get('/register-detail', [UserHostelController::class, 'registerDetail'])->name('user.register-hostel.detail');
+        });
     });
     //route for host
     Route::prefix('host')->group(function (){

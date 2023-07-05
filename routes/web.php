@@ -47,6 +47,9 @@ Route::post('/filter', [SearchController::class,'filter'])->name('filter.index')
 
 //admin
 Route::middleware(['auth'])->group(function(){
+    Route::get('/push-notificaiton', [NotificationController::class, 'index'])->name('push-notificaiton');
+    Route::post('/store-token', [NotificationController::class, 'storeToken'])->name('store.token');
+    Route::post('/send-web-notification', [NotificationController::class, 'sendNotification'])->name('send.web-notification');
 
     Route::prefix('admin')->group(function (){
         Route::get('/', [HomeController::class,'index'])->name('admin.home');

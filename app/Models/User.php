@@ -31,7 +31,8 @@ class User extends Authenticatable implements MustVerifyEmail
         "school",
         "student_card",
         "avatar",
-        "citizen_identification"
+        "citizen_identification",
+        'device_key',
     ];
 
     /**

@@ -6,6 +6,7 @@ use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Services\Notification\NotificationService;
+use App\Http\Services\User\UserService;
 use Illuminate\Support\Carbon;
 
 class NotificationController extends Controller
@@ -17,8 +18,9 @@ class NotificationController extends Controller
      */
     protected $NotificationService;
 
-    public function __construct(NotificationService $NotificationService) {
+    public function __construct(NotificationService $NotificationService, UserService $UserService) {
         $this->NotificationService = $NotificationService;
+        $this->UserService = $UserService;
     }
 
     // public function index()
@@ -30,7 +32,9 @@ class NotificationController extends Controller
 
     public function index()
     {
-        return view('admin.notification.home');
+        $notifications  = $this->NotificationService->getAll();
+
+        return view('admin.notification.index', compact('notifications'));
     }
 
     /**
@@ -40,7 +44,9 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        //
+        $users = $this->UserService->getAllNotHavePagination();
+
+        return view('admin.notification.create', compact('users'));
     }
 
     /**
@@ -51,7 +57,9 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $notification = $this->NotificationService->store($request);
+
+        return redirect()->route('admin.notification.index');
     }
 
     /**
@@ -62,7 +70,7 @@ class NotificationController extends Controller
      */
     public function show(Notification $notification)
     {
-        //
+        return view('admin.notification.detail', compact('notification'));
     }
 
     /**
@@ -99,48 +107,23 @@ class NotificationController extends Controller
         //
     }
 
+    public function storeToken(Request $request)
+    {
+        auth()->user()->update(['device_key'=>$request->token]);
+        return response()->json(['Token successfully stored.']);
+    }
+
+    public function autoStoreToken(Request $request)
+    {
+        $result = $this->NotificationService->autoStoreToken($request->token);
+
+        return $result;
+    }
+
     public function sendNotification(Request $request)
     {
-        $url = 'https://fcm.googleapis.com/fcm/send';
-        $FcmToken = User::whereNotNull('device_key')->pluck('device_key')->all();
-          
-        $serverKey = 'AAAAscnH4Dg:APA91bGTMDc270FxJRCjoKQ70c7YuAyEAcufy-LXIdM4rnbtb1aU56kKe9EUdvAKlrcIbR4ZJ-VfhbfziZvdqNnofHoLismCXQ1FwkuHM7RSJctpYN5ImiLk9Y3ro__ANUFoeozDrai8';
-  
-        $data = [
-            "registration_ids" => $FcmToken,
-            "notification" => [
-                "title" => $request->title,
-                "body" => $request->body,  
-            ]
-        ];
-        $encodedData = json_encode($data);
-    
-        $headers = [
-            'Authorization:key=' . $serverKey,
-            'Content-Type: application/json',
-        ];
-    
-        $ch = curl_init();
-      
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-        // Disabling SSL Certificate support temporarly
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);        
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
-        // Execute post
-        $result = curl_exec($ch);
-        if ($result === FALSE) {
-            die('Curl failed: ' . curl_error($ch));
-        }        
-        // Close connection
-        curl_close($ch);
-        // FCM response
-        // dd($result);   
+        $result = $this->NotificationService->sendNotification($request);
 
-        return true;
+        return view('admin.notification.index');
     }
 }

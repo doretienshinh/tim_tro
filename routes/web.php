@@ -49,6 +49,7 @@ Route::post('/filter', [SearchController::class,'filter'])->name('filter.index')
 Route::middleware(['auth'])->group(function(){
     Route::get('/push-notificaiton', [NotificationController::class, 'index'])->name('push-notificaiton');
     Route::post('/store-token', [NotificationController::class, 'storeToken'])->name('store.token');
+    Route::post('/auto-store-token', [NotificationController::class, 'autoStoreToken'])->name('auto.store.token');
     Route::post('/send-web-notification', [NotificationController::class, 'sendNotification'])->name('send.web-notification');
 
     Route::prefix('admin')->group(function (){
@@ -92,6 +93,10 @@ Route::middleware(['auth'])->group(function(){
         #Notification
         Route::prefix('notification')->group(function (){
             Route::get('/', [NotificationController::class, 'index'])->name('admin.notification.index');
+            Route::get('/create', [NotificationController::class, 'create'])->name('admin.notification.create');
+            Route::post('/create', [NotificationController::class, 'store'])->name('admin.notification.store');
+            Route::get('/detail/{notification}', [NotificationController::class, 'show'])->name('admin.notification.detail');
+
             // Route::get('/detail/{id}', [NotificationController::class, 'show'])->name('admin.notification.detail');
             // Route::get('/create', [NotificationController::class, 'create'])->name('admin.notification.create');
             // Route::post('/create', [NotificationController::class, 'store'])->name('admin.notification.store');

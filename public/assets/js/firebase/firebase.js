@@ -42,14 +42,10 @@ function startFCM() {
 }
 
 messaging.onMessage(function (payload) {
-    console.log(1);
-    const title = payload.notification.title;
-    const options = {
-        body: payload.notification.body,
-        icon: payload.notification.icon,
-    };
-    new Notification(title, options);
-    console.log(payload.notification)
-
-    // alert(title);
+    console.log(payload);
+    jQuery(function($) {
+        $("#notification-button").removeClass("btn-outline-primary");
+        $("#notification-button").addClass("btn-danger");
+        $('#notification_review').append('<div class="text-right mb-3">Thông báo mới nhất</div><div class="bs-toast toast fade show bg-primary mb-3" role="alert" aria-live="assertive" aria-atomic="true"><div class="toast-header"><i class="bx bx-bell me-2"></i><div class="me-auto fw-semibold">' + payload.notification.title + '</div><small>Vừa xong</small></div><div class="toast-body">' + payload.notification.body + '</div></div><hr>')
+    });
 });

@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/store-token', [NotificationController::class, 'storeToken'])->name('store.token');
     Route::post('/auto-store-token', [NotificationController::class, 'autoStoreToken'])->name('auto.store.token');
     Route::post('/send-web-notification', [NotificationController::class, 'sendNotification'])->name('send.web-notification');
+    Route::put('notification/read/{id}', [NotificationController::class, 'read'])->name('notification.read');
 
     Route::prefix('admin')->group(function (){
         Route::get('/', [HomeController::class,'index'])->name('admin.home');
@@ -153,6 +154,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/register/{hostel}', [UserHostelController::class, 'register'])->name('user.register-hostel.store');
             Route::get('/register-detail', [UserHostelController::class, 'registerDetail'])->name('user.register-hostel.detail');
         });
+
     });
     //route for host
     Route::prefix('host')->group(function (){

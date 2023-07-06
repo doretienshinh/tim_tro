@@ -27,15 +27,22 @@ class NotificationService
         $url = 'https://fcm.googleapis.com/fcm/send';
         if($request->user_id == Auth::user()->id) {
             $FcmToken = User::whereNotNull('device_key')->where('id', '!=', Auth::user()->id)->pluck('device_key')->all();
-            $request->read_status = "all";
         }
         else {
             $FcmToken = User::whereNotNull('device_key')->where('id', '=', $request->user_id)->pluck('device_key')->all();
-            $request->read_status = "sended";
         }
 
         try {
-            Notification::create($request->all());
+            if($request->user_id == Auth::user()->id) {
+                $users = User::where('id', '!=', 1)->get();
+                foreach($users as $user){
+                    $request->merge([
+                        'user_id' => $user->id,
+                    ]);
+                    Notification::create($request->all());
+                }
+            }
+            else Notification::create($request->all());
             Session::flash('success','Gửi thông báo thành công');
 
             $serverKey = 'AAAAscnH4Dg:APA91bGTMDc270FxJRCjoKQ70c7YuAyEAcufy-LXIdM4rnbtb1aU56kKe9EUdvAKlrcIbR4ZJ-VfhbfziZvdqNnofHoLismCXQ1FwkuHM7RSJctpYN5ImiLk9Y3ro__ANUFoeozDrai8';
@@ -81,6 +88,20 @@ class NotificationService
         }
         return true;
 
+    }
+
+    public function read($id)
+    {
+        $notification = Notification::where('id', $id)->first();
+
+        try {
+            $notification->read_status = 'read';
+            $notification->save();
+        } catch (\Exception $err){
+            \Log::info($err->getMessage());
+            return $err->getMessage();
+        }
+        return true;
     }
 
     public function update($id, $data)

@@ -21,14 +21,15 @@ firebase.initializeApp({
 // messages.
 const messaging = firebase.messaging();
 messaging.setBackgroundMessageHandler(function (payload) {
-    console.log("Message received.", payload);
-    const title = "Hello world is awesome";
-    const options = {
-        body: "Your notificaiton message .",
-        icon: "/firebase-logo.png",
-    };
-    return self.registration.showNotification(
-        title,
-        options,
-    );
+    // console.log("Message received.", payload);
+    // const title = "Hello world is awesome";
+    // const options = {
+    //     body: "Your notificaiton message .",
+    //     icon: "/firebase-logo.png",
+    // };
+    // console.log(1);
+    // return self.registration.showNotification(
+    //     title,
+    //     options,
+    // );
 });

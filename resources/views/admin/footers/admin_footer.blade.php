@@ -38,7 +38,7 @@
          pusher: {!! json_encode(config('chatify.pusher')) !!},
          pusherAuthEndpoint: '{{ route('pusher.auth') }}'
      };
-     console.log(window.chatify);
+      
      window.chatify.allAllowedExtensions = chatify.allowedImages.concat(chatify.allowedFiles);
  </script>
  <script>

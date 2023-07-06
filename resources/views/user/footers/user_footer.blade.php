@@ -27,7 +27,10 @@
  <script src="{{ asset('assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.js') }}"></script>
 
  <script src="https://js.pusher.com/7.2.0/pusher.min.js"></script>
- <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
  <script type="text/javascript" src="{{ asset('assets/js/firebase/firebase.js') }}"></script>
  <script>
      // Gloabl Chatify variables from PHP to JS
@@ -40,7 +43,7 @@
          pusher: {!! json_encode(config('chatify.pusher')) !!},
          pusherAuthEndpoint: '{{ route('pusher.auth') }}'
      };
-     console.log(window.chatify);
+      
      window.chatify.allAllowedExtensions = chatify.allowedImages.concat(chatify.allowedFiles);
  </script>
  <script>

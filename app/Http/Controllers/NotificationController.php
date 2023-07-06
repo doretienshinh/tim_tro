@@ -126,4 +126,11 @@ class NotificationController extends Controller
 
         return view('admin.notification.index');
     }
+
+    public function read($id)
+    {
+        $result = $this->NotificationService->read($id);
+
+        return $result;
+    }
 }

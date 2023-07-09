@@ -15,7 +15,7 @@ class UserHostelService
 {
     public function getCurrentRegister()
     {
-        $register = Hostel_user::where('user_id', '=', Auth::user()->id)->first();
+        $register = Hostel_user::where('user_id', '=', Auth::user()->id)->where('status', '!=', 'eject')->first();
 
         if($register)
         {

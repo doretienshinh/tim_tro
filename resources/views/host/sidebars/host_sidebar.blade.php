@@ -82,6 +82,11 @@
                         <div data-i18n="Without menu">Tạo bài đăng mới</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{ route('host.hostel.leased') }}" class="menu-link">
+                        <div data-i18n="Without menu">Danh sách trọ đang cho thuê</div>
+                    </a>
+                </li>
             </ul>
         </li>
 
@@ -118,6 +123,20 @@
                 <li class="menu-item">
                     <a href="{{ route('host.time.create') }}" class="menu-link">
                         <div data-i18n="Without menu">Tạo thời gian mới</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menu-item {{ (strpos(Route::currentRouteName(), 'host.request.index') === 0) ? 'active' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class='bx bx-time-five tf-icons menu-icon'></i>
+                <div data-i18n="Layouts">Yêu cầu vào trọ</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('host.request.index') }}" class="menu-link">
+                        <div data-i18n="Without menu">Danh sách yêu cầu</div>
                     </a>
                 </li>
             </ul>

@@ -12,6 +12,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\FavoriteController;
 
 use App\Http\Controllers\Host\HostHostelController;
+use App\Http\Controllers\Host\HostHostelUserController;
 use App\Http\Controllers\Host\HostTimeController;
 use App\Http\Controllers\Host\HostUserController;
 use App\Http\Controllers\Host\HostBookingController;
@@ -170,6 +171,7 @@ Route::middleware(['auth'])->group(function(){
         #Hostel
         Route::prefix('hostel')->group(function (){
             Route::get('/', [HostHostelController::class, 'index'])->name('host.hostel.index');
+            Route::get('/leased', [HostHostelController::class, 'leased'])->name('host.hostel.leased');
             Route::get('/detail/{hostel}', [HostHostelController::class, 'show'])->name('host.hostel.detail');
             Route::get('/create', [HostHostelController::class, 'create'])->name('host.hostel.create');
             Route::post('/create', [HostHostelController::class, 'store'])->name('host.hostel.store');
@@ -193,6 +195,14 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/', [HostBookingController::class, 'index'])->name('host.booking.index');
             Route::get('/edit/{booking}', [HostBookingController::class, 'edit'])->name('host.booking.edit');
             Route::post('/edit/{booking}', [HostBookingController::class, 'update'])->name('host.booking.update');
+            // Route::get('/delete/{time}', [HostTimeController::class, 'destroy'])->name('host.time.delete');
+        });
+
+        #Request 
+        Route::prefix('request')->group(function (){
+            Route::get('/', [HostHostelUserController::class, 'index'])->name('host.request.index');
+            Route::get('/edit/{id}', [HostHostelUserController::class, 'edit'])->name('host.request.edit');
+            Route::post('/edit/{Hostel_user}', [HostHostelUserController::class, 'update'])->name('host.request.update');
             // Route::get('/delete/{time}', [HostTimeController::class, 'destroy'])->name('host.time.delete');
         });
     });

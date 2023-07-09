@@ -57,6 +57,7 @@
                                 <button type="reset" onclick="window.location='{{ URL::route('host.booking.index') }}'"
                                     class="btn btn-outline-secondary">Trở về</button>
                             </div>
+                        </div>
                     </form>
                     <!-- /Account -->
                 </div>

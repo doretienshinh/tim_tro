@@ -17,6 +17,7 @@
                     <tr>
                         <th>Title</th>
                         <th>Address Detail</th>
+                        <th>Tình trạng</th>
                         {{-- <th>Role</th>
                         <th>Verify</th> --}}
                     </tr>
@@ -26,6 +27,7 @@
                     <tr>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $hostel->title }}</strong></td>
                         <td>{{ $hostel->address_detail }}</td>
+                        <td>{{ $hostel->hostel_users->where('status', '=', 'accept')->isNotEmpty() ? 'Đã có người thuê' : 'Chưa có người thuê' }}</td>
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

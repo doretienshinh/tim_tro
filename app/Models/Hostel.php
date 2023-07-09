@@ -38,6 +38,7 @@ class Hostel extends Model
         'kitchen',
         'balcony',
         'amount_of_people',
+        'leased',
     ];
 
     public function hostel_users()

@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex flex-row-reverse">
-                                <a href="{{ route('user.hostel.detail', $hostel) }}" class="btn btn-outline-primary">Xem
+                                <a href="{{ route('host.hostel.detail', $hostel) }}" class="btn btn-outline-primary">Xem
                                     chi
                                     tiết</a>
                             </div>

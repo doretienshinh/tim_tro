@@ -45,6 +45,7 @@ return new class extends Migration
             $table->boolean('elevator');
             $table->boolean('kitchen');
             $table->boolean('balcony');
+            $table->boolean('leased')->default(0);
 
             $table->integer('amount_of_people');
             $table->timestamps();

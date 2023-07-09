@@ -13,7 +13,7 @@ class HostelService
 {
     public function getAll()
     {
-        return Hostel::orderByDesc('id')->paginate(config('app.page')[2]);
+        return Hostel::where('leased', '!=', 1)->orderByDesc('id')->paginate(config('app.page')[2]);
     }
 
     public function find($id)

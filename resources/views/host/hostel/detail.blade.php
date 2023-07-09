@@ -12,13 +12,15 @@
                         {{-- <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger">3</span> --}}
                     </button>
                 </li>
-                <li class="nav-item">
-                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
-                        data-bs-target="#navs-justified-profile" aria-controls="navs-justified-profile"
-                        aria-selected="false">
-                        <i class="tf-icons bx bx-user"></i> Profile
-                    </button>
-                </li>
+                @if ($hostel->hostel_users->where('status', '=', 'accept')->isNotEmpty())
+                    <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                            data-bs-target="#navs-justified-profile" aria-controls="navs-justified-profile"
+                            aria-selected="false">
+                            <i class="tf-icons bx bx-user"></i> Thông tin người thuê trọ
+                        </button>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                         data-bs-target="#navs-justified-messages" aria-controls="navs-justified-messages"
@@ -390,159 +392,137 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
-                    <div>
-                        <h5 class="card-header">Profile Details</h5>
-                        <!-- Account -->
-                        <div class="card-body">
-                            <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                {{-- <img src="{{ asset('assets/img/avatars/default.png') }}" alt="user-avatar"
-                                        class="d-block rounded" height="100" width="100" id="uploadedAvatar" /> --}}
-                                <img src="{{ $hostel->user->avatar ? asset('storage/' . $hostel->user->avatar) : asset('assets/img/avatars/default.png') }}"
-                                    alt="user-avatar" class="d-block rounded" height="100" width="100"
-                                    id="uploadedAvatar" />
-                                <div class="button-wrapper">
-                                    <label class="btn btn-primary me-2 mb-4" tabindex="0">
-                                        <span class="d-none d-sm-block">{{ $hostel->user->name }}</span>
-                                        <i class="bx bx-upload d-block d-sm-none"></i>
-                                    </label>
-                                    {{-- <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                                        <i class="bx bx-reset d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Đặt lại</span>
-                                    </button> --}}
+                @if ($hostel->hostel_users->where('status', '=', 'accept')->isNotEmpty())
+                    <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
+                        <div>
+                            <h5 class="card-header">Người thuê</h5>
+                            <!-- Account -->
+                            <div class="card-body">
+                                <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                    <img src="{{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->avatar ? asset('storage/' . $hostel->hostel_users->where('status', '=', 'accept')->first()->user->avatar) : asset('assets/img/avatars/default.png') }}"
+                                        alt="user-avatar" class="d-block rounded" height="100" width="100"
+                                        id="uploadedAvatar" />
+                                    <div class="button-wrapper">
+                                        <label class="btn btn-primary me-2 mb-4" tabindex="0">
+                                            <span class="d-none d-sm-block">{{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->name }}</span>
+                                            <i class="bx bx-upload d-block d-sm-none"></i>
+                                        </label>
+                                        {{-- <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                            <i class="bx bx-reset d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Đặt lại</span>
+                                        </button> --}}
 
-                                    {{-- <p class="text-muted mb-0">Cho phép định dạng JPG, GIF hoặc PNG. Dung lượng tối đa 800KB</p> --}}
+                                        {{-- <p class="text-muted mb-0">Cho phép định dạng JPG, GIF hoặc PNG. Dung lượng tối đa 800KB</p> --}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr class="my-0" />
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="mb-3 col-md-6">
-                                    <label for="firstName" class="form-label">Họ</label>
-                                    <input class="form-control" type="text" id="firstName" name="first_name"
-                                        value="{{ $hostel->user->first_name }}" disabled />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="lastName" class="form-label">Tên</label>
-                                    <input class="form-control" type="text" name="last_name" id="lastName"
-                                        value="{{ $hostel->user->last_name }}" disabled />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="email" class="form-label">E-mail</label>
-                                    <input class="form-control" type="text" id="email" name="email"
-                                        value="{{ $hostel->user->email }}" disabled />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="role" class="form-label">Vai trò</label>
-                                    <div class="form-check">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role" id="role1"
-                                                value="host"
-                                                {{ $hostel->user->getRoleNames()[0] == 'host' ? 'checked' : '' }}
-                                                disabled />
-                                            <label class="form-check-label" for="role1">host</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role" id="role2"
-                                                value="host"
-                                                {{ $hostel->user->getRoleNames()[0] == 'host' ? 'checked' : '' }}
-                                                disabled />
-                                            <label class="form-check-label" for="role2">Chủ trọ</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="role" id="role3"
-                                                value="user"
-                                                {{ $hostel->user->getRoleNames()[0] == 'user' ? 'checked' : '' }}
-                                                disabled />
-                                            <label class="form-check-label" for="role3">Sinh viên</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="role" class="form-label">Giới tính</label>
-                                    <div class="form-check">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="gender1"
-                                                value="1" {{ $hostel->user->gender == '1' ? 'checked' : '' }}
-                                                disabled />
-                                            <label class="form-check-label" for="gender1">Nam</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="gender2"
-                                                value="0" {{ $hostel->user->gender == '0' ? 'checked' : '' }}
-                                                disabled />
-                                            <label class="form-check-label" for="gender2">Nữ</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="gender3"
-                                                value="2" {{ $hostel->user->gender == '2' ? 'checked' : '' }}
-                                                disabled />
-                                            <label class="form-check-label" for="gender3">Khác</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" name="name"
-                                        value="{{ $hostel->user->name }}" disabled />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label" for="phoneNumber">Số điện thoại</label>
-                                    <div class="input-group input-group-merge">
-                                        <input type="text" id="phoneNumber" name="phone_number" class="form-control"
-                                            value="{{ $hostel->user->phone_number }}" disabled />
-                                    </div>
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="address" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="address" name="address"
-                                        value="{{ $hostel->user->address }}" disabled />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="birthday" class="form-label">Ngày sinh</label>
-                                    <input class="form-control" type="date"
-                                        value="{{ date('Y-m-d', strtotime($hostel->user->birthday)) }}" id="birthday"
-                                        name="birthday" disabled />
-                                </div>
-                                @if ($hostel->user->school)
+                            <hr class="my-0" />
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="mb-3 col-md-6">
-                                        <label for="school" class="form-label">Trường</label>
-                                        <input type="text" class="form-control" id="school" name="school"
-                                            value="{{ $hostel->user->school }}" maxlength="100" disabled />
+                                        <label for="firstName" class="form-label">Họ</label>
+                                        <input class="form-control" type="text" id="firstName" name="first_name"
+                                            value="{{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->first_name }}" disabled />
                                     </div>
-                                @endif
-                                @if ($hostel->user->student_card)
                                     <div class="mb-3 col-md-6">
-                                        <label for="student_card" class="form-label">Thẻ sinh viên</label>
-                                        {{-- <input class="form-control" type="file" id="student-card-upload"
-                                                name="student_card" /> --}}
-                                        <div class="mt-3" id="student_card_show">
-                                            <a href="{{ asset('storage/' . $hostel->user->student_card) }}"
-                                                target="_blank">
-                                                <img src="{{ asset('storage/' . $hostel->user->student_card) }}"
-                                                    width="250px"></a>
+                                        <label for="lastName" class="form-label">Tên</label>
+                                        <input class="form-control" type="text" name="last_name" id="lastName"
+                                            value="{{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->last_name }}" disabled />
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="email" class="form-label">E-mail</label>
+                                        <input class="form-control" type="text" id="email" name="email"
+                                            value="{{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->email }}" disabled />
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="role" class="form-label">Giới tính</label>
+                                        <div class="form-check">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gender" id="gender1"
+                                                    value="1" {{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->gender == '1' ? 'checked' : '' }}
+                                                    disabled />
+                                                <label class="form-check-label" for="gender1">Nam</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gender" id="gender2"
+                                                    value="0" {{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->gender == '0' ? 'checked' : '' }}
+                                                    disabled />
+                                                <label class="form-check-label" for="gender2">Nữ</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gender" id="gender3"
+                                                    value="2" {{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->gender == '2' ? 'checked' : '' }}
+                                                    disabled />
+                                                <label class="form-check-label" for="gender3">Khác</label>
+                                            </div>
                                         </div>
                                     </div>
-                                @endif
-                                @if ($hostel->user->citizen_identification)
                                     <div class="mb-3 col-md-6">
-                                        <label for="citizen_identification" class="form-label">CCCD/CMT</label>
-                                        {{-- <input class="form-control" type="file" id="citizen-identification-upload"
-                                            name="citizen_identification" /> --}}
-                                        <div class="mt-3" id="citizen_identification_show">
-                                            <a href="{{ asset('storage/' . $hostel->user->citizen_identification) }}"
-                                                target="_blank">
-                                                <img src="{{ asset('storage/' . $hostel->user->citizen_identification) }}"
-                                                    width="250px"></a>
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" name="name"
+                                            value="{{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->name }}" disabled />
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label" for="phoneNumber">Số điện thoại</label>
+                                        <div class="input-group input-group-merge">
+                                            <input type="text" id="phoneNumber" name="phone_number" class="form-control"
+                                                value="{{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->phone_number }}" disabled />
                                         </div>
                                     </div>
-                                @endif
+                                    <div class="mb-3 col-md-6">
+                                        <label for="address" class="form-label">Địa chỉ</label>
+                                        <input type="text" class="form-control" id="address" name="address"
+                                            value="{{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->address }}" disabled />
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="birthday" class="form-label">Ngày sinh</label>
+                                        <input class="form-control" type="date"
+                                            value="{{ date('Y-m-d', strtotime($hostel->hostel_users->where('status', '=', 'accept')->first()->user->birthday)) }}" id="birthday"
+                                            name="birthday" disabled />
+                                    </div>
+                                    @if ($hostel->hostel_users->where('status', '=', 'accept')->first()->user->school)
+                                        <div class="mb-3 col-md-6">
+                                            <label for="school" class="form-label">Trường</label>
+                                            <input type="text" class="form-control" id="school" name="school"
+                                                value="{{ $hostel->hostel_users->where('status', '=', 'accept')->first()->user->school }}" maxlength="100" disabled />
+                                        </div>
+                                    @endif
+                                    @if ($hostel->hostel_users->where('status', '=', 'accept')->first()->user->student_card)
+                                        <div class="mb-3 col-md-6">
+                                            <label for="student_card" class="form-label">Thẻ sinh viên</label>
+                                            {{-- <input class="form-control" type="file" id="student-card-upload"
+                                                    name="student_card" /> --}}
+                                            <div class="mt-3" id="student_card_show">
+                                                <a href="{{ asset('storage/' . $hostel->hostel_users->where('status', '=', 'accept')->first()->user->student_card) }}"
+                                                    target="_blank">
+                                                    <img src="{{ asset('storage/' . $hostel->hostel_users->where('status', '=', 'accept')->first()->user->student_card) }}"
+                                                        width="250px"></a>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if ($hostel->hostel_users->where('status', '=', 'accept')->first()->user->citizen_identification)
+                                        <div class="mb-3 col-md-6">
+                                            <label for="citizen_identification" class="form-label">CCCD/CMT</label>
+                                            {{-- <input class="form-control" type="file" id="citizen-identification-upload"
+                                                name="citizen_identification" /> --}}
+                                            <div class="mt-3" id="citizen_identification_show">
+                                                <a href="{{ asset('storage/' . $hostel->hostel_users->where('status', '=', 'accept')->first()->user->citizen_identification) }}"
+                                                    target="_blank">
+                                                    <img src="{{ asset('storage/' . $hostel->hostel_users->where('status', '=', 'accept')->first()->user->citizen_identification) }}"
+                                                        width="250px"></a>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                <hr>
+                                <div class="mt-2">
+                                    <a href="{{ route('chat'). '/' .  $hostel->hostel_users->where('status', '=', 'accept')->first()->user->id }}"class="btn btn-primary me-2">Trò chuyện</a>
+                                </div>
                             </div>
+                            <!-- /Account -->
                         </div>
-                        <!-- /Account -->
                     </div>
-                </div>
+                @endif
                 <div class="tab-pane fade" id="navs-justified-messages" role="tabpanel">
                     a
                 </div>

@@ -12,6 +12,7 @@ class Hostel_user extends Model
     protected $fillable = [
         'user_id',
         'hostel_id',
+        'status',
         'in_at',
         'out_at',
     ];

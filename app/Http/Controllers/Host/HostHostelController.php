@@ -31,6 +31,13 @@ class HostHostelController extends Controller
         return view('host.hostel.index', compact('hostels'));
     }
 
+    public function leased()
+    {
+        $hostels = $this->HostelService->getAll();
+
+        return view('host.hostel.leased', compact('hostels'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

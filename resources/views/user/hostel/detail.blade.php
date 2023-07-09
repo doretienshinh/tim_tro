@@ -290,7 +290,16 @@
                                             Đặt lịch xem trọ
                                         </button>
                                     @endif
-                                    @if (in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()))
+                                    @if($hostel->hostel_users->where('user_id', '=', Auth::user()->id)->isNotEmpty() && $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'accept')
+                                        <button type="button" class="btn btn-warning" disabled>
+                                            Đã thuê trọ
+                                        </button>
+                                    @elseif ($hostel->hostel_users->where('user_id', '=', Auth::user()->id)->isNotEmpty() && $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'eject')
+                                        <button type="button" class="btn btn-warning" disabled>
+                                            Bạn đã bị từ chối cho thuê trọ
+                                        </button>
+                                        <a class="btn btn-primary" href="{{ route('chat') . '/' . $hostel->user->id }}" >Chat trực tiếp với chủ trọ</a>
+                                    @elseif (in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()))
                                         <button type="button" class="btn btn-danger" disabled>
                                             Đã đăng ký thuê trọ
                                         </button>

@@ -30,15 +30,19 @@ class HostHostelUserService
     public function update($data, $Hostel_user)
     {
         $hostel = Hostel::where('id', '=', $Hostel_user->hostel_id)->first();
-        
-        if(isset($data['status'])) {
+
+        if(isset($data['status']) && $data['status'] == 'accept') {
             $data['in_at'] = Carbon::now();
         }
+        else {
+            $data['in_at'] = null;
+            $hostel->leased = false;
+        }
+
         
         try {
             $Hostel_user->fill($data);
             $Hostel_user->save();
-            $hostel->leased = true;
             $hostel->save();
             Session::flash('success','Xét duyệt thành công');
         } catch (\Exception $err){

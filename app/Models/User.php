@@ -31,7 +31,8 @@ class User extends Authenticatable implements MustVerifyEmail
         "school",
         "student_card",
         "avatar",
-        "citizen_identification"
+        "citizen_identification",
+        'device_key',
     ];
 
     /**
@@ -76,5 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }

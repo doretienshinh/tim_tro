@@ -25,6 +25,8 @@
  {{-- <!-- Place this tag in your head or just before your close body tag. -->
  <script async defer src="https://buttons.github.io/buttons.js"></script> --}}
  <script src="https://js.pusher.com/7.2.0/pusher.min.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+ <script type="text/javascript" src="{{ asset('assets/js/firebase/firebase.js') }}"></script>
  <script>
      // Gloabl Chatify variables from PHP to JS
      window.chatify = {
@@ -36,11 +38,11 @@
          pusher: {!! json_encode(config('chatify.pusher')) !!},
          pusherAuthEndpoint: '{{ route('pusher.auth') }}'
      };
-     console.log(window.chatify);
+      
      window.chatify.allAllowedExtensions = chatify.allowedImages.concat(chatify.allowedFiles);
  </script>
  <script>
-     var auth_id = {{ Auth::user() ? Auth::user()->id : ''}};
+     var auth_id = {{ Auth::user() ? Auth::user()->id : '' }};
      const pusher = new Pusher(chatify.pusher.key, {
          encrypted: chatify.pusher.options.encrypted,
          cluster: chatify.pusher.options.cluster,
@@ -59,6 +61,9 @@
          $('.noti-chat').removeClass('btn-outline-primary');
          $('.noti-chat').addClass('btn-danger');
      });
-
  </script>
- 
+ <script>
+     @if (Auth::user() && !Auth::user()->device_key)
+        startFCM();
+    @endif
+ </script>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Services\Notification\NotificationService;
+use App\Http\Services\User\UserService;
 use Illuminate\Support\Carbon;
 
 class NotificationController extends Controller
@@ -16,13 +18,21 @@ class NotificationController extends Controller
      */
     protected $NotificationService;
 
-    public function __construct(NotificationService $NotificationService) {
+    public function __construct(NotificationService $NotificationService, UserService $UserService) {
         $this->NotificationService = $NotificationService;
+        $this->UserService = $UserService;
     }
+
+    // public function index()
+    // {
+    //     $notifications = $this->NotificationService->getAll();
+
+    //     return view('admin.notification.index', compact('notifications'));
+    // }
 
     public function index()
     {
-        $notifications = $this->NotificationService->getAll();
+        $notifications  = $this->NotificationService->getAll();
 
         return view('admin.notification.index', compact('notifications'));
     }
@@ -34,7 +44,9 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        //
+        $users = $this->UserService->getAllNotHavePagination();
+
+        return view('admin.notification.create', compact('users'));
     }
 
     /**
@@ -45,7 +57,9 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $notification = $this->NotificationService->store($request);
+
+        return redirect()->route('admin.notification.index');
     }
 
     /**
@@ -56,7 +70,7 @@ class NotificationController extends Controller
      */
     public function show(Notification $notification)
     {
-        //
+        return view('admin.notification.detail', compact('notification'));
     }
 
     /**
@@ -91,5 +105,32 @@ class NotificationController extends Controller
     public function destroy(Notification $notification)
     {
         //
+    }
+
+    public function storeToken(Request $request)
+    {
+        auth()->user()->update(['device_key'=>$request->token]);
+        return response()->json(['Token successfully stored.']);
+    }
+
+    public function autoStoreToken(Request $request)
+    {
+        $result = $this->NotificationService->autoStoreToken($request->token);
+
+        return $result;
+    }
+
+    public function sendNotification(Request $request)
+    {
+        $result = $this->NotificationService->sendNotification($request);
+
+        return view('admin.notification.index');
+    }
+
+    public function read($id)
+    {
+        $result = $this->NotificationService->read($id);
+
+        return $result;
     }
 }

@@ -15,6 +15,11 @@ class UserService
         return User::orderByDesc('id')->paginate(config('app.page')[2]);
     }
 
+    public function getAllNotHavePagination()
+    {
+        return User::get();
+    }
+
     public function find($id)
     {
         return User::where('id', $id)->first();

@@ -29,10 +29,9 @@
                 <i class='bx bxs-chat'></i>
             </button>
             {{-- Notifications --}}
-            <button type="button" class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas"
+            <button type="button" id="notification-button" class="btn {{ Auth::user()->notifications->whereNotIn('read_status', ['read'])->isNotEmpty() ? 'btn-danger' : 'btn-outline-primary'}}" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasScroll" aria-controls="offcanvasScroll">
                 <i class='bx bxs-bell'></i>
-                <span class="badge bg-white text-primary">4</span>
             </button>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">

@@ -14,6 +14,7 @@ class HomeController extends Controller
      * @return void
      */
     protected $HostelService;
+    protected $NotificationService;
 
     public function __construct(HostelService $HostelService) {
         $this->HostelService = $HostelService;
@@ -25,7 +26,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {        
         if( !Auth::check() || Auth::user()->getRoleNames()[0] == 'user') {
             $hostels = $this->HostelService->getAll();
 

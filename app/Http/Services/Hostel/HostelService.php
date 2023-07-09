@@ -94,9 +94,10 @@ class HostelService
     }
 
     public function search($keyword) {
-        return Hostel::where('title', 'like', '%' . $keyword . '%')
+        $hostels = Hostel::where('title', 'like', '%' . $keyword . '%')
                        ->orWhere('description', 'like', '%' . $keyword . '%')
                        ->get();
+        return $hostels->where('leased', '!=', 1);
     }
 
     public function filter_template($data) {
@@ -184,6 +185,8 @@ class HostelService
             array_push($where, ['balcony', '=', 1]);
         }
 
-        return Hostel::where($where)->get();
+        $hostels = Hostel::where('leased', '!=', 1)->where($where)->get();
+
+        return $hostels->where('leased', '!=', 1);
     }
 }

@@ -2,7 +2,7 @@
 <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>Admin Dashboard</title>
+<title>User Dashboard</title>
 
 <meta name="description" content="" />
 <!-- CSRF Token -->
@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css')}}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/tagify/tagify.css')}}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-select/bootstrap-select.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.css')}}" />
 <!-- Helpers -->
 <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 

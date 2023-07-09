@@ -8,12 +8,17 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <!-- Search -->
-        <div class="navbar-nav align-items-center">
+        {{-- <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
                 <i class="bx bx-search fs-4 lh-0"></i>
                 <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
                     aria-label="Search..." />
             </div>
+        </div> --}}
+        <div class="nav-item d-flex align-items-center">
+            <a href="#" onclick="performSearch(event)"><i class="bx bx-search fs-4 lh-0"></i></a>
+            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
+                   aria-label="Search..." id="searchInput" onkeydown="handleKeyPress(event)" />
         </div>
         <!-- /Search -->
 
@@ -24,10 +29,9 @@
                 <i class='bx bxs-chat'></i>
             </button>
             {{-- Notifications --}}
-            <button type="button" class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas"
+            <button type="button" id="notification-button" class="btn {{ Auth::user()->notifications->whereNotIn('read_status', ['read'])->isNotEmpty() ? 'btn-danger' : 'btn-outline-primary'}}" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasScroll" aria-controls="offcanvasScroll">
                 <i class='bx bxs-bell'></i>
-                <span class="badge bg-white text-primary">4</span>
             </button>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -97,6 +101,24 @@
             </li>
             <!--/ User -->
         </ul>
+        @else
+        <div class="navbar-nav flex-row align-items-center ms-auto">
+            <a href="{{ route('login') }}" class="btn btn-primary me-1">
+                Đăng nhập
+            </a>
+        </div>
         @endif
     </div>
 </nav>
+<script>
+    function performSearch(event) {
+        event.preventDefault();
+        var keyword = document.getElementById('searchInput').value;
+        window.location.href = "{{ route('search.index') }}" + "?keyword=" + encodeURIComponent(keyword);
+    }
+    function handleKeyPress(event) {
+        if (event.keyCode === 13) {
+            performSearch(event);
+        }
+    }
+</script>

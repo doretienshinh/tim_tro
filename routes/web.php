@@ -22,6 +22,7 @@ use App\Http\Controllers\User\UserUserController;
 use App\Http\Controllers\User\UserBookingController;
 use App\Http\Controllers\User\UserChatController;
 use App\Http\Controllers\User\UserFavoriteController;
+use App\Http\Controllers\User\UserFeedbackController;
 
 
 /*
@@ -125,6 +126,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/detail', [UserUserController::class, 'show'])->name('user.user.detail');
             Route::get('/edit', [UserUserController::class, 'edit'])->name('user.user.edit');
             Route::post('/edit', [UserUserController::class, 'update'])->name('user.user.update');
+            Route::get('/find/{id}', [UserUserController::class, 'find'])->name('user.user.find');
         });
 
         #Hostel
@@ -156,6 +158,10 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/register-detail', [UserHostelController::class, 'registerDetail'])->name('user.register-hostel.detail');
         });
 
+        #Feedback
+        Route::prefix('feedback')->group(function (){
+            Route::post('/feedback/{id}', [UserFeedbackController::class, 'feedback'])->name('user.feedback.store');
+        });
     });
     //route for host
     Route::prefix('host')->group(function (){

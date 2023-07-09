@@ -37,6 +37,13 @@ class UserUserController extends Controller
         return view('user.user.detail', compact('user'));
     }
 
+    public function find($id)
+    {
+        $user = $this->UserService->find($id);
+        
+        return view('user.user.find', compact('user'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

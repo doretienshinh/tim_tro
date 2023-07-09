@@ -524,7 +524,28 @@
                     </div>
                 @endif
                 <div class="tab-pane fade" id="navs-justified-messages" role="tabpanel">
-                    a
+                    <h3 class="title">
+                        Tổng đánh giá: {{ $hostel->feedback_hostels->sum('rate') / $hostel->feedback_hostels->count() }} Sao
+                    </h3>
+                    <hr>
+                    @foreach ($hostel->feedback_hostels->sortByDesc('created_at') as $feedback)
+                        <div class="bs-toast toast fade show bg-primary w-100 mb-3" role="alert" aria-live="assertive"
+                            aria-atomic="true">
+                            <div class="toast-header">
+                                <a href="{{ route('user.user.find', $feedback->user->id) }}">
+                                    <img src="{{ $feedback->user->avatar ? asset('storage/' . $feedback->user->avatar) : asset('assets/img/avatars/default.png') }}"
+                                        alt class="w-px-40 h-auto rounded-circle me-1" />
+                                </a>
+                                <div class="me-auto fw-semibold">{{ $feedback->user->id == Auth::user()->id ? 'Bạn' : $feedback->user->name }}</div>
+                                <small>{!! \App\Helpers\Helper::calTimeNotifi($feedback->created_at) !!}</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                {{ $feedback->content }}
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

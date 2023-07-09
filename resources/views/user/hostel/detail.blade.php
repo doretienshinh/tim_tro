@@ -290,15 +290,21 @@
                                             Đặt lịch xem trọ
                                         </button>
                                     @endif
-                                    @if($hostel->hostel_users->where('user_id', '=', Auth::user()->id)->isNotEmpty() && $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'accept')
+                                    @if (
+                                        $hostel->hostel_users->where('user_id', '=', Auth::user()->id)->isNotEmpty() &&
+                                            $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'accept')
                                         <button type="button" class="btn btn-warning" disabled>
                                             Đã thuê trọ
                                         </button>
-                                    @elseif ($hostel->hostel_users->where('user_id', '=', Auth::user()->id)->isNotEmpty() && $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'eject')
+                                    @elseif (
+                                        $hostel->hostel_users->where('user_id', '=', Auth::user()->id)->isNotEmpty() &&
+                                            $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'eject')
                                         <button type="button" class="btn btn-warning" disabled>
                                             Bạn đã bị từ chối cho thuê trọ
                                         </button>
-                                        <a class="btn btn-primary" href="{{ route('chat') . '/' . $hostel->user->id }}" >Chat trực tiếp với chủ trọ</a>
+                                        <a class="btn btn-primary"
+                                            href="{{ route('chat') . '/' . $hostel->user->id }}">Chat trực tiếp với chủ
+                                            trọ</a>
                                     @elseif (in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()))
                                         <button type="button" class="btn btn-danger" disabled>
                                             Đã đăng ký thuê trọ
@@ -485,7 +491,51 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="navs-justified-messages" role="tabpanel">
-                    a
+                    <h3 class="title">
+                        Tổng đánh giá: {{ $hostel->feedback_hostels->sum('rate') / $hostel->feedback_hostels->count() }} Sao
+                    </h3>
+                    <hr>
+                    @foreach ($hostel->feedback_hostels->sortByDesc('created_at') as $feedback)
+                        <div class="bs-toast toast fade show bg-primary w-100 mb-3" role="alert" aria-live="assertive"
+                            aria-atomic="true">
+                            <div class="toast-header">
+                                <a href="{{ route('user.user.find', $feedback->user->id) }}">
+                                    <img src="{{ $feedback->user->avatar ? asset('storage/' . $feedback->user->avatar) : asset('assets/img/avatars/default.png') }}"
+                                        alt class="w-px-40 h-auto rounded-circle me-1" />
+                                </a>
+                                <div class="me-auto fw-semibold">{{ $feedback->user->id == Auth::user()->id ? 'Bạn' : $feedback->user->name }}</div>
+                                <small>{!! \App\Helpers\Helper::calTimeNotifi($feedback->created_at) !!}</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                {{ $feedback->content }}
+                            </div>
+                        </div>
+                    @endforeach
+                    <hr>
+                    <div class="chat-history-footer">
+                        <form class="form-send-message d-flex justify-content-between align-items-center mb-0"
+                            method="POST" action=" {{ route('user.feedback.store', $hostel->id) }}">
+                            @csrf
+                            <select class="selectpicker" data-style="btn-default" name="rate">
+                                <option disable selected>Đánh giá</option>
+                                <option value=1>1 sao</option>
+                                <option value=2>2 sao</option>
+                                <option value=3>3 sao</option>
+                                <option value=4>4 sao</option>
+                                <option value=5>5 sao</option>
+                            </select>
+                            <input class="form-control message-input border-0 me-3 shadow-none"
+                                placeholder="Vui lòng nhập đánh giá" name="content">
+                            <div class="message-actions d-flex align-items-center">
+                                <button class="btn btn-primary d-flex send-msg-btn" type="submit">
+                                    <i class="bx bx-paper-plane me-md-2 me-0"></i>
+                                    <span class="align-middle d-md-inline-block d-none">Gửi</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -70,4 +70,9 @@ class Hostel extends Model
     {
         return $this->hasMany(Favorite::class);
     }
+
+    public function feedback_hostels()
+    {
+        return $this->hasMany(Feedback_hostel::class);
+    }
 }

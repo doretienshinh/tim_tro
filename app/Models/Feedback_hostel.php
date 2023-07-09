@@ -15,4 +15,14 @@ class Feedback_hostel extends Model
         'content',
         'rate',
     ];
+
+    public function hostel()
+    {
+        return $this->belongsTo(Hostel::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'from_user_id');
+    }
 }

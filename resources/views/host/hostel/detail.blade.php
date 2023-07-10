@@ -524,10 +524,12 @@
                     </div>
                 @endif
                 <div class="tab-pane fade" id="navs-justified-messages" role="tabpanel">
-                    <h3 class="title">
-                        Tổng đánh giá: {{ $hostel->feedback_hostels->sum('rate') / $hostel->feedback_hostels->count() }} Sao
-                    </h3>
-                    <hr>
+                    @if ($hostel->feedback_hostels->isNotEmpty())
+                        <h3 class="title">
+                            Tổng đánh giá: {{ $hostel->feedback_hostels->sum('rate') / $hostel->feedback_hostels->count() }} Sao
+                        </h3>
+                        <hr>
+                    @endif
                     @foreach ($hostel->feedback_hostels->sortByDesc('created_at') as $feedback)
                         <div class="bs-toast toast fade show bg-primary w-100 mb-3" role="alert" aria-live="assertive"
                             aria-atomic="true">

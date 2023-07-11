@@ -16,12 +16,16 @@ class UserHostelService
     public function getCurrentRegister()
     {
         $register = Hostel_user::where('user_id', '=', Auth::user()->id)->where('status', '!=', 'eject')->first();
-
         if($register)
         {
             return $register;
         }
         else return false;
+    }
+
+    public function findByWardId($id)
+    {
+        return Hostel::where('ward_id', $id)->orderByDesc('id')->paginate(4);
     }
 
     public function getAll()
@@ -40,6 +44,7 @@ class UserHostelService
         $data['hostel_id'] = $hostel->id;
         $data['in_at'] = null;
         $data['out_at'] = null;
+        $data['status'] = 'request';
 
         $disableRegister = $this->getCurrentRegister();
 

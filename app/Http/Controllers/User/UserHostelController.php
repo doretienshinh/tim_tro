@@ -36,8 +36,11 @@ class UserHostelController extends Controller
      */
     public function show(Hostel $Hostel)
     {
+        $hostels_by_ward = $this->HostelService->findByWardId($Hostel->ward_id);
+
         return view('user.hostel.detail', [
             'hostel' => $Hostel,
+            'hostels_by_ward' => $hostels_by_ward
         ]);
     }
 
@@ -57,9 +60,11 @@ class UserHostelController extends Controller
 
             return redirect()->back();
         } 
+        $hostels_by_ward = $this->HostelService->findByWardId($hostel->ward_id);
 
         return view('user.hostel.detail', [
             'hostel' => $hostel,
+            'hostels_by_ward' => $hostels_by_ward
         ]);
     }
 }

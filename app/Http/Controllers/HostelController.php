@@ -65,8 +65,11 @@ class HostelController extends Controller
      */
     public function show(Hostel $Hostel)
     {
+        $hostels_by_ward = $this->HostelService->findByWardId($Hostel->ward_id);
+
         return view('admin.hostel.detail', [
             'hostel' => $Hostel,
+            'hostels_by_ward' => $hostels_by_ward
         ]);
     }
 

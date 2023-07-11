@@ -21,6 +21,11 @@ class HostHostelService
         return Hostel::where('id', $id)->first();
     }
 
+    public function findByWardId($id)
+    {
+        return Hostel::where('ward_id', $id)->orderByDesc('id')->paginate(4);
+    }
+    
     public function store($data)
     {
         if (isset($data['thumbnail'])) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Host;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\HostelUser\HostHostelUserService;
+use App\Http\Services\Hostel\HostHostelService;
 use App\Http\Services\Tag\TagService;
 use App\Models\Hostel_user;
 
@@ -18,9 +19,10 @@ class HostHostelUserController extends Controller
     protected $HostHostelUserService;
     protected $TagService;
 
-    public function __construct(HostHostelUserService $HostHostelUserService, TagService $TagService, ) {
+    public function __construct(HostHostelUserService $HostHostelUserService, TagService $TagService, HostelService $HostelService) {
         $this->HostHostelUserService = $HostHostelUserService;
         $this->TagService = $TagService;
+        $this->HostelService = $HostelService;
     }
 
     public function index()
@@ -38,8 +40,11 @@ class HostHostelUserController extends Controller
      */
     public function show(Hostel $Hostel)
     {
+        $hostels_by_ward = $this->HostelService->findByWardId($Hostel->ward_id);
+
         return view('host.hostel.detail', [
             'hostel' => $Hostel,
+            'hostels_by_ward' => $hostels_by_ward
         ]);
     }
 

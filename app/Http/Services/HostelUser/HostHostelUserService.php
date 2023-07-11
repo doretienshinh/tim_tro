@@ -14,7 +14,7 @@ class HostHostelUserService
 {
     public function getAllHostel()
     {
-        return Hostel::where('user_id', '=', Auth::user()->id)->orderByDesc('id')->paginate(config('app.page')[2]);
+        return Hostel::where('user_id', '=', Auth::user()->id)->orderByDesc('id')->paginate(config('app.page')[1]);
     }
 
     public function find($id)

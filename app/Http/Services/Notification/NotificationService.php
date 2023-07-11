@@ -14,7 +14,7 @@ class NotificationService
 {
     public function getAll()
     {
-        return Notification::orderByDesc('id')->paginate(config('app.page')[2]);
+        return Notification::orderByDesc('id')->paginate(config('app.page')[1]);
     }
 
     public function find($id)
@@ -179,5 +179,62 @@ class NotificationService
         // dd($result);   
 
         return true;
+    }
+
+    public function notification($id, $title, $content)
+    {
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $FcmToken = User::whereNotNull('device_key')->where('id', '=', $id)->pluck('device_key')->all();
+
+        try 
+        {
+            $data_noti['title'] = $title;
+            $data_noti['content'] = $content;
+            $data_noti['user_id'] = $id;
+
+            Notification::create($data_noti);
+
+            $serverKey = 'AAAAscnH4Dg:APA91bGTMDc270FxJRCjoKQ70c7YuAyEAcufy-LXIdM4rnbtb1aU56kKe9EUdvAKlrcIbR4ZJ-VfhbfziZvdqNnofHoLismCXQ1FwkuHM7RSJctpYN5ImiLk9Y3ro__ANUFoeozDrai8';
+  
+            $data = [
+                "registration_ids" => $FcmToken,
+                "notification" => [
+                    "title" => $title,
+                    "body" => $content,  
+                ]
+            ];
+            $encodedData = json_encode($data);
+
+            $headers = [
+                'Authorization:key=' . $serverKey,
+                'Content-Type: application/json',
+            ];
+        
+            $ch = curl_init();
+        
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+            // Disabling SSL Certificate support temporarly
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);        
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
+            // Execute post
+            $result = curl_exec($ch);
+            if ($result === FALSE) {
+                die('Curl failed: ' . curl_error($ch));
+            }        
+            // Close connection
+            curl_close($ch);
+            // FCM response
+
+        } catch (\Exception $err){
+            \Log::info($err->getMessage());
+            return false;
+        }
+        return true;
+
     }
 }

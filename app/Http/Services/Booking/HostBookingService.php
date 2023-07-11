@@ -13,7 +13,7 @@ class HostBookingService
 {
     public function getAll()
     {
-        return Booking::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'ASC')->paginate(config('app.page')[2]);
+        return Booking::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'ASC')->paginate(config('app.page')[1]);
     }
 
     public function update($data, $booking)

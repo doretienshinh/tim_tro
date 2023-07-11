@@ -12,7 +12,7 @@ class TagService
 {
     public function getAll()
     {
-        return Tag::orderBy('id', 'ASC')->paginate(config('app.page')[2]);
+        return Tag::orderBy('id', 'ASC')->paginate(config('app.page')[1]);
     }
     
     public function getAllNotHavePagination()

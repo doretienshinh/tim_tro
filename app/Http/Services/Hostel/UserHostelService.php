@@ -30,7 +30,7 @@ class UserHostelService
 
     public function getAll()
     {
-        return Hostel::where('user_id', '=', Auth::user()->id)->orderByDesc('id')->paginate(config('app.page')[2]);
+        return Hostel::where('user_id', '=', Auth::user()->id)->orderByDesc('id')->paginate(config('app.page')[1]);
     }
 
     public function find($id)
@@ -55,9 +55,7 @@ class UserHostelService
 
         try {
             Hostel_user::create($data);
-            Session::flash('success','Đã gửi yêu cầu tới chủ trọ');
         } catch (\Exception $err){
-            Session::flash('error','Gửi yêu cầu tới chủ trọ thất bại');
             \Log::info($err->getMessage());
             dd($err->getMessage());
             return false;

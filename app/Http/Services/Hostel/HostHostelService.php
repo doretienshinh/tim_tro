@@ -13,7 +13,7 @@ class HostHostelService
 {
     public function getAll()
     {
-        return Hostel::where('user_id', '=', Auth::user()->id)->orderByDesc('id')->paginate(config('app.page')[2]);
+        return Hostel::where('user_id', '=', Auth::user()->id)->orderByDesc('id')->paginate(config('app.page')[1]);
     }
 
     public function find($id)
@@ -25,7 +25,7 @@ class HostHostelService
     {
         return Hostel::where('ward_id', $id)->orderByDesc('id')->paginate(4);
     }
-    
+
     public function store($data)
     {
         if (isset($data['thumbnail'])) {

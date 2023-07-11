@@ -13,7 +13,7 @@ class FavoriteService
 {
     public function getAllMyFavorite()
     {
-        return Favorite::where('user_id', '=', Auth::user()->id)->orderBy('id', 'ASC')->paginate(config('app.page')[2]);
+        return Favorite::where('user_id', '=', Auth::user()->id)->orderBy('id', 'ASC')->paginate(config('app.page')[1]);
     }
 
     public function find($id)

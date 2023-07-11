@@ -13,7 +13,7 @@ class HostTimeService
 {
     public function getAllMyTime()
     {
-        return Time::where('user_id', '=', Auth::user()->id)->orderBy('id', 'ASC')->paginate(config('app.page')[2]);
+        return Time::where('user_id', '=', Auth::user()->id)->orderBy('id', 'ASC')->paginate(config('app.page')[1]);
     }
 
     public function store($data)

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Hostel\UserHostelService;
 use App\Models\Hostel;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CreateHostelRequest;
+use App\Http\Services\Notification\NotificationService;
+use Illuminate\Support\Facades\Auth;
 
 class UserHostelController extends Controller
 {
@@ -17,9 +20,11 @@ class UserHostelController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $HostelService;
+    protected $NotificationService;
 
-    public function __construct(UserHostelService $HostHostelService,) {
+    public function __construct(UserHostelService $HostHostelService, NotificationService $NotificationService) {
         $this->HostelService = $HostHostelService;
+        $this->NotificationService = $NotificationService;
     }
 
     public function index()
@@ -46,7 +51,14 @@ class UserHostelController extends Controller
 
     public function register(Hostel $Hostel)
     {
-        $this->HostelService->register($Hostel);
+        $result = $this->HostelService->register($Hostel);
+        if($result) {
+            $result = $this->NotificationService->notification($Hostel->user->id, 'Trọ ['. $Hostel->title . '] có người đăng ký', Auth::user()->name . ' đã gửi yêu cầu vào trọ ['. $Hostel->title . '] ');
+        }
+        if($result) {
+            Session::flash('success','Đã gửi yêu cầu tới chủ trọ');
+        }
+        else    Session::flash('error','Gửi yêu cầu tới chủ trọ thất bại');
 
         return redirect()->back();
     }

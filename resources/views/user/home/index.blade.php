@@ -96,6 +96,10 @@
                     </div>
                 </div>
             @endforeach
+
+            <div class="d-flex flex-row-reverse">
+                {{ $hostels->links() }}
+            </div>
         </div>
     </div>
 @endsection

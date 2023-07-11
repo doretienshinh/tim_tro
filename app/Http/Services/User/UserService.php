@@ -12,7 +12,7 @@ class UserService
 {
     public function getAll()
     {
-        return User::orderByDesc('id')->paginate(config('app.page')[2]);
+        return User::orderByDesc('id')->paginate(config('app.page')[1]);
     }
 
     public function getAllNotHavePagination()

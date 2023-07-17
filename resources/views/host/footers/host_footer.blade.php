@@ -68,7 +68,7 @@
      });
  </script>
  <script>
-    @if (Auth::user() && !Auth::user()->device_key)
+    @if (Auth::user())
         startFCM();
     @endif
 </script>

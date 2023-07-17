@@ -111,7 +111,8 @@ class NotificationService
 
     public function autoStoreToken($token)
     {
-
+        if( isset(Auth::user()->device_key) && Auth::user()->device_key == $token) return true;
+        
         try {
             Auth::user()->update(['device_key' => $token]);
             Session::flash('success','Lưu token thành công');

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card mb-4">
-                    <form id="formAccountSettings" method="POST"  action="{{ route('host.request.update', $Hostel_user) }}"
+                    <form id="formAccountSettings" method="POST"  action="{{ route('host.request.update_leave', $Hostel_user) }}"
                         enctype='multipart/form-data'>
                         @csrf
                         <h5 class="card-header">Chi tiết yêu cầu</h5>

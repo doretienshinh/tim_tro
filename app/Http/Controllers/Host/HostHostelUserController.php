@@ -9,6 +9,7 @@ use App\Http\Services\Hostel\HostHostelService;
 use App\Http\Services\Hostel\HostelService;
 use App\Http\Services\Tag\TagService;
 use App\Models\Hostel_user;
+use App\Http\Services\Notification\NotificationService;
 
 class HostHostelUserController extends Controller
 {
@@ -19,11 +20,13 @@ class HostHostelUserController extends Controller
      */
     protected $HostHostelUserService;
     protected $TagService;
+    protected $NotificationService;
 
-    public function __construct(HostHostelUserService $HostHostelUserService, TagService $TagService, HostelService $HostelService) {
+    public function __construct(HostHostelUserService $HostHostelUserService, TagService $TagService, HostelService $HostelService, NotificationService $NotificationService) {
         $this->HostHostelUserService = $HostHostelUserService;
         $this->TagService = $TagService;
         $this->HostelService = $HostelService;
+        $this->NotificationService = $NotificationService;
     }
 
     public function index()
@@ -89,7 +92,15 @@ class HostHostelUserController extends Controller
      */
     public function update(Request $request, Hostel_user $Hostel_user)
     {
-        $this->HostHostelUserService->update($request->all(), $Hostel_user);
+        $result = $this->HostHostelUserService->update($request->all(), $Hostel_user);
+
+        if($result) {
+            if($Hostel_user->status == 'accept')
+            {
+                $result = $this->NotificationService->notification($Hostel_user->user_id, 'Bạn đã được chấp nhận thuê trọ', 'Bạn đã được thuê trọ ['. $Hostel_user->hostel->title . '] ');
+            }
+            else    $result = $this->NotificationService->notification($Hostel_user->user_id, 'Bạn đã bị từ chối thuê trọ', 'Bạn bị từ chối thuê trọ ['. $Hostel_user->hostel->title . '] ');
+        }
 
         return redirect(route('host.request.index'));
     }
@@ -97,7 +108,15 @@ class HostHostelUserController extends Controller
 
     public function update_leave(Request $request, Hostel_user $Hostel_user)
     {
-        $this->HostHostelUserService->update_leave($request->all(), $Hostel_user);
+        $result = $this->HostHostelUserService->update_leave($request->all(), $Hostel_user);
+
+        if($result) {
+            if($Hostel_user->status == 'accept_leave')
+            {
+                $result = $this->NotificationService->notification($Hostel_user->user_id, 'Bạn đã được chấp nhận rời trọ', 'Bạn đã được rời trọ ['. $Hostel_user->hostel->title . '] ');
+            }
+            else    $result = $this->NotificationService->notification($Hostel_user->user_id, 'Bạn đã bị từ chối rời trọ', 'Bạn bị từ chối rời trọ ['. $Hostel_user->hostel->title . '] ');
+        }
 
         return redirect(route('host.request.index_leave'));
     }

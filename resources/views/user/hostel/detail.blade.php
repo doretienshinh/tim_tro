@@ -247,6 +247,10 @@
                                 <button type="button" class="btn btn-warning" disabled>
                                     Đã thuê trọ
                                 </button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#rent_leave">
+                                    Đăng ký rời trọ
+                                </button>
                             @elseif (
                                 $hostel->hostel_users->where('user_id', '=', Auth::user()->id)->isNotEmpty() &&
                                     $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'eject')
@@ -256,9 +260,28 @@
                                 <a class="btn btn-primary" href="{{ route('chat') . '/' . $hostel->user->id }}">Chat trực
                                     tiếp với chủ
                                     trọ</a>
-                            @elseif (in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()))
+                            @elseif (in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()) &&
+                                    $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'request')
                                 <button type="button" class="btn btn-danger" disabled>
                                     Đã đăng ký thuê trọ
+                                </button>
+                            @elseif (in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()) &&
+                                    $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'request_leave')
+                                <button type="button" class="btn btn-danger" disabled>
+                                    Đã đăng ký rời trọ
+                                </button>
+                            @elseif (in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()) &&
+                                    $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'eject_leave')
+                                <button type="button" class="btn btn-danger" disabled>
+                                    Đăng ký rời trọ bị từ chối
+                                </button>
+                                <a class="btn btn-primary" href="{{ route('chat') . '/' . $hostel->user->id }}">Chat trực
+                                    tiếp với chủ
+                                    trọ</a>
+                            @elseif (in_array(Auth::user()->id, $hostel->hostel_users->pluck('user_id')->toArray()) &&
+                                    $hostel->hostel_users->where('user_id', '=', Auth::user()->id)[0]->status == 'accept_leave')
+                                <button type="button" class="btn btn-danger" disabled>
+                                    Đã từng ở trọ
                                 </button>
                             @else
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
@@ -578,6 +601,26 @@
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <a href="{{ route('user.register-hostel.store', $hostel) }}" class="btn btn-success text-white">Thuê
+                        trọ</a>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Hủy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="rent_leave" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">Bạn chắc chắn chứ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>Sau khi ấn đăng ký sẽ gửi thông báo rời trọ tới cho chủ trọ, và đợi chủ trọ xét duyệt</div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <a href="{{ route('user.register-hostel') }}" class="btn btn-danger text-white">Rời
                         trọ</a>
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                         Hủy

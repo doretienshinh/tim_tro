@@ -15,7 +15,8 @@ class UserHostelService
 {
     public function getCurrentRegister()
     {
-        $register = Hostel_user::where('user_id', '=', Auth::user()->id)->where('status', '!=', 'eject')->first();
+        $status = ['eject', 'accept_leave'];
+        $register = Hostel_user::where('user_id', '=', Auth::user()->id)->whereNotIn('status', $status)->first();
         if($register)
         {
             return $register;
@@ -58,6 +59,22 @@ class UserHostelService
         } catch (\Exception $err){
             \Log::info($err->getMessage());
             dd($err->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public function leave()
+    {
+        $hostel_user = $this->getCurrentRegister();
+
+        $data['status'] = 'request_leave';
+        
+        try {
+            $hostel_user->fill($data);
+            $hostel_user->save();
+        } catch (\Exception $err){
+            \Log::info($err->getMessage());
             return false;
         }
         return true;

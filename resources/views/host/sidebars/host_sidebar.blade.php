@@ -131,12 +131,17 @@
         <li class="menu-item {{ (strpos(Route::currentRouteName(), 'host.request.index') === 0) ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='bx bx-time-five tf-icons menu-icon'></i>
-                <div data-i18n="Layouts">Yêu cầu vào trọ</div>
+                <div data-i18n="Layouts">Yêu cầu</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="{{ route('host.request.index') }}" class="menu-link">
-                        <div data-i18n="Without menu">Danh sách yêu cầu</div>
+                        <div data-i18n="Without menu">Yêu cầu vào trọ</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('host.request.index_leave') }}" class="menu-link">
+                        <div data-i18n="Without menu">Yêu cầu rời trọ</div>
                     </a>
                 </li>
             </ul>

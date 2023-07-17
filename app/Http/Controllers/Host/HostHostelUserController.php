@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\HostelUser\HostHostelUserService;
 use App\Http\Services\Hostel\HostHostelService;
+use App\Http\Services\Hostel\HostelService;
 use App\Http\Services\Tag\TagService;
 use App\Models\Hostel_user;
 
@@ -30,6 +31,13 @@ class HostHostelUserController extends Controller
         $hostels = $this->HostHostelUserService->getAllHostel();
 
         return view('host.request.index', compact('hostels'));
+    }
+
+    public function index_leave()
+    {
+        $hostels = $this->HostHostelUserService->getAllHostel();
+
+        return view('host.request.leave.index', compact('hostels'));
     }
 
     /**
@@ -63,6 +71,15 @@ class HostHostelUserController extends Controller
         ]);
     }
 
+    public function edit_leave($id)
+    {
+        $Hostel_user = $this->HostHostelUserService->find($id);
+
+        return view('host.request.leave.edit', [
+            'Hostel_user' => $Hostel_user,
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -75,6 +92,14 @@ class HostHostelUserController extends Controller
         $this->HostHostelUserService->update($request->all(), $Hostel_user);
 
         return redirect(route('host.request.index'));
+    }
+
+
+    public function update_leave(Request $request, Hostel_user $Hostel_user)
+    {
+        $this->HostHostelUserService->update_leave($request->all(), $Hostel_user);
+
+        return redirect(route('host.request.index_leave'));
     }
 
     /**

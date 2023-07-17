@@ -158,6 +158,11 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/register-detail', [UserHostelController::class, 'registerDetail'])->name('user.register-hostel.detail');
         });
 
+        #Leave_hostel
+        Route::prefix('register-hostel')->group(function (){
+            Route::get('/Leave_hostel', [UserHostelController::class, 'leave'])->name('user.register-hostel');
+        });
+
         #Feedback
         Route::prefix('feedback')->group(function (){
             Route::post('/feedback/{id}', [UserFeedbackController::class, 'feedback'])->name('user.feedback.store');
@@ -210,6 +215,11 @@ Route::middleware(['auth'])->group(function(){
             Route::get('/edit/{id}', [HostHostelUserController::class, 'edit'])->name('host.request.edit');
             Route::post('/edit/{Hostel_user}', [HostHostelUserController::class, 'update'])->name('host.request.update');
             // Route::get('/delete/{time}', [HostTimeController::class, 'destroy'])->name('host.time.delete');
+
+            #Request_leave
+            Route::get('/leave', [HostHostelUserController::class, 'index_leave'])->name('host.request.index_leave');
+            Route::get('/edit_leave/{id}', [HostHostelUserController::class, 'edit_leave'])->name('host.request.edit_leave');
+            Route::post('/edit_leave/{Hostel_user}', [HostHostelUserController::class, 'update_leave'])->name('host.request.update_leave');
         });
     });
 });

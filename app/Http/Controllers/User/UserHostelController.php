@@ -66,17 +66,34 @@ class UserHostelController extends Controller
     public function registerDetail()
     {
         $hostel = $this->HostelService->getCurrentRegister() ? $this->HostelService->getCurrentRegister()->hostel : $this->HostelService->getCurrentRegister();
+
         if (!$hostel)
         {
             Session::flash('warning','Bạn không có trọ nào trong mục này');
 
-            return redirect()->back();
+            return redirect()->route('home');
         } 
+
         $hostels_by_ward = $this->HostelService->findByWardId($hostel->ward_id);
 
         return view('user.hostel.detail', [
             'hostel' => $hostel,
             'hostels_by_ward' => $hostels_by_ward
         ]);
+    }
+
+    public function leave()
+    {
+        $result = $this->HostelService->leave();
+        $hostel_user = $this->HostelService->getCurrentRegister();
+        if($result) {
+            $result = $this->NotificationService->notification($hostel_user->hostel->user_id, Auth::user()->name . ' đã yêu cầu rời trọ', Auth::user()->name . ' đã gửi yêu cầu rời trọ ['. $hostel_user->hostel->title . '] ');
+        }
+        if($result) {
+            Session::flash('success','Đã gửi yêu cầu tới chủ trọ');
+        }
+        else    Session::flash('error','Gửi yêu cầu tới chủ trọ thất bại');
+
+        return redirect()->back();
     }
 }

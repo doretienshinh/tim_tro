@@ -53,6 +53,28 @@ class HostHostelUserService
         return true;
     }
 
+    public function update_leave($data, $Hostel_user)
+    {
+        $hostel = Hostel::where('id', '=', $Hostel_user->hostel_id)->first();
+
+        if(isset($data['status']) && $data['status'] == 'accept_leave') {
+            $data['out_at'] = Carbon::now();
+            $hostel->leased = true;
+        }
+        
+        try {
+            $Hostel_user->fill($data);
+            $Hostel_user->save();
+            $hostel->save();
+            Session::flash('success','Xét duyệt thành công');
+        } catch (\Exception $err){
+            Session::flash('error','Xét duyệt thất bại');
+            \Log::info($err->getMessage());
+            return false;
+        }
+        return true;
+    }
+
     public function destroy($hostel){
        
     }

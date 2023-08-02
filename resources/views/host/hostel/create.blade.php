@@ -21,7 +21,7 @@
 </style>
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Hostel Create</span></h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tạo phòng trọ mới</span></h4>
 
         <div class="row">
             <div class="col-md-12">
@@ -29,11 +29,11 @@
                     <form id="formAccountSettings" method="POST" action=" {{ route('host.hostel.store') }}"
                         enctype='multipart/form-data'>
                         @csrf
-                        <h5 class="card-header">Hostel Details</h5>
+                        <h5 class="card-header">Chi tiết phòng trọ</h5>
                         <div class="card-body">
                             <div class="row">
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Title</label>
+                                    <label for="title" class="form-label">Tiêu đề</label>
                                     <input class="form-control" type="text" id="title" name="title"
                                         placeholder="Input title" autofocus />
                                     @if ($errors->has('title'))
@@ -42,7 +42,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">description</label>
+                                    <label for="description" class="form-label">Mô tả</label>
                                     <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                                     @if ($errors->has('description'))
                                         <span id="description-error" class="error text-danger"
@@ -50,7 +50,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="thumbnail" class="form-label">Thumbnail image</label>
+                                    <label for="thumbnail" class="form-label">Ảnh đại diện hiển thị</label>
                                     <input class="form-control" type="file" id="thumbnail-upload" name="thumbnail" />
                                     @if ($errors->has('thumbnail'))
                                         <span id="thumbnail-error" class="error text-danger"
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tag" class="form-label">Choose tag</label>
+                                    <label for="tag" class="form-label">Chọn thẻ</label>
                                     <select id="tag" class="selectpicker w-100" data-style="btn-default"
                                         data-live-search="true" data-show-subtext="true" name="tag_id">
                                         {{-- <option selected="selected" disabled>Choose tag</option> --}}
@@ -76,7 +76,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="city_select" class="form-label">Choose city</label>
+                                    <label for="city_select" class="form-label">Chọn thành phố</label>
                                     <select id="city_select" class="w-100" data-style="btn-default" data-live-search="true"
                                         data-show-subtext="true" name="city_select">
                                     </select>
@@ -86,19 +86,19 @@
                                     @endif
                                 </div>
                                 <div class="mb-3 district_select d-none">
-                                    <label for="district_select" class="form-label">Choose district</label>
+                                    <label for="district_select" class="form-label">Chọn huyện/quận</label>
                                     <select id="district_select" class="w-100" data-style="btn-default"
                                         data-live-search="true" data-show-subtext="true" name="district_select">
                                     </select>
                                 </div>
                                 <div class="mb-3 ward_select d-none">
-                                    <label for="ward" class="form-label">Choose ward</label>
+                                    <label for="ward" class="form-label">Chọn xã/phường</label>
                                     <select id="ward_select" class="w-100" data-style="btn-default" data-live-search="true"
                                         data-show-subtext="true" name="ward_id">
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Address Detail</label>
+                                    <label for="title" class="form-label">Địa chỉ chi tiết</label>
                                     <input class="form-control" type="text" id="address_detail" name="address_detail"
                                         placeholder="Input Address Detail" autofocus />
                                     @if ($errors->has('address_detail'))
@@ -107,7 +107,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="upload-images" class="form-label custom-file-label">Images</label>
+                                    <label for="upload-images" class="form-label custom-file-label">Hình ảnh của phòng trọ( có thể chọn nhiều)</label>
                                     <input class="form-control" type="file" id="upload-images" name="image[]"
                                         accept="image/*" multiple />
                                     @if ($errors->has('image'))
@@ -429,6 +429,7 @@
             $.ajax({
                 url: 'https://provinces.open-api.vn/api/d/' + district_id + '?depth=2',
                 method: 'get',
+                Accept: 'application/json',
                 success: function(response) {
                     var wards = response.wards;
                     $("#ward_select").selectpicker('destroy');

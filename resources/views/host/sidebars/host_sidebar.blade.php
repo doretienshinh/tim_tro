@@ -69,7 +69,7 @@
         <li class="menu-item {{ (strpos(Route::currentRouteName(), 'host.hostel.index') === 0) ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='bx bx-building-house tf-icons menu-icon'></i>
-                <div data-i18n="Layouts">Nhà trọ</div>
+                <div data-i18n="Layouts">Phòng trọ</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
@@ -120,17 +120,12 @@
                         <div data-i18n="Without menu">Danh sách hẹn</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('host.time.create') }}" class="menu-link">
-                        <div data-i18n="Without menu">Tạo thời gian mới</div>
-                    </a>
-                </li>
             </ul>
         </li>
 
         <li class="menu-item {{ (strpos(Route::currentRouteName(), 'host.request.index') === 0) ? 'active' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class='bx bx-time-five tf-icons menu-icon'></i>
+                <i class='bx bx-user-voice tf-icons menu-icon'></i>
                 <div data-i18n="Layouts">Yêu cầu</div>
             </a>
             <ul class="menu-sub">
@@ -147,6 +142,13 @@
             </ul>
         </li>
 
+        <li class="menu-item">
+            <a href="{{ route('chat') }}" class="menu-link">
+                <i class='bx bxs-chat tf-icons menu-icon'></i>
+                <div data-i18n="Layouts">Trò chuyện</div>
+            </a>
+        </li>
+        
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Thông tin tài khoản</span>
         </li>

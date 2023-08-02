@@ -17,8 +17,8 @@
         </div> --}}
         <div class="nav-item d-flex align-items-center">
             <a href="#" onclick="performSearch(event)"><i class="bx bx-search fs-4 lh-0"></i></a>
-            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                   aria-label="Search..." id="searchInput" onkeydown="handleKeyPress(event)" />
+            <input type="text" class="form-control border-0 shadow-none" placeholder="Tìm kiếm..."
+                   aria-label="Tìm kiếm..." id="searchInput" onkeydown="handleKeyPress(event)" />
         </div>
         <!-- /Search -->
 
@@ -64,16 +64,16 @@
                     <li>
                         <a class="dropdown-item" href="{{ route('user.user.detail') }}">
                             <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">My Profile</span>
+                            <span class="align-middle">Tài khoản</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a class="dropdown-item" href="#">
                             <i class="bx bx-cog me-2"></i>
                             <span class="align-middle">Settings</span>
                         </a>
-                    </li>
-                    <li>
+                    </li> --}}
+                    {{-- <li>
                         <a class="dropdown-item" href="#">
                             <span class="d-flex align-items-center align-middle">
                                 <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
@@ -82,7 +82,7 @@
                                     class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
                             </span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
@@ -94,7 +94,7 @@
                                 @csrf
                             </form>
                             <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Log Out</span>
+                            <span class="align-middle">Đăng xuất</span>
                         </a>
                     </li>
                 </ul>

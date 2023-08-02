@@ -95,7 +95,7 @@
                               <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}"/>
                             </div>
                             <div class="mb-3 form-password-toggle">
-                              <label class="form-label" for="password">Password</label>
+                              <label class="form-label" for="password">Mật khẩu</label>
                               <div class="input-group input-group-merge">
                                 <input
                                   type="password"
@@ -109,7 +109,7 @@
                               </div>
                             </div>
                             <div class="mb-3 form-password-toggle">
-                                <label class="form-label" for="password">Password Confirmation</label>
+                                <label class="form-label" for="password">Nhập lại mật khẩu</label>
                                 <div class="input-group input-group-merge">
                                   <input
                                     type="password"
@@ -123,7 +123,7 @@
                                 </div>
                               </div>
                               <div class="mb-3">
-                                <label class="form-label d-block">Choose a role</label>
+                                <label class="form-label d-block">Mục đích bạn muốn sử dụng là?</label>
                                 <div class="form-check form-check-inline mt-3">
                                   <input
                                     class="form-check-input"
@@ -133,7 +133,7 @@
                                     value="user"
                                     checked
                                   />
-                                  <label class="form-check-label" for="inlineRadio1">Student</label>
+                                  <label class="form-check-label" for="inlineRadio1">Tìm phòng trọ</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input
@@ -143,7 +143,7 @@
                                     id="inlineRadio2"
                                     value="host"
                                   />
-                                  <label class="form-check-label" for="inlineRadio2">Host</label>
+                                  <label class="form-check-label" for="inlineRadio2">Cho thuê phòng trọ</label>
                                 </div>
                               </div>
                             {{-- <div class="mb-3">
@@ -155,12 +155,12 @@
                                 </label>
                               </div>
                             </div> --}}
-                            <button class="btn btn-primary d-grid w-100">Sign up</button>
+                            <button class="btn btn-primary d-grid w-100">Đăng ký</button>
                           </form>
                           <p class="text-center">
-                            <span>Already have an account?</span>
+                            <span>Bạn đã có sẵn tài khoản?</span>
                             <a href="{{ route('login') }}">
-                              <span>Sign in instead</span>
+                              <span>Đăng nhập</span>
                             </a>
                           </p>
                     </div>

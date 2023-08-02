@@ -75,12 +75,12 @@
                         </g>
                       </svg>
                     </span>
-                    <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                    <span class="app-brand-text demo text-body fw-bolder">Timtro</span>
                   </a>
                 </div>
                 <!-- /Logo -->
-                <h4 class="mb-2">Forgot Password? 🔒</h4>
-                <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
+                <h4 class="mb-2">Bạn quên mật khẩu? 🔒</h4>
+                <p class="mb-4">Nhập email của bạn và chúng tôi sẽ gửi cho bạn hướng dẫn để đặt lại mật khẩu của bạn</p>
                 <form id="formAuthentication" class="mb-3" action="{{ route('password.email') }}" method="POST">
                 @csrf
                   <div class="mb-3">
@@ -99,12 +99,12 @@
                         </span>
                     @enderror
                   </div>
-                  <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
+                  <button class="btn btn-primary d-grid w-100">Gửi đường dẫn cài lại mật khẩu</button>
                 </form>
                 <div class="text-center">
                   <a href="{{ route('login') }}" class="d-flex align-items-center justify-content-center">
                     <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
-                    Back to login
+                    Trở về đăng nhập
                   </a>
                 </div>
               </div>

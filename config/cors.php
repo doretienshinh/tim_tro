@@ -29,6 +29,7 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
+    'allowed_origins' => ['https://provinces.open-api.vn/'], // Thêm domain của trang web của bạn vào đây
 ];

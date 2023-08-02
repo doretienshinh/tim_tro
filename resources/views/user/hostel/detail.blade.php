@@ -296,7 +296,7 @@
                                     data-bs-toggle="collapse"
                                     data-bs-target="#accordion_attribute_{{ $hostel->id }}" aria-expanded="false"
                                     aria-controls="accordion_attribute_{{ $hostel->id }}">
-                                    Thông tin nhà trọ
+                                    Thông tin phòng trọ
                                 </button>
                             </h2>
                             <div id="accordion_attribute_{{ $hostel->id }}" class="accordion-collapse collapse"
@@ -514,7 +514,7 @@
             </div>
         </div>
         @if ($hostel->user->hostels->count() > 1)
-            <h4 class="fw-bold py-3 mb-4">Những nhà trọ khác cùng chủ</h4>
+            <h4 class="fw-bold py-3 mb-4">Những phòng trọ khác cùng chủ</h4>
             <div class="row">
                 @foreach ($hostel->user->hostels as $index => $hostel_item)
                     <div class="card p-0 m-2 {{ $hostel->id == $hostel_item->id ? 'd-none' : '' }}"
@@ -532,7 +532,7 @@
             </div>
         @endif
         @if ($hostels_by_ward->count() > 1)
-            <h4 class="fw-bold py-3 mb-4">Những nhà trọ khác cùng vị trí</h4>
+            <h4 class="fw-bold py-3 mb-4">Những phòng trọ khác cùng vị trí</h4>
             <div class="row">
                 @foreach ($hostels_by_ward as $index => $hostel_item)
                     <div class="card p-0 m-2 {{ $hostel->id == $hostel_item->id ? 'd-none' : '' }}"

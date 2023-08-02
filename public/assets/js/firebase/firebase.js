@@ -17,11 +17,6 @@ function startFCM() {
             return messaging.getToken()
         })
         .then(function (response) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
             $.ajax({
                 url: location.origin + '/auto-store-token',
                 type: 'POST',
@@ -29,6 +24,9 @@ function startFCM() {
                     token: response
                 },
                 dataType: 'JSON',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (response) {
                     console.log('Token stored.');
                 },

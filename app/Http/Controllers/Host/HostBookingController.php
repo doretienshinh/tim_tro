@@ -5,14 +5,18 @@ namespace App\Http\Controllers\Host;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Services\Booking\HostBookingService;
+use App\Http\Services\Hostel\HostelService;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HostBookingController extends Controller
 {
     protected $hostBookingService;
+    protected $HostelService;
 
-    public function __construct(HostBookingService $hostBookingService,) {
+    public function __construct(HostBookingService $hostBookingService, HostelService $HostelService,) {
         $this->hostBookingService = $hostBookingService;
+        $this->HostelService = $HostelService;
     }
 
     /**
@@ -22,9 +26,10 @@ class HostBookingController extends Controller
      */
     public function index()
     {
-        $bookings = $this->hostBookingService->getAll();
+        // $bookings = $this->hostBookingService->getAll();
+        $hostels = $this->HostelService->getAll();
 
-        return view('host.booking.index', compact('bookings'));
+        return view('host.booking.index', compact('hostels'));
     }
 
     /**

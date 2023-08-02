@@ -69,7 +69,7 @@
                                             data-bs-toggle="collapse"
                                             data-bs-target="#accordion_attribute_{{ $favorite->hostel->id }}" aria-expanded="false"
                                             aria-controls="accordion_attribute_{{ $favorite->hostel->id }}">
-                                            Thông tin nhà trọ
+                                            Thông tin phòng trọ
                                         </button>
                                     </h2>
                                     <div id="accordion_attribute_{{ $favorite->hostel->id }}" class="accordion-collapse collapse"

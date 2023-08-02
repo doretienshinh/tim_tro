@@ -72,18 +72,17 @@
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-2">Verify Your Email Address</h4>
+                        <h4 class="mb-2">Xác minh địa chỉ email của bạn</h4>
                         @if (session('resent'))
                         <div class="alert alert-success" role="alert">
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
                         @endif
 
-                        {{ __('Before proceeding, please check your email for a verification link.') }}
-                        {{ __('If you did not receive the email') }},
+                        <div>Trước khi tiếp tục, vui lòng kiểm tra email của bạn để biết liên kết xác minh. Nếu bạn không nhận được email, hãy ấn vào nút bên dưới để tiến hành gửi lại mail</div>
                     <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button  type="submit" class="btn btn-primary d-grid w-100 mt-4">Click here to request another</button>
+                        <button  type="submit" class="btn btn-primary d-grid w-100 mt-4">Nhấn vào đây để yêu cầu gửi lại mail</button>
                     </form>
                 </div>
             </div>

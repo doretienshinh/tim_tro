@@ -68,18 +68,18 @@
                                         </g>
                                     </svg>
                                 </span>
-                                <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                                <span class="app-brand-text demo text-body fw-bolder">Timtro</span>
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-2">Reset Password? 🔒</h4>
+                        <h4 class="mb-2">Cài đặt lại mật khẩu? 🔒</h4>
                         <form id="formAuthentication" class="mb-3" action="{{ route('password.update') }}"
                             method="POST">
                             @csrf
                             <input type="hidden" name="token" value="{{ $token }}">
                             <input type="hidden" name="email" value="{{ $email }}">
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                                <label for="password" class="form-label">Mật khẩu mới</label>
                                 <input type="text" class="form-control" name="password"
                                     placeholder="Enter your new password" autofocus type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
@@ -91,7 +91,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="password-confirm" class="form-label">Password Confirmation</label>
+                                <label for="password-confirm" class="form-label">Nhập lại mật khẩu</label>
                                 <input type="text" class="form-control" id="password-confirm"
                                     placeholder="Enter your new password" name="password_confirmation" required
                                     autocomplete="new-password" />
@@ -101,13 +101,13 @@
                                     </span>
                                 @enderror
                             </div>
-                            <button class="btn btn-primary d-grid w-100">Reset password</button>
+                            <button class="btn btn-primary d-grid w-100">Cài lại mật khẩu</button>
                     </div>
                     </form>
                     <div class="text-center mb-3">
                         <a href="{{ route('login') }}" class="d-flex align-items-center justify-content-center">
                             <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
-                            Back to login
+                            Trở lại đăng nhập
                         </a>
                     </div>
                 </div>

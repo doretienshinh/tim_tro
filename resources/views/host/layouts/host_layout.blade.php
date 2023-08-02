@@ -54,5 +54,4 @@
     </div> --}}
     @include('host.footers.host_footer')
 </body>
-
 </html>

@@ -22,7 +22,9 @@ class UserBookingController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = $this->userBookingService->getAll();
+
+        return view('user.booking.index', compact('bookings'));
     }
 
     /**
@@ -88,7 +90,9 @@ class UserBookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
-        //
+        $userBooking = $this->userBookingService->delete($booking);
+
+        return redirect()->back();
     }
 
     public function booking(Request $request, $time_id, $hostel_id)

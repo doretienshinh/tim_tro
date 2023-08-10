@@ -76,7 +76,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="{{ route('chat') }}" class="menu-link">
+            <a href="{{ route('user.booking.index') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-calendar"></i>
               <div data-i18n="Chat">Lịch xem trọ</div>
             </a>

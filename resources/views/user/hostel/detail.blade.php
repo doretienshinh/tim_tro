@@ -570,10 +570,12 @@
                                 <i class="bx bx-search-alt me-1"></i>
                                 <span>Thời gian: {{ $time->start_at }} -> {{ $time->end_at }} </span><br>
                                 @if ($time->day)
-                                    <span>Ngày: {{ $time->day }}</span>
+                                    <span>{!! \App\Helpers\Helper::renderTimeDay($time) !!}</span>
+                                    <small>{{ $time->note }}</small>
                                 @endif
                                 @if ($time->weekly_at)
-                                    <span>Hằng tuần: {{ $time->weekly_at }}</span>
+                                    <span>{!! \App\Helpers\Helper::renderTimeWeekly($time) !!}</span>
+                                    <small>{{ $time->note }}</small>
                                 @endif
                             </a>
                         @endforeach

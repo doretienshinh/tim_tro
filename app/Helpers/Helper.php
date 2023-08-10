@@ -29,4 +29,37 @@ class Helper
 
         return $time_noti;
     }
+
+    public static function renderTimeWeekly($time)
+    {
+        if($time->weekly_at == 'Chủ nhật') {
+            $weekly_at = 0;
+        }
+        else {
+            $weekly_at = preg_split("/[\s,]+/", $time->weekly_at)[1]; 
+        }
+
+        $now = Carbon::now();
+        $currentDayOfWeek = $now->format('w'); // Lấy thứ hiện tại (0 - 6)
+
+        $nextDesiredDay = null;
+        $daysUntilDesiredDay = ($weekly_at - $currentDayOfWeek + 7) % 7;
+            
+            if ($daysUntilDesiredDay >= 0) {
+                $nextDesiredDay = clone $now;
+                $nextDesiredDay->modify("+$daysUntilDesiredDay days");
+            }
+
+        if ($nextDesiredDay !== null) {
+            return $time->weekly_at . ": " . $nextDesiredDay->format('Y-m-d');
+        }
+    }
+
+    public static function renderTimeDay($time)
+    {
+        $dayOfWeek = date('w', strtotime($time->day)); // Lấy thứ (0 - 6)
+        $daysOfWeekNames = ['Chủ Nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+        
+        return $daysOfWeekNames[$dayOfWeek] . ": " . $time->day;
+    }
 }

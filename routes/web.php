@@ -137,6 +137,8 @@ Route::middleware(['auth'])->group(function(){
         #Booking
         Route::prefix('booking')->group(function (){
             Route::post('/store/{time_id}/{hostel_id}', [UserBookingController::class, 'booking'])->name('user.booking.store');
+            Route::get('/', [UserBookingController::class, 'index'])->name('user.booking.index');
+            Route::get('/delete/{booking}', [UserBookingController::class, 'destroy'])->name('user.booking.destroy');
         });
 
         #Chat
